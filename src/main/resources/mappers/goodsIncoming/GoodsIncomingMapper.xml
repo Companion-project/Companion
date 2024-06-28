@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+	"-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.companion.mapper.GoodsIncomingMapper">
+
+   <sql id="baseColums">
+       incoming_num, goods_num, incoming_qty, incoming_date, production_date, incoming_price, emp_num
+   </sql>
+
+   <resultMap id="goodsIncomingResultMap" type="com.example.companion.domain.GoodsIncomingDTO" >
+        <constructor>
+        <idArg column="incoming_num" javaType="string" />
+		<idArg column="goods_num" javaType="string" />
+		<arg column="incoming_qty" javaType="integer"/>
+		<arg column="incoming_date" javaType="java.util.Date"/>
+		<arg column="production_date" javaType="java.util.Date"/>
+		<arg column="incoming_price" javaType="integer"/>
+		<arg column="emp_num" javaType="string"/>
+        </constructor>
+   </resultMap>
+
+<insert id="goodsIncomingInsert" parameterType="com.example.companion.domain.GoodsIncomingDTO">
+insert into goodsincoming
+             (incoming_num, goods_num, incoming_qty, incoming_date, production_date, incoming_price, emp_num)
+       values(#{incomingNum},#{goodsNum},#{incomingQty},#{incomingDate},#{productionDate},#{incomingPrice},#{empNum})
+</insert>
+<select id="goodsIncomingAllSelect" resultMap="goodsIncomingResultMap">
+    select <include refid="baseColums"/>
+    from goodsincoming
+</select>
+<select id="selectIncomingGoods" resultMap="goodsIncomingResultMap">
+    select <include refid="baseColums"/>
+    from goodsincoming
+    where incoming_num = #{incomingNum} and goods_num = #{goodsNum}
+</select>
+<update id="goodsIncomingUpdate" parameterType="com.example.companion.domain.GoodsIncomingDTO">
+    update goodsincoming
+    set incoming_date = #{incomingDate}, incoming_qty = #{incomingQty}, production_date = #{productionDate},
+        incoming_price = #{incomingPrice}
+    where incoming_num = #{incomingNum} and goods_num = #{goodsNum}
+</update>
+<delete id="incomingGoodsNumDelete">
+    delete from goodsincoming
+    where incoming_num = #{incomingNum} and goods_num =#{goodsNum}
+</delete>
+</mapper>
