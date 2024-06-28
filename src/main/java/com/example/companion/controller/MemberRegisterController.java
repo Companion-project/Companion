@@ -21,22 +21,12 @@ public class MemberRegisterController {
         return new MemberCommand();
     }
 
-    @RequestMapping(value = "userAgree", method = RequestMethod.GET)
-    public String agree(){
-        return "memberRegist/userAgree";
-    }
-
-    @RequestMapping(value = "userWrite", method = RequestMethod.POST)
+    @RequestMapping(value = "userWrite", method = RequestMethod.GET)
     public String userWrite(
     /*userForm.html 페이지 열 때 memberCommand가 필요함.
     userForm.html 열리는 모든 곳에서 memberCommand가 전송되어야 함.
     여기는 없음
-    */
-            @RequestParam(value = "agree", defaultValue = "false")boolean agree){
-        //동의하지 않아도 넘어가는 부분 수정(차단)
-        if(agree == false){
-            return "memberRegist/userAgree";
-        }
+    */){
         return "memberRegist/userForm";
     }
 
