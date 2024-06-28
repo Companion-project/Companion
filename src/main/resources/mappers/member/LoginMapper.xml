@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.companion.mapper.LoginMapper">
+    <delete id="memberDelete" parameterType="string">
+        delete from members
+        <trim prefix="where" prefixOverrides="AND | OR">
+           and member_num = #{memberNum}
+        </trim><!-- where다음에 AND 또는 OR가 있다면 삭제처리 -->
+    </delete>
+    <select id="selectIdCheck" parameterType="string" resultType="string">
+        select member_id from members
+        where member_id = #{userId}
+        union
+        select emp_id from employees
+        where emp_id = #{userId}
+    </select>
+
+    <select id="selectEmailCheck" parameterType="string" resultType="string">
+        select member_email from members
+        where member_email = #{userEmail}
+        union
+        select emp_email from employees
+        where emp_email = #{userEmail}
+    </select>
+</mapper>

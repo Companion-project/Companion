@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:if="${userId != null}">
+    당신의 아이디는 [[${#strings.substring(userId,0,4)}]]
+    <!-- 1부터 문자열의 전체 길이에서 4를 뺀 만큼 반복 -->
+    <th:block th:each=" i : ${#numbers.sequence(1, #strings.length(userId) - 4 )}">
+        *
+    </th:block>
+    입니다.
+    </div>
+
+    <div th:if="${userId == null}">
+        입력한 정보에 해당하는 아이디가 존재하지 않습니다.
+    </div>
+</div>
+
+<li><a href="/">HOME</a> </li>
+
+</body>
+</html>

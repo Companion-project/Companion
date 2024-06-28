@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 로그인 되었을 때 -->
+<div th:if="${session.auth != null}">
+    <ul>
+        <!-- 일반회원과 직원으로 분류 -->
+        <!-- 로그인을 할 대 직원은 emp를 회원은 mem을 grade에 저장하여 구분 -->
+        <th:block th:if="${session.auth.grade == 'emp'}">
+            <li><a href="employee/employeeList">직원목록</a> </li>
+            <li><a href="member/memberList">회원목록</a> </li>
+        </th:block>
+
+        <!-- 이메일로 임시 비밀번호 발급받았으므로 내정보에서 비밀번호 변경 가능하도록 구현 -->
+        <th:block th:if="${session.auth.grade == 'mem'}">
+            <li><a href="/mypage/myDetail">내정보 보기</a> </li>
+        </th:block>
+
+        <li><a href="login/logout">로그아웃</a></li>
+    </ul>
+</div>
+
+
+<!-- 회원가입, 로그인 -->
+<!-- 로그인의 경우 회원, 직원이 같은 페이지에서 로그인 가능하도록 구현 -->
+<!-- 오류가 있는 경우 Command가 가지고 있는 값 받아오도록 구현.
+     th:object="${loginCommand}"를 사용하면 첫 페이지에 오류 발생
+     처음시작 시
+-->
+
+<!-- 로그인이 되지 않았을 때  -->
+<div th:if="${session.auth == null}">
+<form action="/login/login" method="post" th:object="${loginCommand}">
+    <table border="1" align="center">
+        <tr>
+            <td colspan="2">
+                자동로그인<input type="checkbox" name="autoLogin"/>
+                아이디저장<input type="checkbox" name="idStore"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="userId" placeholder="아이디" th:value="${loginCommand.userId}"/><br/>
+                <span style="color:red" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
+            </td>
+            <td rowspan="2">
+                <input type="image" src="/static/images/logo.png" width="60">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="password" name="userPw" placeholder="비밀번호" th:value="${loginCommand.userPw}" /><br/>
+                <span style="color:red" th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                    <a href="/register/userAgree">회원가입</a> |
+                    <a href="/help/findId">아이디</a> /
+                    <a href="/help/findPassword">비밀번호 찾기</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+</body>
+</html>
