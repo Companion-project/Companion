@@ -5,6 +5,7 @@
     <title>Title</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script src="/static/js/memberShip/memberDrop.js"></script>
 </head>
 <body>
 <ul>
@@ -17,24 +18,9 @@
 회원 탈퇴<br/>
 <form action="memberDropOk" method="post" name="frm" id="frm">
     비밀번호 : <input type="password" id="memberPw" name="memberPw" />
+    <input type="submit" value="회원탈퇴" />
     <div style="color:red">[[${errPw}]]</div>
 </form>
 
-<script type="text/javascript">
-$(function(){
-    $("#frm").submit(function(){
-        if($("#memberPw").val() == ""){
-            alert("비밀번호를 입력하세요.");
-            $("#memberPw").focus();
-            return false;
-        }else{
-            var conf = confirm("정말로 탈퇴하시겠습니까?");
-            if(!conf){
-                return false;
-            }
-        }
-    });
-});
-</script>
 </body>
 </html>
