@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>companion</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<script src="/static/js/goods/goodsList.js"></script>
+</head>
+<body>
+<ul>
+	<li><a href="goodsForm">상품 추가</a></li>
+	<li><a href="goodsIncoming">상품 입고</a></li>
+	<li><a href="goodsIncomingList">상품 입고 현황</a></li>
+</ul>
+<table border=1 width="600" align="center">
+<form action="goodList" method="get">
+	<tr>
+		<td colspan="6">검색 :
+			<input type="search" name="searchWord" size="60" th:value="${searchWord}"/>
+			<input type="submit" value="검색"/>
+		</td>
+	</tr>
+</form>
+<form action="productsDelete" method="post" id="frm">
+	<tr>
+		<td>번호</td>
+		<td>상품번호</td>
+		<td>상품명</td>
+		<td>상품가격</td>
+		<td>등록일</td>
+		<td>
+			<input type="checkbox" id="checkBoxs"/>
+			<input type="submit" value="선택삭제"/>
+		</td>
+	</tr>
+	<tr th:each="dto, cnt : ${dtos}">
+		<td>[[${cnt.count}]]</td>
+		<td><a th:href="|goodsDetail?goodsNum=${dto.goodsNum}|">[[${dto.goodsNum}]]</a></td>
+		<td><a th:href="@{goodsDetail(goodsNum=${dto.goodsNum})}">[[${dto.goodsName}]]</a></td>
+		<td>[[${dto.goodsPrice}]]</td>
+		<td>[[${#dates.format(dto.goodsRegist,'yyyy-MM-dd')}]]</td>
+		<td>
+			<input type="checkbox" name="memDels" th:value="${dto.goodsNum}"/>
+		</td>
+	</tr>
+</form>
+		<tr align="center"><td colspan="6">
+		<th:block th:if="${page <= 1}">
+		[이전]
+		</th:block>
+		<th:block th:if="${page > 1}">
+		<a th:href="@{goodsList(page=${page - 1},searchWord=${searchWord})}">[이전]</a>
+		</th:block>
+
+		<th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}">
+		<a th:href="@{goodsList(page=${i},searchWord=${searchWord})}">[[${i}]]</a>
+		</th:block>
+		<th:block th:if="${page >= maxPage}">
+		[다음]
+		</th:block>
+		<th:block th:if="${page < maxPage}">
+		<a th:href="@{goodsList(page=${page + 1}, searchWord=${searchWord})}">[다음]</a>
+		</th:block>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

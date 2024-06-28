@@ -1,0 +1,12 @@
+$(function(){
+    $.ajax({
+        url:"goodsWrite",
+        dataType:"html",
+        success:function(result){
+            $("#writeForm").html(result);
+        },
+        error:function(){
+            alert("서버오류");
+        }
+    });
+});

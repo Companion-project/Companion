@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>companion</title>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/static/js/daumAddressScript.js"></script>
 </head>
 <body>
 직원 정보 수정 <br/>
@@ -11,7 +13,7 @@
 <input type="hidden" name="empPw" value="1111!qqqq" />
 <input type="hidden" name="empPwCon" value="111111" />
 직원번호 : <input type="text" name="empNum" th:value="${employeeCommand.empNum}" readonly="readonly"/><br />
-직원아이디 : <input type="text" name="empId" th:value="${employeeCommand.empId}" /><br />
+직원아이디 : <input type="text" name="empId" readonly="readonly" th:value="${employeeCommand.empId}" /><br />
 직원이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}" />
 		 <span style="color:red" th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
 직원주소 : <input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}" />

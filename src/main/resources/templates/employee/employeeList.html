@@ -2,26 +2,61 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>companion</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<script src="/static/js/employee/employeeList.js"></script>
 </head>
 <body>
-직원 목록 페이지
-<a href="empRegist">직원 등록</a><br/>
-<table border="1" width="600px">
+직원 목록 페이지<br/>
+<a href="empRegist">직원등록</a> |
+<a href="/">이전페이지</a><br />
+<form  action="employeeList" method="get" >
+	<tr>
+		<td colspan="5">검색 :
+			<input type="search" name="searchWord" size="60" th:value="${searchWord}"/>
+			<input type="submit" value="검색" />
+		</td>
+    </tr>
+</form>
+<form action="empsDelete" method="post" id="frm">
+<table border=1 width=600px>
     <tr>
         <td>직원번호</td>
         <td>직원아이디</td>
         <td>직원이름</td>
         <td>등록일</td>
         <td>연락처</td>
+        <td><input type="checkbox" id="checkBoxs"/>
+			<input type="submit" value="삭제" />
+        </td>
     </tr>
-    <tr th:each="dto : ${list}">
-        <td>[[${dto.empNum]]</td>
-        <td>[[${dto.empId]]</td>
-        <td>[[${dto.empName]]</td>
-        <td>[[${#dates.format(dto.empRegiDate,'yyyy-MM-dd')}]]</td>
-        <td>[[${dto.empPhone]]</td>
-    </tr>
+<tr th:each="dto : ${dtos}">
+	<td><a th:href="|employeeDetail?empNum=${dto.empNum}|">[[${dto.empNum}]]</a></td>
+	<td><a th:href="@{employeeDetail(empNum=${dto.empNum})}|">[[${dto.empId}]]</a></td>
+	<td>[[${dto.empName}]]</td>
+	<td>[[${#dates.format(dto.empRegiDate,'yyyy-MM-dd')}]]</td>
+	<td>[[${dto.empPhone}]]</td>
+	<td><input type="checkbox" name="empDels" th:value="${dto.empNum}" /></td>
+</tr>
+<tr align="center"><td colspan="6">
+	<th:block th:if="${page <= 1}">
+	[이전]
+	</th:block>
+	<th:block th:if="${page > 1}">
+	<a th:href="@{employeeList(page=${page - 1},searchWord=${searchWord})}">[이전]</a>
+	</th:block>
+	<th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}">
+	<a th:href="@{employeeList(page=${i},searchWord=${searchWord})}">[[${i}]]</a>
+	</th:block>
+	<th:block th:if="${page >= maxPage}">
+	[다음]
+	</th:block>
+	<th:block th:if="${page < maxPage}">
+	<a th:href="@{employeeList(page=${page + 1},searchWord=${searchWord})}">[다음]</a>
+	</th:block>
+	</td>
+</tr>
 </table>
+</form>
 </body>
 </html>

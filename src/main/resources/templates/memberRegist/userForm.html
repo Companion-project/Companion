@@ -60,11 +60,11 @@ th:object, th:value를 통해 오류가 있어 되돌아 올 경우 입력값을
     $(function(){
         $("#memberId").on("change keyup", function(){
             var memberId = $("#memberId").val();
-            var memberIdPattern = /^[a-z0-9]{5,20}$/;
+            var memberIdPattern = /^[a-z0-9]{4,8}$/;
 
             //아이디 유효성 검사
             if(!memberIdPattern.test(memberId)){
-            $("#idCheck").text("아이디는 영어 소문자와 숫자만 사용하여 5~20글자 내에서 입력하세요.")
+            $("#idCheck").text("아이디는 영어 소문자와 숫자만 사용하여 4~8글자 내에서 입력하세요.")
                 .css("color","red");
                 return;
             }

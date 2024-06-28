@@ -11,7 +11,7 @@ import java.util.Date;
 public class EmployeeCommand {
     String empNum;
 	@NotEmpty(message = "아이디를 입력해주세요")
-	@Size(min = 8, max = 12, message = "아이디는 8글자이상 12글자이하로 작성해주세요")
+	@Size(min = 4, max = 8, message = "아이디는 4글자이상 8글자이하로 작성해주세요")
 	String empId;
 	@Pattern( regexp = "^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-+]).{8,}$",
 			 message = "영문자와 숫자 그리고 특수문자가 포함된 8글자 이상으로 작성해주세요")
