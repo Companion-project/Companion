@@ -47,11 +47,17 @@ public class MemberMyPageController {
     }
 
     @PostMapping("myPwUpdate")
-    @ResponseBody //html이 아닌 값을 전달할 때 사용. RestController와 같은 역할
-    public boolean myPwUpdate(@RequestParam("oldPw") String oldPw,
-            @RequestParam(value = "newPw") String newPw,
-            HttpSession session){
-        return myPassConfirmService.execute(newPw, oldPw, session);
+    @ResponseBody
+    public String myPwUpdate(@RequestParam("oldPw") String oldPw,
+                             @RequestParam("newPw") String newPw,
+                             HttpSession session) {
+        boolean result = myPassConfirmService.execute(newPw, oldPw, session);
+        if (result) {
+            session.invalidate(); // 세션 무효화
+            return "success";
+        } else {
+            return "failure";
+        }
     }
 
     @GetMapping("memberDrop")

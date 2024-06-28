@@ -8,6 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
+<script src="/static/js/member/memberForm.js"></script>
 </head>
 <body>
 회원등록 페이지<br/>
@@ -54,51 +55,6 @@
 <input type="submit" value="회원등록">
 </form>
 
-<script type="text/javascript">
-
-$(function(){
-    $("#memberId").on("change keyup", function(){
-        $.ajax({
-            type:'post',
-            url:"/login/userIdCheck",
-            data:{"userId":$("#memberId").val()},
-            dataType:'text',
-            success: function(result){
-
-            $("#idCheck").text(result);
-            if(result.trim() == "사용가능한 아이디입니다."){
-                $("#idCheck").css("color","blue");
-            }else{
-                $("#idCheck").css("color","red");
-            }
-        },
-        error:function(){
-        }
-    });
-});
-
-    $("#memberEmail").on("change keyup", function(){
-        $.ajax({
-            type:'post',
-            url:"/checkRest/userEmailCheck",
-            data:{"userEmail":$("#memberEmail").val()},
-            dataType:'text',
-            success: function(result){
-
-                $("#emailCheck").text(result);
-                if(result.trim() == "사용가능한 이메일입니다."){
-                    $("#emailCheck").css("color","blue");
-                }else{
-                    $("#emailCheck").css("color","red");
-                }
-            },
-            error:function(){
-            }
-        });
-    });
-});
-
-</script>
 
 </body>
 </html>

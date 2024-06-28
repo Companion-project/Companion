@@ -46,8 +46,8 @@
             <span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br/>
             <span id='emailCheck'></span><br/>
 
-    주민번호 : <input type="text" name="empSsn" th:value="${employeeCommand.empSsn}"/>
-            <span style="color:red" th:if="${#fields.hasErrors('empSsn')}" th:errors="*{empSsn}"></span><br/>
+    주민번호 : <input type="text" name="empssn" th:value="${employeeCommand.empssn}"/>
+            <span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br/>
 
     <input type="submit" value="등록"/><br/>
 
