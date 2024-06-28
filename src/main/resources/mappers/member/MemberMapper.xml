@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.companion.mapper.MemberMapper">
+    <delete id="memberDelete" parameterType="string">
+        delete from members
+        <trim prefix="where" prefixOverrides="AND | OR">
+            and member_num = #{memberNum}
+        </trim><!-- where 다음에 AND 또는 OR가 있다면 삭제
+                    그러므로 and는 실행될 때 자동 삭제처리 -->
+    </delete>
+    <update id="memberUpdate" parameterType="com.example.companion.domain.MemberDTO">
+        update members
+        <trim prefix="set" suffixOverrides=","><!-- 뒤에 남아 있을 ,삭제 -->
+            member_Name = #{memberName},
+            member_ADDR = #{memberAddr},
+            <if test="memberAddrDetail != null">
+                member_Addr_Detail = #{memberAddrDetail},
+            </if>
+            <if test="memberAddrDetail == null">
+                member_Addr_Detail = null,
+            </if>
+            member_Post = #{memberPost},
+            gender = #{gender},
+            member_Phone1 = #{memberPhone1},
+            <choose>
+                <when test="memberPhone2 != null">
+                    member_Phone2 =#{memberPhone2},
+                </when>
+                <when test="memberPhone2 == null">
+                    member_Phone2 =null,
+                </when>
+            </choose>
+            member_Email =#{memberEmail},
+            member_Birth = #{memberBirth},
+            point = #{point},
+        </trim>
+        <where>
+            member_num = #{memberNum}
+        </where>
+    </update>
+
+    <select id="memberSelectOne" parameterType="string" resultType="com.example.companion.domain.MemberDTO">
+        select <include refid="memberColumnsBase"/>
+        from members
+        where member_num = #{memberNum}
+    </select>
+
+    <!-- 여러 회원 동시 삭제하므로 int연산자 사용 -->
+    <!-- MyBatis에서 in연산자 사용은 foreach -->
+    <delete id="membersDelete" parameterType="string">
+        delete from members
+        where member_num in
+        <foreach collection="membersNum" item="memberNum" open="(" close=")" index="index" separator=",">
+            #{memberNum}
+
+        </foreach>
+    </delete>
+
+    <!-- 컬럼 정의 -->
+    <!-- member_regist 별칭을 memberRegistDate로 설정 안해서 컬럼명 DTO랑 일치하지 않아서 등록일 에러 발생했었음.
+    해결완료 -->
+    <sql id="memberColumnsBase">
+        member_num, member_id, member_pw, member_name, member_addr,
+        member_addr_detail, member_post, member_phone1, member_phone2,
+        member_regist memberRegistDate, member_birth, member_email, member_email_conf,
+        point, gender
+    </sql>
+
+    <select id="selectAll" resultType="com.example.companion.domain.MemberDTO" parameterType="com.example.companion.domain.StartEndPageDTO">
+        <!-- 페이징을 위해 순서 번호를 가지고 와야 하므로 서브쿼리 사용 -->
+        select * from
+                    (select ROW_NUMBER() over (order by member_num) as rn,
+                        <include refid="memberColumnsBase"/>
+                    from members
+                    <where>
+                        <if test="searchWord != null">
+                            MEMBER_NAME like '%' || #{searchWord} || '%'
+                            or member_id like '%' || #{searchWord} || '%'
+                            or member_num like '%' || #{searchWord} || '%'
+                        </if>
+                    </where>
+                    )sub1
+        where rn between #{startRow} and #{endRow}
+
+    </select>
+
+    <select id="memberAutoNum" resultType="string">
+        select concat('mem', coalesce(max(substring(member_num from 4)::integer), 100000) + 1)
+        from members;
+    </select>
+    <insert id="memberInsert" parameterType="com.example.companion.domain.MemberDTO">
+        insert into members(member_num, member_id, member_pw, member_name, member_addr,
+                            member_addr_detail, member_post, member_phone1, member_phone2,
+                            member_regist, member_birth, gender, member_email, member_email_conf, point)
+        values(#{memberNum},#{memberId},#{memberPw},#{memberName},
+               #{memberAddr},#{memberAddrDetail},#{memberPost},#{memberPhone1},#{memberPhone2},
+               now(),#{memberBirth}, #{gender},#{memberEmail}, null, 0)
+    </insert>
+
+    <select id="memberCount" parameterType="string" resultType="integer">
+        select count(*) from members
+            <if test='searchWord != null'>
+                    <where>
+                        MEMBER_NAME like '%' || #{searchWord} || '%'
+                        or member_id like '%' || #{searchWord} || '%'
+                        or member_num like '%' || #{searchWord} || '%'
+                    </where>
+            </if>
+
+    </select>
+
+</mapper>

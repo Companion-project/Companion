@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+직원 목록 페이지
+<a href="empRegist">직원 등록</a><br/>
+<table border="1" width="600px">
+    <tr>
+        <td>직원번호</td>
+        <td>직원아이디</td>
+        <td>직원이름</td>
+        <td>등록일</td>
+        <td>연락처</td>
+    </tr>
+    <tr th:each="dto : ${list}">
+        <td>[[${dto.empNum]]</td>
+        <td>[[${dto.empId]]</td>
+        <td>[[${dto.empName]]</td>
+        <td>[[${#dates.format(dto.empRegiDate,'yyyy-MM-dd')}]]</td>
+        <td>[[${dto.empPhone]]</td>
+    </tr>
+</table>
+</body>
+</html>

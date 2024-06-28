@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.companion.mapper.FindMapper">
+    <select id="findId" parameterType="string" resultType="string">
+        select member_id
+        from members
+        where member_email = #{userEmail}
+        and (member_phone1 = #{userPhone} or member_phone2 = #{userPhone})
+        union
+        select emp_id
+        from employees
+        where emp_phone = #{userPhone} and emp_email =#{userEmail}
+    </select>
+    
+    <select id="userEmail" resultType="com.example.companion.domain.AuthInfoDTO">
+        select member_email userEmail, 'mem' grade
+        from members
+        where member_id = #{_userId} and member_phone1 = #{_userPhone}
+        union
+        select emp_email, 'emp'
+        from employees
+        where emp_phone = #{_userPhone} and emp_id = #{_userId}
+    </select>
+
+    <update id="pwUpdate" parameterType="com.example.companion.domain.AuthInfoDTO">
+    <!-- 테이블이나 컬럼: ${}, 데이터: #{} -->
+        update ${tableName}
+        set ${pwColumName} = #{userPw}
+        where ${userIdColumName} = #{userId}
+    </update>
+    </mapper>
