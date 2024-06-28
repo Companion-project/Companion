@@ -1,9 +1,0 @@
-## 이메일 중복처리 주소 에러
-
-2024-06-18T12:17:10.792+09:00 WARN 2676 --- [nio-8089-exec-5] o.s.web.servlet.PageNotFound : No mapping for POST /checkRest/userEmailCheck
-
-에러문구 발생
-
-원인: memberForm 의 이메일 중복 처리하는 자바스크립트에 입력한 주소랑
-
-CheckRestController의 RequestMapping주소가 달라서 에러 발생함 주의할 것!
