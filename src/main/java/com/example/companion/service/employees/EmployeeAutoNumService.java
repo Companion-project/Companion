@@ -8,15 +8,12 @@ import org.springframework.ui.Model;
 
 @Service
 public class EmployeeAutoNumService {
-
     @Autowired
     EmployeeMapper employeeMapper;
-
-    //validated할 때 command를 사용하므로 미리 command에 저장
-    public void execute(Model model){
-        String empNum = employeeMapper.autoNum();
+    public void execute(Model model ){
+        String empNum =employeeMapper.autoNum();
         EmployeeCommand employeeCommand = new EmployeeCommand();
         employeeCommand.setEmpNum(empNum);
-        model.addAttribute("employeeCommand", employeeCommand);
+        model.addAttribute("employeeCommand",employeeCommand);
     }
 }

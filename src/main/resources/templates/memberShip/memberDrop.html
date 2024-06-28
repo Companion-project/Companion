@@ -16,7 +16,7 @@
 </ul>
 회원 탈퇴<br/>
 <form action="memberDropOk" method="post" name="frm" id="frm">
-    비밀번호 : <input type="password" id="memberPw" name="membrPw" />
+    비밀번호 : <input type="password" id="memberPw" name="memberPw" />
     <div style="color:red">[[${errPw}]]</div>
 </form>
 
@@ -28,8 +28,8 @@ $(function(){
             $("#memberPw").focus();
             return false;
         }else{
-            conf = confirm("정말로 탈퇴하시겠습니까?");
-            if(!conf{
+            var conf = confirm("정말로 탈퇴하시겠습니까?");
+            if(!conf){
                 return false;
             }
         }
