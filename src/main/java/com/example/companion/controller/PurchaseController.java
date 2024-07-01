@@ -1,6 +1,7 @@
 package com.example.companion.controller;
 
 import com.example.companion.command.PurchaseCommand;
+import com.example.companion.mapper.PurchaseMapper;
 import com.example.companion.service.IniPayReqService;
 import com.example.companion.service.purchase.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,6 +32,35 @@ public class PurchaseController {
     @Autowired
     PaymentDeleteService paymentDeleteService;
 
+    //이번에는 service를 만들지 않고 바로 interface를 가져오겠습니다.
+    @Autowired
+    PurchaseMapper purchaseMapper ;
+    @RequestMapping("purchaseOk")
+    public String purchaseOk(
+            @RequestParam(value="purchaseNum")String purchaseNum) {
+        purchaseMapper.purchaseOk(purchaseNum);
+        return "redirect:orderList";
+    }
+
+    @RequestMapping("paymentDel")
+    public String paymentDel(
+            @RequestParam("purchaseNum") String purchaseNum) {
+        paymentDeleteService.execute(purchaseNum);
+        return "redirect:orderList";
+    }
+
+    @RequestMapping("orderList")
+    public String orderList(HttpSession session, Model model){
+        orderProcessListService.execute(session, model);
+        return "purchase/orderList";
+    }
+
+    @PostMapping("INIstdpay_pc_return")
+    public String payReturn(HttpServletRequest request, HttpSession session, Model model) {
+        iniPayReturnService.execute(request, session, model);
+        return "purchase/buyfinished";
+    }
+
     @GetMapping("paymentOk")
     public String paymentOk(
             @RequestParam(value = "purchaseNum") String purchaseNum,
@@ -44,12 +74,9 @@ public class PurchaseController {
         return "purchase/payment";
     }
 
-    @RequestMapping(value="goodsBuy")
-    public String goodsBuy(
-            @RequestParam(value = "prodCk") String [] prodCk, //체크박스가 배열로 전송
-            HttpSession session, Model model){
-        goodsBuyService.execute(prodCk, session, model);
-        return "purchase/goodsOrder";
+    @GetMapping("close")
+    public String close() {
+        return "purchase/close";
     }
 
     @PostMapping("goodsOrder")
@@ -58,21 +85,18 @@ public class PurchaseController {
         String purchaseNum = goodsOrderService.execute(purchaseCommand, session, model);
         return "redirect:paymentOk?purchaseNum="+purchaseNum;
     }
-    @PostMapping("INIstdpay_pc_return")
-    public String payReturn(HttpServletRequest request, HttpSession session, Model model) {
-        iniPayReturnService.execute(request, session, model);
-        return "purchase/buyfinished";
+
+    @RequestMapping(value="goodsBuy")
+    public String goodsBuy(
+            @RequestParam(value = "prodCk") String [] prodCk, //체크박스가 배열로 전송
+            HttpSession session, Model model){
+        goodsBuyService.execute(prodCk, session, model);
+        return "purchase/goodsOrder";
     }
-    @RequestMapping("orderList")
-    public String orderList(HttpSession session, Model model){
-        orderProcessListService.execute(session, model);
-        return "purchase/orderList";
-    }
-    @RequestMapping("paymentDel")
-    public String paymentDel(
-            @RequestParam("purchaseNum") String purchaseNum) {
-        paymentDeleteService.execute(purchaseNum);
-        return "redirect:orderList";
-    }
+
+
+
+
+
 
 }
