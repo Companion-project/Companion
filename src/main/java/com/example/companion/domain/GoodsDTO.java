@@ -19,6 +19,10 @@ public class GoodsDTO {
     String goodsContent;
     String empNum;
 
+    //카테고리 추가
+    String goodsCategory;
+    String subCategory;
+
     Integer visitCount;
     Date goodsRegist;
     String updateEmpNum;

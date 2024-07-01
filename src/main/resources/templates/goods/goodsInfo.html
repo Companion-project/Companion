@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>companion</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<script src="/static/js/goods/goodsInfo.js"></script>
 </head>
 <body>
 
@@ -10,6 +12,22 @@
 <caption>상품 상세보기</caption>
 <tr><th width="150">상품번호</th><td>[[${goodsCommand.goodsNum}]]</td></tr>
 <tr><th>상품명</th><td>[[${goodsCommand.goodsName}]]</td></tr>
+<tr><th>대분류</th>
+    <td>
+        <span th:if="${goodsCommand.goodsCategory != null}">
+            [[${goodsCommand.goodsCategory}]]
+        </span>
+        <span th:unless="${goodsCommand.goodsCategory != null}">대분류 정보 없음</span>
+    </td>
+</tr>
+<tr><th>소분류</th>
+    <td>
+        <span th:if="${goodsCommand.subCategory != null}">
+            [[${goodsCommand.subCategory}]]
+        </span>
+        <span th:unless="${goodsCommand.subCategory != null}">소분류 정보 없음</span>
+    </td>
+</tr>
 <tr><th>상품가격</th><td>[[${goodsCommand.goodsPrice}]]</td></tr>
 <tr><th>배송비</th><td>[[${goodsCommand.deliveryCost}]]</td></tr>
 <tr><th>상품설명</th><td>
