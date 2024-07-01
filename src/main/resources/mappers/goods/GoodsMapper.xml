@@ -121,7 +121,7 @@ where goods_num = #{goodsNum}
 <!-- 상품정보와 같이 가져오기  -->
 select g.goods_num, goods_name, goods_price, goods_content, delivery_cost, emp_num,
 	     goods_regist, goods_main_store, goods_main_store_img, goods_images,
-		 goods_images_img, visit_count, update_emp_num, goods_update_date,goods_category, goods_subcategory
+		 goods_images_img, visit_count, update_emp_num, goods_update_date,goods_category, goods_subcategory,
 		 coalesce(tot,0) stock
 from goods g left outer join (   <!-- 상품정보는 있지만 입고가 없어도 출력  -->
 	<!-- 조인으로 입고수량 - 구매수량 = 재고수량 계산 쿼리, 구매수량 null일 시 0, 구매수량 없어도 입고수량이 있으면 출력 -->

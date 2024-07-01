@@ -80,7 +80,7 @@
                 <tr>
                     <th:block th:each="dto, idx : ${categoryMap.get(mainCategory).get(subCategory)}">
                         <td>
-                            <a th:href="@{|/goods/goodsDetail?goodsNum=${dto.goodsNum}|}">
+                            <a th:href="|corner/detailView/${dto.goodsNum}|">
                                 <img th:src="@{|/static/upload/${dto.goodsMainStore}|}" /><br />
                                 [[${dto.goodsName}]]<br/>
                                 [[${dto.goodsPrice}]]<br/>
