@@ -1,5 +1,6 @@
 package com.example.companion.mapper;
 
+import com.example.companion.domain.CartDTO;
 import com.example.companion.domain.GoodsDTO;
 import com.example.companion.domain.GoodsDetailStockDTO;
 import com.example.companion.domain.StartEndPageDTO;
@@ -23,4 +24,9 @@ public interface GoodsMapper {
     public int goodsDelete(String goodsNum);
     public GoodsDetailStockDTO goodsDetailStock(String goodsNum);
     public  int visitCount(String goodsNum);
+    public List<GoodsDTO> wishGoodsList(String memberNum);
+    // 조인문 없이 조인을 하기 위해서는 두개의 테이블 검색 쿼리가 각각 존재해야 한다.
+    public GoodsDTO goodsSelect(String goodsNum); // 그래서 각각 상품과 장바구니 쿼리문을 만들어주겠습니다.
+    public CartDTO cartSelect(Integer cartNum); // 앞서 cartNum이 필요한데 테이블에는 cartNum없어 추가하겠습니다.
+
 }

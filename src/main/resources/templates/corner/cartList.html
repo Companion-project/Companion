@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Companion</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#checkBoxs").click(function(){
+                if($("#checkBoxs").prop("checked")){
+                    $("input:checkbox[name=prodCk]").prop("checked", true);
+                }else{
+                    $("input:checkbox[name=prodCk]").prop("checked", false);
+                }
+                goodsChk();
+            });
+            $("input:checkbox[name=prodCk]").click(function(){
+                var tot = $("input:checkbox[name=prodCk]").length;
+                var checked = $("input:checkbox[name=prodCk]:checked").length;
+                if(tot == checked){
+                    $("#checkBoxs").prop("checked",true);
+                }else{
+                    $("#checkBoxs").prop("checked",false);
+                }
+                //체크할때마다 이므로 여기서 함수 실행
+                goodsChk();
+            });
+        });
+        function del1(){
+            var chk_arr = [];
+            $("input[name='prodCk']:checked").each(function(){
+                chk_arr.push($(this).val());
+            });
+        $.ajax({
+            url: "cartDels" ,
+            type : "post",
+            dataType:"text",
+            data:{"goodsNums" : chk_arr},
+            success : function(result){
+                if(result == "200"){
+                    location.reload();
+                }else{
+                    alert("삭제되지 않았습니다.");
+                }
+            },
+            error : function () {
+                alert("삭제할 상품을 하나 이상 선택하여 주세요.");
+            }
+        });
+    }
+    function del(goodsNum){
+        location.href="cartDel?goodsNum="+goodsNum;
+    }
+    function goodsChk(){
+        var chkLeng  = $("input[name=prodCk]");
+        var cnt = 0;
+        var sumPrice = 0;
+        for(var i = 0; i < chkLeng.length; i++){
+            if(chkLeng[i].checked == true){
+                cnt++;
+                sumPrice += Number($(".totalPrice:eq("+i+")").text())
+                         +  Number($(".deliveryCost:eq("+i+")").text());
+            }
+        }
+    $("#prodCnt").text(cnt);
+    $("#sumPrice").text(sumPrice);
+}
+    function cartAdd(goodsNum , goodsPrice){
+        $.ajax({
+            type : "get",
+            url : "cartAdd",
+            dataType : "text",
+            data : {"goodsNum" : goodsNum , "qty" : 1},
+            success : function(result){
+                if(result.trim() == "200"){
+                    $("#"+goodsNum).text(Number($("#"+goodsNum).text()) + 1);
+                    $("#t_"+goodsNum).text(Number($("#t_"+goodsNum).text()) + Number(goodsPrice));
+                }
+            },
+            error : function(){
+                alert('에러가 나왔다 홀홀홀~');
+            },
+            complete:goodsChk
+        });
+    }
+    function checkQty(goodsNum){
+        if($("#"+goodsNum).text() > 1 ){
+            $.ajax({
+                type : "get",
+                dataType : "text",
+                url : "cartQtyDown",
+                data :
+                {"goodsNum" : goodsNum},
+                success : function(result){
+                    var data = JSON.parse(result);
+                    $("#"+goodsNum).text(data.cartDTO.cartQty);
+                    $("#t_"+goodsNum).text(data.cartDTO.cartQty * data.goodsDTO.goodsPrice);
+                },
+                error : function(){
+                    alert('에러발생');
+                },
+                complete:goodsChk
+            });
+        }else{
+            alert("최소 수량이 1이어야 합니다.");
+            return false;
+        }
+    }
+    </script>
+</head>
+<body>
+<form action="/purchase/goodsBuy" method="post" >
+    <table width="800" align="center" >
+        <tr><td><input type="checkbox" id="checkBoxs" checked="checked"/></td>
+            <td>이미지</td><td>제품명</td><td>수량</td><td>합계금액</td><td>배송비</td>
+            <td><input type="button"  value="선택 상품 삭제" onclick="del1();"/></td>
+        </tr>
+        <tr th:each=" dto: ${list}">
+            <td><input type="checkbox" name="prodCk" checked="checked"
+                       th:value="${dto.goodsDTO.goodsNum}"/></td>
+            <td><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" /></td>
+            <td>[[${dto.goodsDTO.goodsName}]]</td>
+            <td><a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}');|"> - </a>
+                <span th:id="${dto.goodsDTO.goodsNum}">[[${dto.cartDTO.cartQty}]]</span>
+                <a th:href="|javascript:cartAdd('${dto.goodsDTO.goodsNum}','${dto.goodsDTO.goodsPrice}')|"> + </a>
+            </td>
+            <td><span th:id="${'t_'+ dto.goodsDTO.goodsNum}" class="totalPrice">[[${dto.totalPrice}]]</span></td>
+            <td><span class="deliveryCost">[[${dto.goodsDTO.deliveryCost}]]</span></td>
+            <td><input type="button"  value="삭제" th:attr="onclick=|del('${dto.goodsDTO.goodsNum}');|"/></td>
+        </tr>
+        <tr>
+            <td colspan="7" align="right">
+                상품수 : <span id="prodCnt">[[${list.size}]]</span>개<br />
+                전체 금액 : <span id="sumPrice">[[${sumPrice}]]</span>원<br />
+
+                <input type="submit" value="구매하기" />
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
