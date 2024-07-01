@@ -141,7 +141,7 @@ body {
 }
 
 .index {
-    flex: 1; /* 빈 공간을 채우도록 설정 */
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
