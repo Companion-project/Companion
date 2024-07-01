@@ -11,9 +11,16 @@
 	<li><a href="goodsForm">상품 추가</a></li>
 	<li><a href="goodsIncoming">상품 입고</a></li>
 	<li><a href="goodsIncomingList">상품 입고 현황</a></li>
+	<li><a href="/">메인페이지</a></li>
 </ul>
 <table border=1 width="600" align="center">
-<form action="goodList" method="get">
+ <tr>
+    <td colspan="6" class="text-right">
+        <span style="color:red" th:if="${errorMessage}" th:text="${errorMessage}"></span>
+        <span style="color:red" th:unless="${errorMessage}">* 상품 입고 후에는 해당하는 상품을 삭제할 수 없습니다</span>
+    </td>
+</tr>
+<form action="goodsList" method="get">
 	<tr>
 		<td colspan="6">검색 :
 			<input type="search" name="searchWord" size="60" th:value="${searchWord}"/>

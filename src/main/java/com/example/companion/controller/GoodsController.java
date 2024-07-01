@@ -4,6 +4,7 @@ import com.example.companion.command.GoodsCommand;
 import com.example.companion.service.goods.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,14 +29,14 @@ public class GoodsController {
     @Autowired
     GoodsDeleteService goodsDeleteService;
 
-    @RequestMapping(value = "goodsList", method = RequestMethod.GET)
-    public String goodsList(
-                @RequestParam(value = "searchWord", required = false) String searchWord,
-                @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                Model model){
-        goodsListService.execute(searchWord,model,page);
-        return "/goods/goodsList";
-    }
+ 	@RequestMapping(value="goodsList" , method=RequestMethod.GET)
+	public String  goodsList(
+			@RequestParam(value="searchWord" , required = false) String searchWord,
+			@RequestParam(value = "page" , required = false , defaultValue = "1") int page,
+			Model model) {
+		goodsListService.execute(searchWord, model, page);
+		return "/goods/goodsList";
+	}
 
     @GetMapping("goodsForm")
     public String goodsForm(){
@@ -65,8 +66,13 @@ public class GoodsController {
 
     @PostMapping("productsDelete")
     public String productsDelete(
-            @RequestParam(value="memDels") String memDels[]){
-        productsDeleteService.execute(memDels);
+            @RequestParam(value="memDels") String memDels[], Model model) {
+        try {
+            productsDeleteService.execute(memDels);
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("errorMessage", "입고된 상품은 선택삭제 할 수 없습니다.");
+            return "goods/goodsError"; // 에러 메시지를 표시할 별도의 페이지로 이동
+        }
         return "redirect:goodsList";
     }
 
@@ -86,6 +92,8 @@ public class GoodsController {
 
     @PostMapping("goodsUpdate")
     public String goodsUpdate(@Validated GoodsCommand goodsCommand, BindingResult result, HttpSession session, Model model){
+           System.out.println("goodsCategory: " + goodsCommand.getGoodsCategory());
+
         goodsUpdateService.execute(goodsCommand,session, result, model);
         if(result.hasErrors()){
             return "/goods/goodsModify";

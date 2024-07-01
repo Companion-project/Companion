@@ -30,11 +30,14 @@ public class GoodsWriteService {
         dto.setGoodsNum(goodsCommand.getGoodsNum());
         dto.setGoodsPrice(goodsCommand.getGoodsPrice());
         dto.setDeliveryCost(goodsCommand.getDeliveryCost());
-
+        dto.setGoodsCategory(goodsCommand.getGoodsCategory());
+        dto.setSubCategory(goodsCommand.getSubCategory());
         AuthInfoDTO auth = (AuthInfoDTO)session.getAttribute("auth");
         String empId = auth.getUserId();
         String empNum = employeeMapper.getEmpNum(empId);
         dto.setEmpNum(empNum);
+
+        long maxFileSize = 20 * 1024 * 1024; // 이미지 크기 20메가
 
         //이미지 파일 추가 로직
         //파일저장 경로
@@ -42,6 +45,9 @@ public class GoodsWriteService {
         String fileDir = resource.getFile();
         //메인이미지
         MultipartFile mf = goodsCommand.getGoodsMainStore(); //command에서 이미지 객체 가지고 오기
+        if (mf.getSize() > maxFileSize) {
+            throw new RuntimeException("이미지 파일은 20MB 이하로 첨부해주세요.");
+        }
         String originalFile = mf.getOriginalFilename(); //파일객체에서 upload할 때 사용한 파일명
         String extension = originalFile.substring(originalFile.lastIndexOf(".")); //파일명에서 확장자 추출
         String storeName = UUID.randomUUID().toString().replace("-",""); //랜덤아이디 부여
@@ -62,6 +68,9 @@ public class GoodsWriteService {
             String storeTotal = "";
             //파일이 여러개이므로 반복
             for(MultipartFile mtf : goodsCommand.getGoodsImages()){
+                if (mtf.getSize() > maxFileSize) {
+                    throw new RuntimeException("이미지 파일은 20MB 이하로 첨부해주세요.");
+                }
                 originalFile = mtf.getOriginalFilename();
                 extension = originalFile.substring(originalFile.lastIndexOf("."));
                 storeName = UUID.randomUUID().toString().replace("-","");
