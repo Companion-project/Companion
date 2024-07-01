@@ -1,0 +1,194 @@
+/* styles.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: url("../static/images/background.png"); /* 이미지 경로 수정 */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.companion-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* .left-container과 .main-container 이외의 영역 숨기기 */
+}
+
+.main-container {
+    width: 600px;
+    height: 100vh;
+    background-color: white;
+    overflow-y: auto;
+    border-left: 1px solid #E9EBEC;
+    border-right: 1px solid #E9EBEC;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 500px;
+}
+
+.header {
+    position: fixed;
+    width: 570px;
+    height: 52px;
+    border-bottom: 1px solid #E9EBEC;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    justify-content: center;
+}
+
+.header h3 {
+    margin-left: auto; /* 다른 요소들과 간격을 유지하도록 자동 마진을 설정 */
+    margin-right: auto;
+}
+
+.back-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-image: url("../static/images/back-button.png"); /* 이미지 경로 수정 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.back-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.left-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 100vh;
+    padding: 50px 0 0 40px;
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    z-index: 100;
+}
+
+#logo {
+    margin-bottom: 16px;
+    height: 200px;
+}
+
+#main-text {
+    margin-bottom: 16px;
+    height: 52px;
+}
+
+.search-container {
+    margin-top: 20px;
+    width: 340px;
+    height: 52px;
+    background-image: url("../static/images/button-search.png"); /* 이미지 경로 수정 */
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 1000;
+}
+
+.search-form {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 190px;
+    height: 23px;
+    padding: 14px 16px;
+    border: none;
+    background: transparent !important;
+    font-size: 14px;
+    outline: none;
+    color: black;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 20px;
+}
+
+.search-input::placeholder {
+    color: #888;
+}
+
+.search-button {
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.index {
+    flex: 1; /* 빈 공간을 채우도록 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* 원하는 여백 설정 */
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        background-image: none;
+        background-color: rgb(244, 237, 237);
+    }
+    .left-container {
+        display: none;
+    }
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 580px;
+    height: 56px;
+    background-color: #ffffff;
+    border-top: 1px solid #E9EBEC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    z-index: 999;
+}
+
+.bottom-nav-item {
+    width: 35px;
+    height: 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+#nav-home {
+    background-image: url("../static/images/inactive_home.png"); /* 이미지 경로 수정 */
+}
+
+#nav-category {
+    background-image: url("../static/images/inactive_category.png"); /* 이미지 경로 수정 */
+}
+
+#nav-login {
+    background-image: url("../static/images/inactive_login.png"); /* 이미지 경로 수정 */
+}
