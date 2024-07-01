@@ -15,7 +15,6 @@ width: 600px;
 max-width: calc(100vw - 20px); /* 화면 너비보다 크면 600px로 제한 */
 height: 100vh;
 background-color: white;
-overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
 border-left: 1px solid #E9EBEC;
 border-right: 1px solid #E9EBEC;
 display: flex;
@@ -32,7 +31,7 @@ height: 52px;
 border-bottom: 1px solid #E9EBEC;
 display: flex;
 align-items: center;
-padding: 0 16px;
+padding: 0 10px;
 justify-content: center;
 background-color: #ffffff;
 }
@@ -120,7 +119,6 @@ flex: 1; /* 남은 공간을 모두 차지 */
 width: 100%;
 max-width: 100%;
 overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
-padding: 80px;
 }
 
 

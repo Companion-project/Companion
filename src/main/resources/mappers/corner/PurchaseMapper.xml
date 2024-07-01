@@ -92,7 +92,7 @@
         </association>
         <collection property="purchaseListGoodsDTOs" ofType="com.example.companion.domain.PurchaseListGoodsDTO">
             <association property="purchaseList" javaType="com.example.companion.domain.PurchaseListDTO">
-                <result column="purchasae_qty" jdbcType="BIGINT" property="purchaseQty"/>
+                <result column="purchase_qty" jdbcType="BIGINT" property="purchaseQty"/>
                 <result column="total_price" jdbcType="BIGINT" property="totalPrice"/>
             </association>
             <association property="goods" javaType="com.example.companion.domain.GoodsDTO"><!-- resultMap이 없으므로 작성해야합니다. -->
