@@ -12,20 +12,12 @@
 <caption>상품 상세보기</caption>
 <tr><th width="150">상품번호</th><td>[[${goodsCommand.goodsNum}]]</td></tr>
 <tr><th>상품명</th><td>[[${goodsCommand.goodsName}]]</td></tr>
-<tr><th>대분류</th>
+<tr><th>카테고리</th>
     <td>
         <span th:if="${goodsCommand.goodsCategory != null}">
             [[${goodsCommand.goodsCategory}]]
         </span>
-        <span th:unless="${goodsCommand.goodsCategory != null}">대분류 정보 없음</span>
-    </td>
-</tr>
-<tr><th>소분류</th>
-    <td>
-        <span th:if="${goodsCommand.subCategory != null}">
-            [[${goodsCommand.subCategory}]]
-        </span>
-        <span th:unless="${goodsCommand.subCategory != null}">소분류 정보 없음</span>
+        <span th:unless="${goodsCommand.goodsCategory != null}">카테고리 정보 없음</span>
     </td>
 </tr>
 <tr><th>상품가격</th><td>[[${goodsCommand.goodsPrice}]]</td></tr>

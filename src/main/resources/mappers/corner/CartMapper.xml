@@ -31,13 +31,12 @@
         <result column="update_Emp_Num" jdbcType="VARCHAR" property="updateEmpNum"/>
         <result column="goods_Update_Date" jdbcType="DATE" property="goodsUpdateDate"/>
         <result column="goods_category" jdbcType="VARCHAR" property="goodsCategory"/>
-        <result column="goods_subcategory" jdbcType="VARCHAR" property="subCategory"/>
     </resultMap>
 
 <select id="goodsSelectAll" resultMap="goodsResultMap">
 select goods_Num , goods_name , goods_price ,goods_content , delivery_cost , emp_num
        ,goods_regist , goods_main_store ,goods_main_store_img , goods_images
-       ,goods_images_img , visit_count ,update_Emp_Num , goods_Update_Date, goods_category,goods_subcategory
+       ,goods_images_img , visit_count ,update_Emp_Num , goods_Update_Date, goods_category
 from goods
 </select>
 

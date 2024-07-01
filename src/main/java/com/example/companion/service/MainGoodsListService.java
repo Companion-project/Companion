@@ -16,31 +16,21 @@ public class MainGoodsListService {
     public void execute(Model model) {
         List<GoodsDTO> list = cartMapper.goodsSelectAll();
 
-        Map<String, Map<String, List<GoodsDTO>>> categoryMap = new HashMap<>();
+        Map<String, List<GoodsDTO>> categoryMap = new HashMap<>();
 
-        categoryMap.put("사료", new HashMap<>());
-        categoryMap.get("사료").put("건식사료", new ArrayList<>());
-        categoryMap.get("사료").put("습식사료", new ArrayList<>());
-        categoryMap.get("사료").put("자연식", new ArrayList<>());
+        // 미리 정의된 카테고리 목록
+        List<String> categories = Arrays.asList("사료", "간식", "용품");
 
-        categoryMap.put("간식", new HashMap<>());
-        categoryMap.get("간식").put("수제간식", new ArrayList<>());
-        categoryMap.get("간식").put("캔/파우치", new ArrayList<>());
-        categoryMap.get("간식").put("영양/기능", new ArrayList<>());
+        // 카테고리 맵 초기화
+        for (String category : categories) {
+            categoryMap.put(category, new ArrayList<>());
+        }
 
-        categoryMap.put("용품", new HashMap<>());
-        categoryMap.get("용품").put("장난감", new ArrayList<>());
-        categoryMap.get("용품").put("산책용품", new ArrayList<>());
-        categoryMap.get("용품").put("의류/악세사리", new ArrayList<>());
-
+        // 상품을 해당 카테고리에 분류
         for (GoodsDTO dto : list) {
-            String mainCategory = dto.getGoodsCategory();
-            String subCategory = dto.getSubCategory();
-
-            if (mainCategory != null && subCategory != null &&
-                categoryMap.containsKey(mainCategory) &&
-                categoryMap.get(mainCategory).containsKey(subCategory)) {
-                categoryMap.get(mainCategory).get(subCategory).add(dto);
+            String category = dto.getGoodsCategory();
+            if (category != null && categoryMap.containsKey(category)) {
+                categoryMap.get(category).add(dto);
             }
         }
 

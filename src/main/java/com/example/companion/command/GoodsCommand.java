@@ -30,5 +30,4 @@ public class GoodsCommand {
     Date goodsUpdateDate;
      //카테고리 추가
     String goodsCategory;
-    String subCategory;
 }

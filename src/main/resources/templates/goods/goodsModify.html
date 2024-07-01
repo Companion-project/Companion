@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>companion</title>
-	<!-- ajax는 CheckRestController에서 처리 -->
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/goods/goodsModify.js"></script>
 </head>
@@ -17,20 +16,13 @@
 	<td><input type="text" name="goodsName"  th:field="*{goodsName}" /><br />
 		<span style="color:red" th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span></td></tr>
 
-<tr><th>대분류</th>
+<tr><th>카테고리</th>
     <td>
         <select id="goodsCategory" name="goodsCategory" th:field="*{goodsCategory}" required>
-            <option value="">대분류 선택</option>
+            <option value="">카테고리 선택</option>
             <option value="사료">사료</option>
             <option value="간식">간식</option>
             <option value="용품">용품</option>
-        </select>
-    </td>
-</tr>
-<tr><th>소분류</th>
-    <td>
-        <select id="subCategory" name="subCategory" th:field="*{subCategory}" required>
-            <option value="">소분류 선택</option>
         </select>
     </td>
 </tr>

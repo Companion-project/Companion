@@ -1,26 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const mainCategoryTabs = document.getElementById('main-category-tabs');
-    const subCategoryTabs = document.getElementById('sub-category-tabs');
-    const categoryContents = document.querySelectorAll('.sub-category-content');
+    const categoryContents = document.querySelectorAll('.category-content');
 
-    function showSubCategories(mainCategory) {
-        subCategoryTabs.innerHTML = '';
-        if (categoryMap && categoryMap.hasOwnProperty(mainCategory)) {
-            const subCategories = Object.keys(categoryMap[mainCategory]);
-            subCategories.forEach(subCategory => {
-                const button = document.createElement('button');
-                button.textContent = subCategory;
-                button.setAttribute('data-category', subCategory);
-                subCategoryTabs.appendChild(button);
-            });
-        }
-    }
-
-    function showCategory(mainCategory, subCategory) {
+    function showCategory(mainCategory) {
         categoryContents.forEach(content => {
             content.style.display = 'none';
         });
-        const selectedCategory = document.getElementById(`sub-category-${mainCategory}-${subCategory}`);
+        const selectedCategory = document.getElementById(`category-${mainCategory}`);
         if (selectedCategory) {
             selectedCategory.style.display = 'block';
         }
@@ -33,35 +19,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 button.classList.remove('active');
             });
             event.target.classList.add('active');
-            showSubCategories(mainCategory);
-            if (categoryMap && categoryMap.hasOwnProperty(mainCategory)) {
-                const firstSubCategory = Object.keys(categoryMap[mainCategory])[0];
-                showCategory(mainCategory, firstSubCategory);
+            if (mainCategory === 'all') {
+                categoryContents.forEach(content => {
+                    content.style.display = 'block';
+                });
+            } else {
+                showCategory(mainCategory);
             }
-        }
-    });
-
-    subCategoryTabs.addEventListener('click', function(event) {
-        if (event.target.tagName === 'BUTTON') {
-            const mainCategory = document.querySelector('#main-category-tabs .active').getAttribute('data-category');
-            const subCategory = event.target.getAttribute('data-category');
-            subCategoryTabs.querySelectorAll('button').forEach(button => {
-                button.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            showCategory(mainCategory, subCategory);
         }
     });
 
     // 페이지 로드 시 첫 번째 대분류 카테고리 선택
     const firstMainCategory = mainCategoryTabs.querySelector('button');
-    if (firstMainCategory && categoryMap) {
-        firstMainCategory.classList.add('active');
-        const mainCategory = firstMainCategory.getAttribute('data-category');
-        showSubCategories(mainCategory);
-        if (categoryMap.hasOwnProperty(mainCategory)) {
-            const firstSubCategory = Object.keys(categoryMap[mainCategory])[0];
-            showCategory(mainCategory, firstSubCategory);
-        }
+    if (firstMainCategory) {
+        firstMainCategory.click();
     }
 });
