@@ -1,36 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>companion</title>
+	<meta charset="UTF-8">
+	<title>companion</title>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#buyItem").click(function(){
+			location.href="../buyItem?goodsNum=[[${dto.goodsDTO.goodsNum}]]&qty="+$("#qty").val();
+		});
+		$("#qty").click(function(){
+			const money = [[${dto.goodsDTO.goodsPrice}]] * $("#qty").val();
+			const moneyFormatter = new Intl.NumberFormat('ko-KR',{style:'currency',currency:'KRW'});
+			const formattedMoney = moneyFormatter.format(money);
+			$("#tot").text(formattedMoney + '원');
+		});
+		$("#cartBtn").click(function(){
+			if([[${session.auth == null}]]){
+				window.open("/login/item.login","login","width=315, height=200,top = 100, left=100");
+			}else{
+					$.ajax({
+					type:"get",
+					url:"../cartAdd",
+					dataType:"text",
+					data:{"goodsNum" : "[[${dto.goodsDTO.goodsNum}]]","qty":$("#qty").val()},
+					success:function(result){
+						if(result.trim() == "200"){
+							if(confirm("계속 쇼핑하려면 '취소'를 클릭하세요.")){
+								location.href="../cartList";
+							}else if(result.trim() == "999"){
+								alert("관리자는 사용할 수 없는 페이지입니다.");
+							}else if(result.trim() == "000"){
+								alert("로그인을 해야합니다.");
+							}
+						}
+					},
+					error:function(){
+						alert("관리자는 사용할 수 없는 페이지입니다.");
+					}
+				});
+			}
+		});
+        $("#wish").click(function(){
+            if([[${session.auth == null}]]){
+                window.open("/login/item.login","login","width=315, height=200,top = 100, left=100");
+            }else{
+                $.ajax({
+                    type:"post",
+                    url:"../goodsWishAdd",
+                    dataType:"text",
+                    data:{"goodsNum" : "[[${dto.goodsDTO.goodsNum}]]"},
+                    success:function(result){
+                        if(result.trim() == "1"){
+                            $("#wish").attr("src","/static/images/heart.png");
+                        }else if(result.trim() == "0"){
+                            $("#wish").attr("src","/static/images/heart1.png");
+                        }else if(result.trim() == "999"){
+                            alert("관리자는 사용할 수 없습니다.");
+                        }
+                    },
+                    error:function(){
+                        alert("관리자는 사용할 수 없습니다.");
+                    }
+                });
+                }
+            });
+        });
+
+
+	</script>
 </head>
 <body>
 <table width="800" align="center">
 	<tr><td colspan="2">([[${dto.goodsDTO.goodsName}]]) 상품정보 입니다. | 상품 조회수 : [[${dto.goodsDTO.visitCount}]]</td></tr>
 	<tr><td rowspan="6" width="300px">
-			<img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" alt="상품이미지"/></td>
+		<img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" alt="상품이미지"/></td>
 		<td>상품명 : [[${dto.goodsDTO.goodsName}]]</td>
 	</tr>
 	<tr><td>가격 : [[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice)+'원'}]]</td></tr>
 	<tr><td>배송비 <span th:if="${dto.goodsDTO.deliveryCost == 0}">무료배송</span>
-				  <span th:if="${dto.goodsDTO.deliveryCost != 0}">
+		<span th:if="${dto.goodsDTO.deliveryCost != 0}">
 					[[${#numbers.formatCurrency(dto.goodsDTO.deliveryCost) + '원'}]]</span></td></tr>
 	<tr><td>수량 : <input type="number" min=1 step="1" value="1" id="qty" name="qty" /></td></tr>
-	<tr><td>총 상품금액 : [[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice) + '원'}]]<span id="tot"></span></td></tr>
+	<tr><td>총 상품금액 : <span id="tot">[[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice) + '원'}]]</span></td></tr>
 	<tr><td><!--  재고가 있을 때만 버튼이 보이게  -->
-			<button type="button" id="cartBtn" th:if="${dto.stock > 0 }">  장바구니 |</button>
-			<button type="button" id="buyItem" th:if="${dto.stock > 0 }"> 바로구매  |</button>
-			<span th:if="${dto.stock <= 0 }" >  입고 예정 상품입니다  </span> |
-			 찜
-		</td>
+		<button type="button" id="cartBtn" th:if="${dto.stock > 0 }"> 장바구니 |</button>
+		<button type="button" id="buyItem" th:if="${dto.stock > 0 }"> 바로구매  |</button>
+		<span th:if="${dto.stock <= 0 }" >  입고 예정 상품입니다  </span>
+		<th:block th:if="${wish == null}">
+			<img src="/static/images/heart1.png" id="wish" width="20" />
+		</th:block>
+		<th:block th:if="${wish != null}">
+			<img src="/static/images/heart.png" id="wish" width="20" />
+		</th:block> 찜
+	</td>
 	</tr>
 	<tr><td colspan="2">남은 수량 :[[${dto.stock}]] 개</td></tr>
 	<tr><td colspan="2"><p>
-				<span id="descript">제품 상세 설명</span> |
-				<span id="review">리뷰</span> |
-				<span id="inquire" >상품문의</span>
-			</p>
-		</td>
+		<span id="descript">제품 상세 설명</span> |
+		<span id="review">리뷰</span> |
+		<span id="inquire" >상품문의</span>
+	</p>
+	</td>
 	</tr>
 </table>
 </body>
