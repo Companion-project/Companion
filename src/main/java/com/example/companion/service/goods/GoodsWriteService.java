@@ -31,7 +31,6 @@ public class GoodsWriteService {
         dto.setGoodsPrice(goodsCommand.getGoodsPrice());
         dto.setDeliveryCost(goodsCommand.getDeliveryCost());
         dto.setGoodsCategory(goodsCommand.getGoodsCategory());
-        dto.setSubCategory(goodsCommand.getSubCategory());
         AuthInfoDTO auth = (AuthInfoDTO)session.getAttribute("auth");
         String empId = auth.getUserId();
         String empNum = employeeMapper.getEmpNum(empId);

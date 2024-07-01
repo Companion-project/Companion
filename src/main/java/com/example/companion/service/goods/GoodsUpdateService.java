@@ -31,7 +31,6 @@ public class GoodsUpdateService {
 		dto.setGoodsContent(goodsCommand.getGoodsContent());
 		dto.setGoodsName(goodsCommand.getGoodsName());
 		dto.setGoodsCategory(goodsCommand.getGoodsCategory());
-		dto.setSubCategory(goodsCommand.getSubCategory());
 		dto.setGoodsNum(goodsCommand.getGoodsNum());
 		dto.setGoodsPrice(goodsCommand.getGoodsPrice());
 		dto.setDeliveryCost(goodsCommand.getDeliveryCost());

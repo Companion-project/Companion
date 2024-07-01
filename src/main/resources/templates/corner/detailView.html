@@ -77,6 +77,7 @@
 		<img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" alt="상품이미지"/></td>
 		<td>상품명 : [[${dto.goodsDTO.goodsName}]]</td>
 	</tr>
+	<tr><td>카테고리 : [[${dto.goodsDTO.goodsCategory}]]</td></tr>
 	<tr><td>가격 : [[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice)+'원'}]]</td></tr>
 	<tr><td>배송비 <span th:if="${dto.goodsDTO.deliveryCost == 0}">무료배송</span>
 		<span th:if="${dto.goodsDTO.deliveryCost != 0}">
