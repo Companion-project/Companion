@@ -23,4 +23,5 @@ public interface PurchaseMapper {
     public List<OrderListDTO> orderList(@Param("memberNum")String memberNum,
                                         @Param("purchaseNum")String purchaseNum);
     public int paymentDelete(String memberNum);
+    public Integer purchaseOk(String purchaseNum);
 }

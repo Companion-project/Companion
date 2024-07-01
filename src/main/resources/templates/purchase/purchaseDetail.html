@@ -20,7 +20,6 @@
 <hr />
 구매상품 정보<br />
 <table width="800" align = "center">
-  <!--  구매시 상품 정보는 여럭 일 수 있어 마이바티스에서 collection으로 받아왔습니다. -->
   <th:block th:each=" dto  : ${dto.purchaseListGoodsDTOs}">
     <tr >	<td><img src="|/static/upload/${dto.goods.goodsMainStore}|" /></td>
       <td>제품가격 : [[${#numbers.formatCurrency(dto.goods.goodsPrice)}]]원 |
@@ -60,9 +59,7 @@
     </td>
   </tr>
 </table>
-<!-- 결제정보가 있어야 배송정보를 보거나 입력할 수 있습니다. -->
 <div th:if="${dto.paymentDTO.appldate != null }">
-  <!-- 배송정보 이므로 배송정보가 있으면 보이도록 합니다. -->
   <div th:if="${dto.deliveryDTO.deliveryNumber != null }">
     <hr /> <!-- 입력한 배송정보 가지고오기 -->
     <form action="/delivery/deliveryDel" method="post">
