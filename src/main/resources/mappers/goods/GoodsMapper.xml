@@ -7,7 +7,7 @@
 	<sql id="goodsColumnsBase">
 	   goods_Num , goods_name , goods_price ,goods_content , delivery_cost , emp_num
 	  ,goods_regist , goods_main_store ,goods_main_store_img , goods_images
-	  ,goods_images_img , visit_count ,update_Emp_Num , goods_Update_Date, goods_category, goods_subcategory
+	  ,goods_images_img , visit_count ,update_Emp_Num , goods_Update_Date, goods_category
 	</sql>
 
 	<resultMap type="com.example.companion.domain.GoodsDTO" id="goodsResultMap">
@@ -19,7 +19,6 @@
 		<arg column="goods_Content" javaType="string"/>
 		<arg column="emp_Num" javaType="string"/>
 		<arg column="goods_category" javaType="string"/>
-		<arg column="goods_subcategory" javaType="string"/>
 		<arg column="visit_Count" javaType="integer"/>
 		<arg column="goods_Regist" javaType="java.util.Date"/>
 		<arg column="update_Emp_Num" javaType="string"/>
@@ -42,7 +41,7 @@ values(#{goodsNum}, #{goodsName}, #{goodsPrice}, #{goodsContent}, #{deliveryCost
 		, #{goodsMainStore},#{goodsMainStoreImg}
 	    <if test="goodsImages != null">, #{goodsImages}, #{goodsImagesImg}</if>
 		<if test="goodsImages == null">, null ,null</if>
-	    ,0,null,null,#{goodsCategory}, #{subCategory})
+	    ,0,null,null,#{goodsCategory})
 </insert>
 <select id="allSelect" resultType="com.example.companion.domain.GoodsDTO" >
 select * from (
@@ -53,14 +52,13 @@ select * from (
 		,goods_main_store_img goodsMainStoreImg, goods_images goodsImages
 		,goods_images_img goodsImagesImg, visit_count visitCount
 		,update_Emp_Num updateEmpNum, goods_Update_Date goodsUpdateDate
-	    ,goods_category goodsCategory, goods_subcategory subCategory
+	    ,goods_category goodsCategory
 	from goods
 	<where>
 		<if test="searchWord != null">
 			goods_name like '%' || #{searchWord} || '%'
             or goods_content like '%' || #{searchWord} || '%'
             or goods_category like '%' || #{searchWord} || '%'
-            or goods_subcategory like '%' || #{searchWord} || '%'
 		</if>
 	</where>
 )sub1
@@ -73,7 +71,6 @@ where rn between #{startRow} and #{endRow}
 			goods_name like '%' || #{searchWord} || '%'
             or goods_content like '%' || #{searchWord} || '%'
             or goods_category like '%' || #{searchWord} || '%'
-            or goods_subcategory like '%' || #{searchWord} || '%'
 		</if>
 	</where>
 </select>
@@ -94,7 +91,7 @@ update goods
 set GOODS_NAME = #{goodsName}, GOODS_PRICE = #{goodsPrice}
 	,delivery_cost =#{deliveryCost}, GOODS_CONTENT = #{goodsContent}
     ,update_emp_num = #{updateEmpNum}, goods_update_date = now()
-	,goods_category = #{goodsCategory}, goods_subcategory = #{subCategory}
+	,goods_category = #{goodsCategory}
 	<if test="goodsMainStore != null">
 	,goods_main_store = #{goodsMainStore}
 	,goods_main_store_img = #{goodsMainStoreImg}
@@ -121,7 +118,7 @@ where goods_num = #{goodsNum}
 <!-- 상품정보와 같이 가져오기  -->
 select g.goods_num, goods_name, goods_price, goods_content, delivery_cost, emp_num,
 	     goods_regist, goods_main_store, goods_main_store_img, goods_images,
-		 goods_images_img, visit_count, update_emp_num, goods_update_date,goods_category, goods_subcategory
+		 goods_images_img, visit_count, update_emp_num, goods_update_date,goods_category,
 		 coalesce(tot,0) stock
 from goods g left outer join (   <!-- 상품정보는 있지만 입고가 없어도 출력  -->
 	<!-- 조인으로 입고수량 - 구매수량 = 재고수량 계산 쿼리, 구매수량 null일 시 0, 구매수량 없어도 입고수량이 있으면 출력 -->

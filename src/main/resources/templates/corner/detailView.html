@@ -77,13 +77,7 @@
 		<img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" alt="상품이미지"/></td>
 		<td>상품명 : [[${dto.goodsDTO.goodsName}]]</td>
 	</tr>
-	<tr><td>카테고리 :
-	<span th:if="${dto != null and dto.goodsDTO != null and dto.goodsDTO.goodsCategory != null}">
-    [[${#strings.arraySplit(dto.goodsDTO.goodsCategory, ':')[0]}]] >
-    [[${#strings.arraySplit(dto.goodsDTO.goodsCategory, ':')[1]}]]
-	</span>
-	<span th:unless="${dto != null and dto.goodsDTO != null and dto.goodsDTO.goodsCategory != null}">
-		카테고리 정보 없음	</span></td></tr>
+	<tr><td>카테고리 : [[${dto.goodsDTO.goodsCategory}]]</td></tr>
 	<tr><td>가격 : [[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice)+'원'}]]</td></tr>
 	<tr><td>배송비 <span th:if="${dto.goodsDTO.deliveryCost == 0}">무료배송</span>
 		<span th:if="${dto.goodsDTO.deliveryCost != 0}">

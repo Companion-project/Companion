@@ -21,7 +21,6 @@ public class GoodsDTO {
 
     //카테고리 추가
     String goodsCategory;
-    String subCategory;
 
     Integer visitCount;
     Date goodsRegist;
