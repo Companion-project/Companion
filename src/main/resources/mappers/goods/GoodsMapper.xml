@@ -137,4 +137,9 @@ update goods
 set visit_count = visit_count + 1
 where goods_num = #{goodsNum}
 </update>
+<select id="wishGoodsList" parameterType="string" resultMap="goodsResultMap">
+	select <include refid="goodsColumnsBase" />
+	from goods
+	where goods_num in (select goods_num from wish where member_num = #{memberNum})
+</select>
 </mapper>
