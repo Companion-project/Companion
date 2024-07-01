@@ -12,6 +12,25 @@
 	<table border = "1" width ="600" align="center">
 		<tr><th width="100">상품번호</th>
 			<td><input type="text" name="goodsNum" th:value="${goodsCommand.goodsNum}" readonly="readonly"/>자동부여</td></tr>
+
+	 <tr><th>대분류</th>
+            <td>
+                <select id="goodsCategory" name="goodsCategory" th:field="*{goodsCategory}" required>
+                    <option value="">대분류 선택</option>
+                    <option value="사료">사료</option>
+                    <option value="간식">간식</option>
+                    <option value="용품">용품</option>
+                </select>
+            </td>
+        </tr>
+        <tr><th>소분류</th>
+            <td>
+                <select id="subCategory" name="subCategory" th:field="*{subCategory}" required>
+                    <option value="">소분류 선택</option>
+                </select>
+            </td>
+        </tr>
+
 		<tr><th>상품명</th>
 			<td><input type="text" name="goodsName"  th:value="${goodsCommand.goodsName}" /><br />
 				<span style="color:red" th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span></td></tr>

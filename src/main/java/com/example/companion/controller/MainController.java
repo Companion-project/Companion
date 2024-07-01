@@ -13,9 +13,9 @@ public class MainController {
     @Autowired
     MainGoodsListService mainGoodsListService;
 
-    @RequestMapping("/")
-    public String index(@ModelAttribute("loginCommand")LoginCommand loginCommand, Model model){
+     @RequestMapping("/")
+    public String index(@ModelAttribute("loginCommand") LoginCommand loginCommand, Model model){
         mainGoodsListService.execute(model);
-        return "/index";
+        return "index";
     }
 }
