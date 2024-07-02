@@ -2,9 +2,73 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/corner/wishList.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 </head>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+<body>
+<img src="/static/images/background.png" id="back-img">
+<div class="companion-container">
+    <div class="left-container">
+        <img src="/static/images/logo.png" id="logo">
+        <img src="/static/images/main-text.png" id="main-text">
+
+        <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
+                <button type="submit" class="search-button" aria-label="검색"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+            <h3>관심목록</h3>
+        </div>
+
+        <div class="index">
+            <form action="goodsWishDels" id="frm" method="post">
+                <div class="product-list">
+                    <div class="product-header">
+                        <div>번호</div>
+                        <div>이미지</div>
+                        <div>상품이름</div>
+                        <div>가격</div>
+                        <div>
+                            <input type="checkbox" id="checkBoxs"/>
+                            <input type="submit" id="submit" value="선택 삭제"/>
+                        </div>
+                    </div>
+
+                    <div th:each="dto, idx : ${dtos}" class="product-item">
+                        <div>[[${idx.count}]]</div>
+                        <div><img th:src="|/static/upload/${dto.goodsMainStore}|" alt="상품이미지"/></div>
+                        <div><a th:href="@{/goods/goodsDetail(goodsNum=${dto.goodsNum})}">[[${dto.goodsName}]]</a></div>
+                        <div>[[${dto.goodsPrice}]]</div>
+                        <div>
+                            <input type="checkbox" name="wishGoodsDel" th:value="${dto.goodsNum}"/>
+                            <button type="button" th:attr='onclick=|location.href="wishDel?goodsNum=${dto.goodsNum}"|'>삭제</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="bottom-nav">
+            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png"
+                                                                       class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png"
+                                                                   class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png"
+                                                                    class="nav-icon"></a>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(function(){
         $("#frm").submit(function(){
@@ -31,25 +95,6 @@
         });
     });
 </script>
-<body>
-<form action="goodsWishDels" id="frm" method="post">
-    <table width="600" border = 1>
-
-        <tr><td>번호</td><td>이미지</td><td>상품이름</td><td>가격</td>
-            <td><input type="checkbox" id="checkBoxs" />
-                <input type="submit" value="선택 삭제" />
-            </td>
-        </tr>
-        <tr th:each="dto , idx : ${dtos}">
-            <td>[[${idx.count}]]</td>
-            <td><img th:src="|/static/upload/${dto.goodsMainStore}|" /></td>
-            <td><a th:href="@{/goods/goodsDetail(goodsNum=${dto.goodsNum})}">[[${dto.goodsName}]]</a></td>
-            <td>[[${dto.goodsPrice}]]</td>
-            <td><input type="checkbox" name="wishGoodsDel" th:value="${dto.goodsNum}"/>
-                <button type="button"
-                        th:attr='onclick=|location.href="wishDel?goodsNum=${dto.goodsNum}"|'>삭제</button></td>
-        </tr>
-    </table>
-</form>
+<script src="/static/js/test.js"></script>
 </body>
 </html>
