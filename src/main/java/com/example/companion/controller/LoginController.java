@@ -25,6 +25,8 @@ public class LoginController {
     @Autowired
     UserLoginService userLoginService;
 
+
+
     @PostMapping("userIdCheck")
     //html문서가 아닌 텍스트를 전달하기 위해서는 @ResponseBody필요
     public @ResponseBody String userIdCheck(
