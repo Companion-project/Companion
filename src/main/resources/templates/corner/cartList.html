@@ -9,55 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/corner/cartList.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background-image: url("/static/images/background.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-        }
-        .search-container {
-            margin-top: 20px;
-            width: 340px;
-            height: 52px;
-            background-image: url("/static/images/button-search.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 1000;
-        }
-
-        @media screen and (max-width: 1024px) {
-        body {
-            background-image: none;
-            background-color: rgb(244, 237, 237);
-        }
-        .left-container {
-            display: none;
-        }
-
-        .main-container {
-        margin-left: 0;
-    }
-    }
-    </style>
 </head>
 <body>
+<img src="/static/images/background.png" id="back-img">
 <div class="companion-container">
     <div class="left-container">
         <img src="/static/images/logo.png" id="logo">
         <img src="/static/images/main-text.png" id="main-text">
 
         <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
             <form id="searchForm" class="search-form">
                 <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
                 <button type="submit" class="search-button" aria-label="검색"></button>
@@ -72,37 +33,39 @@
         </div>
 
         <div class="index">
-            <form action="/purchase/goodsBuy" method="post" class="cart-form">
-                <div class="cart-header">
-                    <input type="checkbox" id="checkBoxs" checked="checked">
-                    <div>이미지</div>
-                    <div>제품명</div>
-                    <div>수량</div>
-                    <div>합계금액</div>
-                    <div>배송비</div>
-                    <div><input type="button" value="선택 상품 삭제" onclick="del1();"></div>
-                </div>
-
-                <div class="cart-row" th:each="dto : ${list}">
-                    <input type="checkbox" name="prodCk" checked="checked" th:value="${dto.goodsDTO.goodsNum}">
-                    <img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|">
-                    <div class="cart-item-info">
+            <form action="/purchase/goodsBuy" method="post" class="purchase-form">
+                <div class="cart-container">
+                    <div class="cart-header">
+                        <div class="cart-checkbox"><input type="checkbox" id="checkBoxs" checked="checked"/></div>
+                        <div class="menu-item">이미지</div>
+                        <div class="menu-item">제품명</div>
+                        <div class="menu-item">수량</div>
+                        <div class="menu-item">합계금액</div>
+                        <div class="menu-item">배송비</div>
+                        <div class="cart-button"><input type="button" value="선택 상품 삭제" onclick="del1();"/></div>
+                    </div>
+                    <div th:each=" dto: ${list}" class="cart-row">
+                        <div><input type="checkbox" name="prodCk" checked="checked"
+                                    th:value="${dto.goodsDTO.goodsNum}"/></div>
+                        <div><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" /></div>
                         <div>[[${dto.goodsDTO.goodsName}]]</div>
-                        <div class="cart-item-actions">
+                        <div>
                             <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}');|"> - </a>
                             <span th:id="${dto.goodsDTO.goodsNum}">[[${dto.cartDTO.cartQty}]]</span>
-                            <a th:href="|javascript:cartAdd('${dto.goodsDTO.goodsNum}', '${dto.goodsDTO.goodsPrice}')|"> + </a>
+                            <a th:href="|javascript:cartAdd('${dto.goodsDTO.goodsNum}','${dto.goodsDTO.goodsPrice}')|"> + </a>
+                        </div>
+                        <div><span th:id="${'t_'+ dto.goodsDTO.goodsNum}" class="totalPrice">[[${dto.totalPrice}]]</span></div>
+                        <div><span class="deliveryCost">[[${dto.goodsDTO.deliveryCost}]]</span></div>
+                        <div class="cart-button"><input type="button" value="삭제" th:attr="onclick=|del('${dto.goodsDTO.goodsNum}');|"/></div>
+                    </div>
+                    <div class="cart-footer">
+                        <div class="cart-summary">
+                            상품수 : <span id="prodCnt">[[${list.size}]]</span>개<br />
+                            전체 금액 : <span id="sumPrice">[[${sumPrice}]]</span>원<br />
+
+                            <input type="submit" value="구매하기" />
                         </div>
                     </div>
-                    <div class="totalPrice" th:text="${dto.totalPrice}"></div>
-                    <div class="deliveryCost" th:text="${dto.goodsDTO.deliveryCost}"></div>
-                    <div><input type="button" value="삭제" th:attr="onclick=|del('${dto.goodsDTO.goodsNum}');|"></div>
-                </div>
-
-                <div class="cart-summary">
-                    <div>상품수 : <span id="prodCnt">[[${list.size}]]</span>개</div>
-                    <div>전체 금액 : <span id="sumPrice">[[${sumPrice}]]</span>원</div>
-                    <div><input type="submit" value="구매하기"></div>
                 </div>
             </form>
         </div>
@@ -131,7 +94,6 @@
             }else{
                 $("#checkBoxs").prop("checked",false);
             }
-            //체크할때마다 이므로 여기서 함수 실행
             goodsChk();
         });
     });
@@ -140,81 +102,81 @@
         $("input[name='prodCk']:checked").each(function(){
             chk_arr.push($(this).val());
         });
-    $.ajax({
-        url: "cartDels" ,
-        type : "post",
-        dataType:"text",
-        data:{"goodsNums" : chk_arr},
-        success : function(result){
-            if(result == "200"){
-                location.reload();
-            }else{
-                alert("삭제되지 않았습니다.");
+        $.ajax({
+            url: "cartDels" ,
+            type : "post",
+            dataType:"text",
+            data:{"goodsNums" : chk_arr},
+            success : function(result){
+                if(result == "200"){
+                    location.reload();
+                }else{
+                    alert("삭제되지 않았습니다.");
+                }
+            },
+            error : function () {
+                alert("삭제할 상품을 하나 이상 선택하여 주세요.");
             }
-        },
-        error : function () {
-            alert("삭제할 상품을 하나 이상 선택하여 주세요.");
-        }
-    });
-}
-function del(goodsNum){
-    location.href="cartDel?goodsNum="+goodsNum;
-}
-function goodsChk(){
-    var chkLeng  = $("input[name=prodCk]");
-    var cnt = 0;
-    var sumPrice = 0;
-    for(var i = 0; i < chkLeng.length; i++){
-        if(chkLeng[i].checked == true){
-            cnt++;
-            sumPrice += Number($(".totalPrice:eq("+i+")").text())
-                     +  Number($(".deliveryCost:eq("+i+")").text());
-        }
+        });
     }
-$("#prodCnt").text(cnt);
-$("#sumPrice").text(sumPrice);
-}
-function cartAdd(goodsNum , goodsPrice){
-    $.ajax({
-        type : "get",
-        url : "cartAdd",
-        dataType : "text",
-        data : {"goodsNum" : goodsNum , "qty" : 1},
-        success : function(result){
-            if(result.trim() == "200"){
-                $("#"+goodsNum).text(Number($("#"+goodsNum).text()) + 1);
-                $("#t_"+goodsNum).text(Number($("#t_"+goodsNum).text()) + Number(goodsPrice));
+    function del(goodsNum){
+        location.href="cartDel?goodsNum="+goodsNum;
+    }
+    function goodsChk(){
+        var chkLeng  = $("input[name=prodCk]");
+        var cnt = 0;
+        var sumPrice = 0;
+        for(var i = 0; i < chkLeng.length; i++){
+            if(chkLeng[i].checked == true){
+                cnt++;
+                sumPrice += Number($(".totalPrice:eq("+i+")").text())
+                           +  Number($(".deliveryCost:eq("+i+")").text());
             }
-        },
-        error : function(){
-            alert('에러가 나왔다 홀홀홀~');
-        },
-        complete:goodsChk
-    });
-}
-function checkQty(goodsNum){
-    if($("#"+goodsNum).text() > 1 ){
+        }
+        $("#prodCnt").text(cnt);
+        $("#sumPrice").text(sumPrice);
+    }
+    function cartAdd(goodsNum , goodsPrice){
         $.ajax({
             type : "get",
+            url : "cartAdd",
             dataType : "text",
-            url : "cartQtyDown",
-            data :
-            {"goodsNum" : goodsNum},
+            data : {"goodsNum" : goodsNum , "qty" : 1},
             success : function(result){
-                var data = JSON.parse(result);
-                $("#"+goodsNum).text(data.cartDTO.cartQty);
-                $("#t_"+goodsNum).text(data.cartDTO.cartQty * data.goodsDTO.goodsPrice);
+                if(result.trim() == "200"){
+                    $("#"+goodsNum).text(Number($("#"+goodsNum).text()) + 1);
+                    $("#t_"+goodsNum).text(Number($("#t_"+goodsNum).text()) + Number(goodsPrice));
+                }
             },
             error : function(){
-                alert('에러발생');
+                alert('에러 발생');
             },
-            complete:goodsChk
         });
-    }else{
-        alert("최소 수량이 1이어야 합니다.");
-        return false;
     }
-}
+    function checkQty(goodsNum){
+        if($("#"+goodsNum).text() > 1 ){
+            $.ajax({
+                type : "get",
+                dataType : "text",
+                url : "cartQtyDown",
+                data : {"goodsNum" : goodsNum},
+                success : function(result){
+                    var data = JSON.parse(result);
+                    $("#"+goodsNum).text(data.cartDTO.cartQty);
+                    $("#t_"+goodsNum).text(data.cartDTO.cartQty * data.goodsDTO.goodsPrice);
+                },
+                error : function(){
+                    alert('에러 발생');
+                },
+                complete:goodsChk
+            });
+        }else{
+            alert("최소 수량이 1이어야 합니다.");
+            return false;
+        }
+    }
+
+
 </script>
 <script src="/static/js/test.js"></script>
 </body>
