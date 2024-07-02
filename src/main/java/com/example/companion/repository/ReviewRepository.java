@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ReviewRepository {
     @Autowired
@@ -32,5 +34,10 @@ public class ReviewRepository {
         statement = namespace + ".reviewDelete";
         return sqlSession.delete(statement, reviewNum) ;
     }
+
+    public List<ReviewDTO> goodsReviewList(String goodsNum) {
+        statement = namespace + ".goodsReviewList";
+        return sqlSession.selectList(statement, goodsNum) ;
+    }     ///    list로 받아올 때는 selectList함수를 사용합니다.
 
 }

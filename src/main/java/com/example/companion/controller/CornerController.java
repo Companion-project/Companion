@@ -2,6 +2,7 @@ package com.example.companion.controller;
 
 import com.example.companion.domain.CartGoodsDTO;
 import com.example.companion.service.corner.*;
+import com.example.companion.service.goods.GoodsDetailService;
 import com.example.companion.service.goods.GoodsDetailViewService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,23 +40,36 @@ public class CornerController {
     GoodsCartDelService goodsCartDelService;
     @Autowired
     CartQtyDownService cartQtyDownService;
+    @Autowired
+    GoodsDetailService goodsDetailService;
+
+    @RequestMapping("goodsDescript")
+    public String goodsDescript(
+            @RequestParam(value="goodsNum") String goodsNum,
+            Model model) {
+        goodsDetailService.execute(goodsNum, model);
+        return "corner/goodsDescript";
+    }
 
     @GetMapping("detailView/{goodsNum}")
     public String prodInfo(@PathVariable("goodsNum") String goodsNum, Model model, HttpSession session){
         goodsDetailViewService.execute(goodsNum, model, session);
         return "corner/detailView";
     }
+
     @RequestMapping(value = "goodsWishAdd", method = RequestMethod.POST)
     public @ResponseBody String goodsWishAdd(//ajax에 1또는 0을 전달하려면 RESTAPI나 @ResponseBody사용
                                              @RequestParam("goodsNum") String goodsNum,
                                              HttpSession session){
         return goodsWishService.execute(goodsNum, session);
     }
+
     @GetMapping("wishList")
     public String wishList(HttpSession session, Model model){
         goodsWishListService.execute(session, model);
         return "corner/wishList";
     }
+
     @PostMapping("goodsWishDels")
     public String goodsWishDels(
             @RequestParam("wishGoodsDel") String wishGoodsDels [],
@@ -63,12 +77,14 @@ public class CornerController {
         wishGoodsDelsService.execute(wishGoodsDels, session);
         return "redirect:wishList";
     }
+
     @GetMapping("wishDel")
     public String wishDel(@RequestParam("goodsNum") String goodsNum,
                           HttpSession session){
         wishDelService.execute(goodsNum, session);
         return "redirect:wishList";
     }
+
     @GetMapping("cartAdd")
     @ResponseBody
     public String cartAdd(
@@ -77,11 +93,13 @@ public class CornerController {
             HttpSession session) {
         return cartInsertService.execute(goodsNum, qty, session);
     }
+
     @GetMapping("cartList")
     public String cartList(Model model, HttpSession session) {
         cartListService.execute(model, session);
         return "corner/cartList";
     }
+
     @PostMapping(value = "cartDels")
     @ResponseBody
     public String cartdel(
@@ -89,6 +107,7 @@ public class CornerController {
             HttpSession session){
         return goodsCartDelsService.execute(goodsNums, session);
     }
+
     @GetMapping("cartDel")
     public String cartDel(
             @RequestParam("goodsNum") String goodsNum,
@@ -96,6 +115,7 @@ public class CornerController {
         goodsCartDelService.execute(goodsNum, session);
         return "redirect:cartList";
     }
+
     @GetMapping("cartQtyDown")
     public void cartQtyDown(
             @RequestParam(value = "goodsNum") String goodsNum,
@@ -113,6 +133,7 @@ public class CornerController {
             e.printStackTrace();
         }
     }
+
     @GetMapping("buyItem")
     public String buyItem(
             @RequestParam(value = "goodsNum") String goodsNum,
