@@ -33,7 +33,7 @@
             <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}" >
                 ([[${dto.goods.goodsName}]])
             </th:block>
-            /[[${orderListDTO.purchaseDTO.purchaseNum}] ]
+            /[[${orderListDTO.purchaseDTO.purchaseNum}]]
         </td>
         <td>
             <!-- 상품준비중인 경우 결제취소는 안보이고 상품준비중으로 표시되게 한다. -->
