@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import java.util.*;
 
 @Service
-public class MainGoodsListService {
+public class CategoryGoodsListService {
     @Autowired
     CartMapper cartMapper;
 
