@@ -13,7 +13,7 @@ public class MainGoodsListService {
     @Autowired
     CartMapper cartMapper;
 
-    public void execute(Model model) {
+    public void execute(String goodsCategory, Model model) {
         List<GoodsDTO> list = cartMapper.goodsSelectAll();
 
         Map<String, List<GoodsDTO>> categoryMap = new HashMap<>();
