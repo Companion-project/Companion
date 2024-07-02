@@ -56,8 +56,6 @@
         }
     }
 
-        @media screen
-
 
 
     </style>
@@ -91,9 +89,9 @@ th:object, th:value를 통해 오류가 있어 되돌아 올 경우 입력값을
             <span><form action="userRegist" method="post" id="frm" th:object="${memberCommand}">
             회원아이디<br/>
             <input type="text" name="memberId" id="memberId" class="input-style"/><br/>
-            <span style="color:red" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span><br/>
+            <span style="color:red; font-size: 14px;" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span>
 
-            <span id='idCheck'></span><br/>
+            <span id='idCheck'></span><br/><br/>
 
             회원비밀번호 <br/>
             <input type="password" name="memberPw" class="input-style"/><br/>
@@ -133,12 +131,12 @@ th:object, th:value를 통해 오류가 있어 되돌아 올 경우 입력값을
 
             이메일 <br/>
             <input type="email" name="memberEmail" id="memberEmail" th:value="${memberCommand.memberEmail}" class="input-style"/><br/>
-            <span style="color:red" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span><br/>
-            <span id='emailCheck'></span><br/>
+            <span style="color:red" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
+            <span id='emailCheck'></span><br/><br/>
 
             생년월일 <br/>
             <input type="date" name="memberBirth" th:value="${#dates.format(memberCommand.memberBirth, 'yyyy-MM-dd')}" class="input-style"/><br/>
-            <span style="color:red" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></span><br/>
+            <span style="color:red" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></span><br/><br/>
 
             <input type="submit" id="button" value="가입하기" class="input-style"/>
             </div>
