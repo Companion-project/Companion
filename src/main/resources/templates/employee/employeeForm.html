@@ -9,60 +9,22 @@
 <script src="/static/js/daumAddressScript.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/employee/employeeForm.js"></script>
-<script src="/static/js/test.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="/static/css/employee/employeeForm.css">
-    <style>
-        body {
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background-image: url("/static/images/background.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-        .search-container {
-            margin-top: 20px;
-            width: 340px;
-            height: 52px;
-            background-image: url("/static/images/button-search.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 1000;
-        }
+<link rel="stylesheet" type="text/css" href="/static/css/employee/employeeForm.css">
 
-        @media screen and (max-width: 1024px) {
-        body {
-            background-image: none;
-            background-color: rgb(244, 237, 237);
-        }
-        .left-container {
-            display: none;
-        }
-
-        .main-container {
-        margin-left: 0;
-    }
-    }
-    </style>
 </head>
+
 <body>
+<img src="/static/images/background.png" id="back-img">
 <div class="companion-container">
     <div class="left-container">
         <img src="/static/images/logo.png" id="logo">
         <img src="/static/images/main-text.png" id="main-text">
 
         <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
             <form id="searchForm" class="search-form">
                 <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
                 <button type="submit" class="search-button" aria-label="검색"></button>
@@ -80,10 +42,10 @@
             <!-- index 내용 -->
             <span><!-- EmployeeCommand에서 유효성 검사 후 에러메세지 전송 -->
 				<form action="empRegist" method="post" th:object="${employeeCommand}" id="frm">
-				직원번호<br/>  <input type="text" name="empNum"  id="empNum" readonly='readonly'  th:value="${employeeCommand.empNum}"/>
-						  <span style="color:red">자동 부여</span><br />
+				직원번호&nbsp;<span style="color:red; font-size: 13px;">(자동 부여)</span><br/>
+                    <input type="text" name="empNum"  id="empNum" readonly='readonly'  th:value="${employeeCommand.empNum}"/><br /><br/>
 				아이디<br/>  <input type="text" name="empId"  id="empId" th:value="${employeeCommand.empId}"/><br/>
-						<span style="color:red" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span><br/>
+						<span style="color:red" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span>
 						<span id='idCheck'></span><br />
 				비밀번호<br/>  <input type="password" name="empPw" id="empPw" /><br/>
 						  <span style="color:red" th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
@@ -91,9 +53,10 @@
 							  <span style="color:red" th:if="${#fields.hasErrors('empPwCon')}" th:errors="*{empPwCon}"></span><br />
 				이름<br/>  <input type="text" name="empName" th:value="${employeeCommand.empName}"/><br/>
 					  <span style="color:red" th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
-				주소<br/>  <input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}">
-					   <button type="button" onclick="execDaumPostcode()">주소검색</button><br />
-				상세주소<br/>  <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}"/><br />
+				주소<br/>  <input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}"
+                             onclick="execDaumPostcode();" readonly="readonly"><br/><br/>
+
+				상세주소<br/>  <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}"/><br /><br/>
 				우편번호<br/>  <input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}"/><br/>
 						  <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
 				연락처<br/>  <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/><br/>
