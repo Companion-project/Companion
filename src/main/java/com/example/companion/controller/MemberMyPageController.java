@@ -27,6 +27,12 @@ public class MemberMyPageController {
     @Autowired
     MemberDropService memberDropService;
 
+    @GetMapping("myPage")
+    public String myPage(HttpSession session, Model model){
+        memberInfoService.execute(session, model);
+        return "memberShip/myPage";
+    }
+
     @GetMapping("myDetail")
     //로그인 저장한 세션값 -> 내정보를 DB에서 가져오기
     //DB에서 가져온 정보값을 model을 이용해 myInfo.html로 전송

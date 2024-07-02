@@ -204,17 +204,8 @@ body {
     cursor: pointer;
 }
 
-.regist-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%; /* 부모 요소인 main-container에 꽉 차게 */
-    max-width: 600px; /* 예시로 설정한 최대 너비 */
-    margin: auto; /* 가운데 정렬을 위해 auto 마진 추가 */
 
-}
-    .input-style {
+.input-style {
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -244,7 +235,6 @@ body {
           width: 100%;
         }
 
-
         @media screen and (max-width: 1024px) {
         #back-img {
             display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
@@ -259,4 +249,7 @@ body {
         .main-container {
             margin-left: 0;
         }
+
+
     }
+
