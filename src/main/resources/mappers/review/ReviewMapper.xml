@@ -31,4 +31,12 @@
         where REVIEW_NUM = #{reviewNum}
     </delete>
 
+    <!-- 리뷰 리스트 -->
+    <select id="goodsReviewList" parameterType="string" resultType="com.example.companion.domain.ReviewDTO">
+        select PURCHASE_NUM purchaseNum, REVIEW_DATE reviewDate,
+               REVIEW_CONTENT reviewContent, MEMBER_ID memberId
+        from review
+        where GOODS_NUM = #{goodsNum}
+    </select>
+
 </mapper>
