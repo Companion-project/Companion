@@ -12,7 +12,7 @@
 
     .main-container {
         width: 600px;
-        max-width: calc(100vw - 20px); /* 화면 너비보다 크면 600px로 제한 */
+        max-width: calc(100vw - 20px);
         height: 100vh;
         background-color: white;
         border-left: 1px solid #E9EBEC;
