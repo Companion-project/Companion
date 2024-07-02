@@ -46,7 +46,6 @@
         display: flex;
         align-items: center;
         height: 100%;
-        background-image: url("/static/images/back-button.png");
         background-size: contain;
         background-repeat: no-repeat;
         width: 24px;
@@ -155,7 +154,17 @@
     cursor: pointer;
 }
 
-        input {
+.regist-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%; /* 부모 요소인 main-container에 꽉 차게 */
+    max-width: 600px; /* 예시로 설정한 최대 너비 */
+    margin: auto; /* 가운데 정렬을 위해 auto 마진 추가 */
+
+}
+    .input-style {
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -165,11 +174,11 @@
 
     }
 
-    input:not([type="radio"]){
-    width: 300px;
+    .input-style:not([type="radio"]){
+    width: 400px;
     }
 
-    input:focus {
+    .input-style:focus {
       border-color: #007bff;
     }
 
