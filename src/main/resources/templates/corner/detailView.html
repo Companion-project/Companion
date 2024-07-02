@@ -6,11 +6,11 @@
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		// 페이지가 열릴 때 상품정보가 출력되게 함수를 실행 시켜줍니다.
-		goodsDescript();
+		// 페이지가 열릴 때 리뷰정보가 출력되게 함수를 실행.
+		goodsReivew();
 
 		$("#buyItem").click(function(){
-			location.href="../buyItem?goodsNum=[[${dto.goodsDTO.goodsNum}]]&qty="+$("#qty").val();
+			location.href="../buyItem?goodsNum="+[[${dto.goodsDTO.goodsNum}]]+"&qty="+$("#qty").val();
 		});
 
 		$("#qty").click(function(){
@@ -46,6 +46,7 @@
 				});
 			}
 		});
+
         $("#wish").click(function(){
             if([[${session.auth == null}]]){
                 window.open("/login/item.login","login","width=315, height=200,top = 100, left=100");
@@ -71,26 +72,8 @@
 			}
 		});
 
-		//삼품정보를 클릭하면 상품정보 함수가 실행되게 합니다.
-		$("#descript").click(function(){
-			goodsDescript();
-		});
-
-		// 리뷰를 클릭하면 리뷰정보를 받올 수 있게 합니다.
 		$("#review").click(function(){
-			$.ajax({
-				type : "post" ,
-				url : "/review/reviewList",
-				dataType : "html",
-				data : {"goodsNum" : "[[${dto.goodsDTO.goodsNum}]]"},
-				success : function(result){
-					$("#notice").html(result);
-					},
-				error : function(){
-					alert("서버오류!!!!");
-					return false;
-				}
-			});
+			goodsReivew();
 		});
 
 		$("#inquire").click(function(){
@@ -102,24 +85,21 @@
 	//구매페이지들어올때 관심상품이 있는 회원인지 확인을 해야 한다.
 	// 현재 우리는 회원만 등록 가능하고 직원은 등록할 수 없다. 직원인 경우 코드를 추가해준다.
 
-
-	// 삼품정보를 가지고 올 함수를 정의합니다.
-	function goodsDescript(){
+	function goodsReivew(){
 		$.ajax({
 			type : "post" ,
-			url : "../goodsDescript",
+			url : "/review/reviewList",
 			dataType : "html",
 			data : {"goodsNum" : "[[${dto.goodsDTO.goodsNum}]]"},
-			success : function(result){ //result를 html로 받아와서 출력하겠습니다.
+			success : function(result){
 				$("#notice").html(result);
-				},
+			},
 			error : function(){
 				alert("서버오류!!!!");
 				return false;
 			}
 		});
 	}
-
 	// 상품문의 를 불러올 함수를 만들겠습니다.
 	function inquire(){ // 상품정보 , 리뷰, 상품문의가 모두 코드가 같습니다. 데이터를 불러올 주소만 다릅니다.
 		$.ajax({
@@ -168,7 +148,16 @@
 		<tr><td colspan="2">남은 수량 :[[${dto.stock}]] 개</td></tr>
 		<tr><td colspan="2">
 			<p>
-			<span id="descript">제품 상세 설명</span> |
+			<!--<span id="descript">제품 상세 설명</span> |-->
+			<table width="800" align="center">
+				<tr><td>
+					<span th:utext="${#strings.replace(goodsCommand.goodsContent ,newLine,'&lt;br /&gt;' )}" ></span>
+					<br />
+					<th:block  th:each=" goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-')}">
+						<img th:src="|/static/upload/${goodsImage}|" />
+					</th:block>
+				</td></tr>
+			</table>
 			<span id="review">리뷰</span> |
 			<span id="inquire" >상품문의</span>
 			</p>
