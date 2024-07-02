@@ -22,7 +22,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
         excludeList.add("/login/**/*");
         excludeList.add("/corner/**/*");
         excludeList.add("/review/**/*");
+        excludeList.add("/employee/**/*");
         excludeList.add("/inquire/**/*"); //허용페이지 이외에는 다 차단
+        excludeList.add("/static/**");
         registry.addInterceptor(inteceptorConfig)
                 .addPathPatterns("/**/*")
                 .excludePathPatterns(excludeList);

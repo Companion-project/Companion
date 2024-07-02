@@ -53,7 +53,9 @@
                         <div>[[${dto.goodsPrice}]]</div>
                         <div>
                             <input type="checkbox" name="wishGoodsDel" th:value="${dto.goodsNum}"/>
-                            <button type="button" th:attr='onclick=|location.href="wishDel?goodsNum=${dto.goodsNum}"|'>삭제</button>
+                            <button type="button" th:attr='onclick=|location.href="wishDel?goodsNum=${dto.goodsNum}"|'>
+                                삭제
+                            </button>
                         </div>
                     </div>
                 </div>
