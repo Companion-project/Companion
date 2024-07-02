@@ -9,23 +9,27 @@
 <body>
 <!-- 로그인 되었을 때 구분 -->
 <div th:if="${session.auth != null}">
-    <!--   // UserLoginService 아이디와 비번이 일치하면 session에 로그인 정보 저장 session.setAttribute("auth", dto);-->
-<ul>
-    <!-- 회원과 직원 메뉴 분리 로그인 시 grade저장 직원=emp 회원=mem -->
-    <th:block th:if="${session.auth.grade == 'emp'}">
-    <li><a href="employee/employeeList">직원목록</a></li>
-    <li><a href="member/memberList">회원목록</a></li>
-    <li><a href="employee/empMyPage">마이페이지</a></li>
-    <li><a href="goods/goodsList">상품리스트</a></li>
-    </th:block>
-    <!-- 이메일 임시 비밀번호 전달 후 회원정보 수정에서 비밀번호 변경 절차 -->
-    <th:block thLif="${session.auth.grade == 'mem'}">
-        <li><a href="/mypage/myDetail">내정보 보기</a></li>
-    </th:block>
-
-    <!-- 로그아웃 -->
-    <li><a href="login/logout">로그아웃</a></li>
-</ul>
+    <ul>
+        <!-- 회원과 직원 메뉴 분리 로그인 시 grade저장 직원=emp 회원=mem -->
+        <th:block th:if="${session.auth.grade == 'emp'}">
+            <li><a href="employee/employeeList">직원목록</a></li>
+            <li><a href="member/memberList">회원목록</a></li>
+            <li><a href="employee/empMyPage">마이페이지</a></li>
+            <li><a href="goods/goodsList">상품리스트</a></li>
+            <li><a href="/purchase/purchaseList">주문 내역</a></li><!-- 고객이 주문한 내역 확인 -->
+            <li><a href="/inquire/goodsQuestion">상품 문의</a></li>
+        </th:block>
+        <!-- 이메일 임시 비밀번호 전달 후 회원정보 수정에서 비밀번호 변경 절차 -->
+        <th:block th:if="${session.auth.grade == 'mem'}">
+            <li><a href="/mypage/myDetail">내정보 보기</a></li>
+            <li><a href="/corner/wishList">관심 목록</a></li> <!-- 관심상품 목록 보기 -->
+            <li><a href="/corner/cartList">장바구니</a></li>
+            <li><a href="/purchase/orderList">주문목록</a></li>
+        </th:block>
+      
+        <!-- 로그아웃 -->
+        <li><a href="login/logout">로그아웃</a></li>
+    </ul>
 </div>
 <!-- 직원과 회원이 같은 페이지에서 로그인 -->
 <!-- 오류가 있는경우 th:object 값 가져오기/ UserLoginService에서 result.rejectValue 받아오기-->

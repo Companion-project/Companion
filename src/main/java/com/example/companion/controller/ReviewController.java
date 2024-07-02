@@ -3,10 +3,7 @@ package com.example.companion.controller;
 import com.example.companion.domain.ReviewDTO;
 import com.example.companion.service.goods.GoodsDeleteService;
 import com.example.companion.service.goods.GoodsDetailService;
-import com.example.companion.service.review.ReviewDeleteService;
-import com.example.companion.service.review.ReviewDetailService;
-import com.example.companion.service.review.ReviewUpdateService;
-import com.example.companion.service.review.ReviewWriteService;
+import com.example.companion.service.review.*;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,17 @@ public class ReviewController {
     ReviewDetailService reviewDetailService;
     @Autowired
     ReviewUpdateService reviewUpdateService;
+    @Autowired
+    ReviewListService reviewListService;
+
+    @PostMapping("reviewList")
+    public String reviewList(
+            @RequestParam(value="goodsNum") String goodsNum,
+            Model model) {
+        reviewListService.execute(goodsNum, model);
+        model.addAttribute("newLineChar", "\n");
+        return "review/reviewList";
+    }
 
     @RequestMapping(value="goodsReviewModify", method =RequestMethod.POST)
     public String goodsReviewUpdate(
