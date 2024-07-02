@@ -1,5 +1,4 @@
-
-    #back-img {
+#back-img {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,6 +8,7 @@
     z-index: -1; /* 다른 콘텐츠 위에 있도록 */
     pointer-events: none; /* 이벤트를 막아 다른 요소에 영향을 주지 않도록 */
 }
+
 
 body {
             margin: 0;
@@ -34,50 +34,11 @@ body {
         height: 100vh;
         overflow: hidden;
     }
-
-/* 스크롤바 전체 */
-::-webkit-scrollbar {
-  width: 10px; /* 스크롤바의 너비 (기본값) */
-}
-
-/* 스크롤바 트랙 */
-::-webkit-scrollbar-track {
-  background-color: transparent; /* 트랙 배경색 투명 처리 */
-}
-
-/* 스크롤바 썸 */
-::-webkit-scrollbar-thumb {
-  background-color: #FC6B70; /* 썸 색상 (버튼과 동일) */
-  border-radius: 8px; /* 썸 둥글기 */
-}
-
-/* 스크롤바 버튼 */
-::-webkit-scrollbar-button {
-  background-color: transparent; /* 버튼 색상 */
-}
-
-  @media screen and (max-width: 1024px) {
-        #back-img {
-            display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
-        }
-        body {
-            background-color: rgb(244, 237, 237);
-        }
-        .left-container {
-            display: none;
-        }
-
-        .main-container {
-            margin-left: 0;
-        }
-    }
-
     .main-container {
         width: 600px;
         max-width: calc(100vw - 20px); /* 화면 너비보다 크면 600px로 제한 */
         height: 100vh;
         background-color: white;
-        overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
         border-left: 1px solid #E9EBEC;
         border-right: 1px solid #E9EBEC;
         display: flex;
@@ -85,9 +46,7 @@ body {
         justify-content: space-between; /* 위아래 여백을 동일하게 배분 */
         margin-left: 500px; /* 원하는 위치에 맞게 조정 */
         padding: 10px; /* 내부 여백 추가 */
-
     }
-
     .header {
         position: fixed;
         width: 584px;
@@ -99,7 +58,6 @@ body {
         justify-content: center;
         background-color: #ffffff;
     }
-
     .header h3 {
         margin-left: auto;
         margin-right: auto;
@@ -119,7 +77,6 @@ body {
         width: 24px;
         height: 24px;
     }
-
     .left-container {
         position: fixed;
         top: 0;
@@ -134,12 +91,10 @@ body {
         align-items: flex-start;
         z-index: 100;
     }
-
     #logo {
         margin-bottom: 16px;
         height: 200px;
     }
-
     #main-text {
         margin-bottom: 16px;
         height: 52px;
@@ -198,19 +153,148 @@ body {
     cursor: pointer;
     z-index: 3; /* 버튼은 가장 위에 배치 */
 }
+
+
 .index {
-   flex: 1;
+    flex: 1;
     width: 100%;
     max-width: 100%;
     overflow-y: auto;
     margin-top: 60px;
     margin-bottom: 60px;
 
+.empRegist {
+          padding: 10px 20px;
+          font-size: 18px;
+          font-weight: bold;
+          background-color: #FC6B70;
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+          width: 500px;
+          margin-top: 30px;
+          margin-left: 60px;
+          margin-bottom: 10px;
+        }
+
+         .empRegist:hover {
+        background-color: #fb5256;
+    }
+
+    #searchbar {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    }
+
+    #searchbarinput {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        outline: none;
+        transition: border-color 0.3s;
+        width: 500px;
+        margin-bottom: 10px;
+    }
+
+    #searchbarinput:focus {
+        border-color: #FC6B70;
+    }
+
+    #searchbutton {
+        padding: 9px 18px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #FC6B70;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+    #searchbutton:hover {
+        background-color: #fb5256;
+    }
+
+#frm {
+    margin-top: 10px;
 }
-#frm{
-    margin-left: 33px;
-    margin-bottom: 10px;
+
+#employeetable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
+
+#employeetable th,
+#employeetable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+#employeetable th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#employeetable a,
+#employeetable .pagination-cell a,
+#employeetable .pagination-cell span {
+    color: #0066cc;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#employeetable a:hover,
+#employeetable .pagination-cell a:hover {
+    color: #004080;
+}
+
+#employeetable input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+#employeetable input[type="submit"] {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #FC6B70;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#employeetable input[type="submit"]:hover {
+    background-color: #fb5256;
+}
+
+#employeetable .pagination-cell {
+    text-align: center;
+    padding: 5px 0;
+}
+
+#employeetable .pagination-cell a,
+#employeetable .pagination-cell span {
+    padding: 5px 10px;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+}
+
+#employeetable .pagination-cell span {
+    color: #999;
+}
+
+}
+
 
     .bottom-nav {
         position: fixed;
@@ -225,7 +309,6 @@ body {
         padding: 0 10px;
         z-index: 999;
     }
-
     .bottom-nav-item {
         width: 35px;
         height: 35px;
@@ -234,7 +317,6 @@ body {
         background-size: contain;
         cursor: pointer;
     }
-
     .nav-icon {
     width: 35px;
     height: 35px;
@@ -242,34 +324,22 @@ body {
     background-position: center;
     background-size: contain;
     cursor: pointer;
-
-
 }
 
-    input {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      outline: none;
-      transition: border-color 0.3s;
-      width: 500px;
-      margin-top: 5px;
-    }
-
-    input:focus {
-      border-color: #007bff;
-    }
-
-    #button {
-          padding: 10px 20px;
-          font-size: 18px;
-          font-weight: bold;
-          background-color: #FC6B70;
-          color: #fff;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-          width: 523px;
+        @media screen and (max-width: 1024px) {
+        #back-img {
+            display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
         }
+        body {
+            background-color: rgb(244, 237, 237);
+        }
+        .left-container {
+            display: none;
+        }
+
+        .main-container {
+            margin-left: 0;
+        }
+
+
+    }
