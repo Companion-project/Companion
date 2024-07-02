@@ -3,10 +3,12 @@ package com.example.companion.controller;
 import com.example.companion.command.LoginCommand;
 import com.example.companion.service.login.IdcheckService;
 import com.example.companion.service.login.UserLoginService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +40,8 @@ public class LoginController {
 
     @PostMapping("login")
     //아이디와 비밀번호를 command로 받아옴
-    public String login(@Validated LoginCommand loginCommand, BindingResult result, HttpSession session){
-        userLoginService.execute(loginCommand, session, result);
+    public String login(@Validated LoginCommand loginCommand, BindingResult result, HttpSession session, HttpServletResponse response){
+        userLoginService.execute(loginCommand, session, result, response);
         //오류가 있으면 index.html페이지 열리도록 구현.
         if(result.hasErrors()){
             return "index";
@@ -50,17 +52,23 @@ public class LoginController {
     }
 
     @GetMapping("logout")
-    public String logout(HttpSession session){
-        session.invalidate(); //로그아웃시 모든 세션 삭제
+    public String logout(HttpSession session, HttpServletResponse response){
+        //로그아웃에서 해당 쿠키만 삭제
+        Cookie cookie = new Cookie("autoLogin", "");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        session.invalidate();
         return "redirect:/"; //첫페이지로 이동
     }
+
     @RequestMapping(value = "item.login", method = RequestMethod.GET)
     public String item(LoginCommand loginCommand){
         return "login";
     }
     @RequestMapping(value = "item.login", method = RequestMethod.POST)
     public String item(@Validated LoginCommand loginCommand, BindingResult result, HttpSession session, HttpServletResponse response) {
-        userLoginService.execute(loginCommand, session, result);
+        userLoginService.execute(loginCommand, session, result, response);
         if (result.hasErrors()) {
             // 입력하지 않은 값이 있으면 다시 페이지를 로딩
             return "login";
