@@ -25,7 +25,10 @@ public class LoginController {
     @Autowired
     UserLoginService userLoginService;
 
-
+    @GetMapping("/loginForm")
+    public String loginForm(LoginCommand loginCommand) {
+        return "loginForm";  // 이 부분은 그대로 두세요.
+    }
 
     @PostMapping("userIdCheck")
     //html문서가 아닌 텍스트를 전달하기 위해서는 @ResponseBody필요
@@ -46,7 +49,7 @@ public class LoginController {
         userLoginService.execute(loginCommand, session, result, response);
         //오류가 있으면 index.html페이지 열리도록 구현.
         if(result.hasErrors()){
-            return "index";
+            return "loginForm";
 
         }
         return "redirect:/";

@@ -26,6 +26,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         excludeList.add("/static/**");
         excludeList.add("/userConfirm");
         excludeList.add("/test");
+//        excludeList.add("/loginForm");
         //허용페이지 이외에는 다 차단
         registry.addInterceptor(inteceptorConfig)
                 .addPathPatterns("/**/*")

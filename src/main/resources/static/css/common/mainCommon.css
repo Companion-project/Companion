@@ -234,13 +234,17 @@ body {
 }
 
 @media screen and (max-width: 1024px) {
-    .main-container {
-        width: 100%;
-        margin: 0 10px;
-        padding: 10px;
+    #back-img {
+        display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
     }
-    .product-item img {
-        width: 40px;
-        height: 40px;
+    body {
+        background-color: rgb(244, 237, 237);
+    }
+    .left-container {
+        display: none;
+    }
+
+    .main-container {
+        margin-left: 0;
     }
 }

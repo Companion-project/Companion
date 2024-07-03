@@ -2,47 +2,60 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Companion</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/test.css">
+    <title>companion</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 </head>
 <body>
-<img src="/static/images/background.png" id="back-img">
-<div class="companion-container">
-    <div class="left-container">
-        <img src="/static/images/logo.png" id="logo">
-        <img src="/static/images/main-text.png" id="main-text">
+<!-- 로그인 되었을 때 구분 -->
+<div th:if="${session.auth != null}">
+    <ul>
+        <!-- 회원과 직원 메뉴 분리 로그인 시 grade저장 직원=emp 회원=mem -->
+        <th:block th:if="${session.auth.grade == 'emp'}">
+            <li><a href="employee/employeeList">직원목록</a></li>
+            <li><a href="member/memberList">회원목록</a></li>
+            <li><a href="employee/empMyPage">마이페이지</a></li>
+            <li><a href="goods/goodsList">상품리스트</a></li>
+            <li><a href="/purchase/purchaseList">주문 내역</a></li><!-- 고객이 주문한 내역 확인 -->
+            <li><a href="/inquire/goodsQuestion">상품 문의</a></li>
+        </th:block>
+        <!-- 이메일 임시 비밀번호 전달 후 회원정보 수정에서 비밀번호 변경 절차 -->
+        <th:block th:if="${session.auth.grade == 'mem'}">
+            <li><a href="/mypage/myPage">마이페이지</a></li>
+            <li><a href="/corner/wishList">관심 목록</a></li> <!-- 관심상품 목록 보기 -->
+            <li><a href="/corner/cartList">장바구니</a></li>
+            <li><a href="/purchase/orderList">주문목록</a></li>
+        </th:block>
 
-        <div class="search-container">
-            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
-            <form id="searchForm" class="search-form">
-                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
-                <button type="submit" class="search-button" aria-label="검색"></button>
-            </form>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div class="header">
-            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-            <h3>페이지명</h3>
-        </div>
-
-        <div class="index">
-            <!-- index 내용 -->
-            <span>Index 내용을 여기에 넣으세요.</span>
-        </div>
-
-        <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png" class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png" class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png" class="nav-icon"></a>
-        </div>
-    </div>
+        <!-- 로그아웃 -->
+        <li><a href="login/logout">로그아웃</a></li>
+    </ul>
 </div>
-<script src="/static/js/test.js"></script>
+<!-- 직원과 회원이 같은 페이지에서 로그인 -->
+<!-- 오류가 있는경우 th:object 값 가져오기/ UserLoginService에서 result.rejectValue 받아오기-->
+
+<!-- 로그인이 되지 않았을 떄 -->
+<div th:if="${session.auth == null}" >
+    <form action="/login/login" method="post" th:object="${loginCommand}">
+        <table border="1" align="center">
+            <tr><td colspan="2">
+                자동로그인<input type="checkbox" name="autoLogin" />
+                아이디저장<input type="checkbox" name="idStore" th:checked="${loginCommand.idStore != null && loginCommand.idStore}"/>
+            </td></tr>
+            <tr><td><input type="text" name="userId" placeholder="아이디" th:value="${loginCommand.userId}"/><br/>
+                <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span></td>
+                <td rowspan="2">
+                    <input type="image" src="/static/images/logo.png" width="60">
+                </td></tr>
+            <tr><td><input type="password" name="userPw" placeholder="비밀번호" /><br/>
+                <span th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></span></td></tr>
+            <tr><td colspan="2">
+                <a href="/register/userWrite">회원가입</a> |
+                <a href="/help/findId">아이디</a>/
+                <a href="/help/findPassword">비밀번호 찾기</a></td></tr>
+        </table>
+    </form>
+</div>
+
 </body>
 </html>
