@@ -2,12 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Companion</title>
+    <title>companion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/static/js/daumAddressScript.js"></script>
+    <script src="/static/js/test.js"></script>
+    <link rel="stylesheet" href="/static/css/worker/empPage.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/static/css/test.css">
 </head>
 <body>
 <img src="/static/images/background.png" id="back-img">
@@ -28,12 +33,17 @@
     <div class="main-container">
         <div class="header">
             <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-            <h3>페이지명</h3>
+            <h3>내정보 수정</h3>
         </div>
-
         <div class="index">
-            <!-- index 내용 -->
-            <span>Index 내용을 여기에 넣으세요.</span>
+
+    <ul>
+    <li><a href="empInfo">내정보 보기</a></li>
+	<li> <a href="employeeUpdate">내정보 수정</a></li>
+	<li> <a href="employeePwModify"> 비밀번호변경</a></li>
+	<li> <a href="/"> 메인</a></li>
+    </ul>
+
         </div>
 
         <div class="bottom-nav">
@@ -43,6 +53,5 @@
         </div>
     </div>
 </div>
-<script src="/static/js/test.js"></script>
 </body>
 </html>

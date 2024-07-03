@@ -54,6 +54,7 @@ public class CornerController {
     @GetMapping("detailView/{goodsNum}")
     public String prodInfo(@PathVariable("goodsNum") String goodsNum, Model model, HttpSession session){
         goodsDetailViewService.execute(goodsNum, model, session);
+        goodsDetailService.execute(goodsNum, model);
         return "corner/detailView";
     }
 
