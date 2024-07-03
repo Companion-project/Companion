@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<th:block th:replace="common/mainCommon :: head"></th:block>
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 	<meta charset="UTF-8">
-	<title>Companion</title>
+	<th:block th:replace="common/mainCommon :: head"></th:block>
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
@@ -27,12 +26,21 @@
 			<span th:if="${dto.goodsDTO.deliveryCost != 0}">
 						[[${#numbers.formatCurrency(dto.goodsDTO.deliveryCost) + '원'}]]</span>
 		</td></tr>
-		<tr><td>수량 : <input type="number" min=1 step="1" value="1" id="qty" name="qty" /></td></tr>
-		<tr><td>총 상품금액 : <span id="tot">[[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice) + '원'}]]</span></td></tr>
+
+		<!--<tr th:if="${dto.stock > 0 }" ><td>수량 : <input type="number" min=1 step="1" value="1" id="qty" name="qty" /></td></tr>-->
+		<tr th:if="${dto.stock > 0 }" >
+			<td>수량
+				<button id="decrement" class="qty-button">-</button>
+				<input type="number" id="qty" name="qty" class="qty-input" value="1">
+				<button id="increment" class="qty-button">+</button>
+			</td>
+		</tr>
+
+		<tr th:if="${dto.stock > 0 }" ><td>총 상품금액 : <span id="tot">[[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice) + '원'}]]</span></td></tr>
+		<span th:if="${dto.stock <= 0 }" >  품절  </span>
 		<tr><td><!--  재고가 있을 때만 버튼이 보이게  -->
-			<button type="button" id="cartBtn" th:if="${dto.stock > 0 }"> 장바구니 |</button>
-			<button type="button" id="buyItem" th:if="${dto.stock > 0 }"> 바로구매  |</button>
-			<span th:if="${dto.stock <= 0 }" >  입고 예정 상품입니다  </span>
+			<button type="button" id="buyItem" > 바로구매  |</button>
+			<button type="button" id="cartBtn" > 장바구니 |</button>
 			<th:block th:if="${wish == null}">
 				<img src="/static/images/heart1.png" id="wish" width="20" />
 			</th:block>
@@ -41,7 +49,7 @@
 			</th:block> 찜
 		</td>
 		</tr>
-		<tr><td colspan="2">남은 수량 :[[${dto.stock}]] 개</td></tr>
+		<!--<tr><td colspan="2">남은 수량 :[[${dto.stock}]] 개</td></tr>-->
 		<tr><td colspan="2">
 			<p>
 			<!--<span id="descript">제품 상세 설명</span> |-->
@@ -70,6 +78,7 @@
 		const goodsNum = [[${dto.goodsDTO.goodsNum}]];
 		const goodsPrice = [[${dto.goodsDTO.goodsPrice}]];
 		const auth = [[${session.auth}]];
+		const stock = [[${dto.stock}]];
 		/*]]>*/
 	</script>
 	<script src="/static/js/corner/detailView.js"></script>
