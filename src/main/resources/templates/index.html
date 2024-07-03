@@ -3,10 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <title>companion</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/test.css">
+
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 </head>
+
 <body>
+
+<img src="/static/images/background.png" id="back-img">
+<div class="companion-container">
+    <div class="left-container">
+        <img src="/static/images/logo.png" id="logo">
+        <img src="/static/images/main-text.png" id="main-text">
+
+        <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
+                <button type="submit" class="search-button" aria-label="검색"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+            <h3>페이지명</h3>
+        </div>
+
+        <div class="index">
+            <a href="/category">카테고리</a>
+
+            <!-- MainGoodsListService에서 model로 받아온 list를 출력합니다. -->
+            <table align="center" width="600">
+                <tr><!-- 상품정보를 옆으로 출력해야 하므로 TD를 반복하겠습니다. -->
+                    <th:block th:each="dto , idx : ${list}">
+                        <!-- list로 받아온 값을 하나씩 변수 dto에 전달하고 index는 idx로 받는다, index는 반복할때마다 0부터 시작하는값이다, 1씩증가  -->
+                        <td><!-- 이제 구매 페이지로 이동합니다 -->
+                            <a th:href="|corner/detailView/${dto.goodsNum}|">
+                                <img th:src="|/static/upload/${dto.goodsMainStore}|"/><br />
+                                [[${dto.goodsName}]]<br />
+                                [[${dto.goodsPrice}]] <br />
+                                <!-- 배송비가 0이면 무료배송으로 출력한다. -->
+                                <span th:if="${dto.deliveryCost == 0}" >무료배송</span>
+                                <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
+                            </a>
+                        </td>
+                        <!-- 옆으로 만 출력되기 때문에 3개마다 행을 변경할 수 있게 3개마다 </tr>로 막아주고 다시 <tr>을 열어준다. -->
+                        <!-- idx에서 count를 불러올 수 있는데 count는 1부터 시작하는 값을 가져온다 idx를 3으로 나눈 나머지가 0일 때마다
+                             </tr><tr>을 출력-->
+                        <th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'" />
+                    </th:block>
+                </tr>
+            </table>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png" class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png" class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png" class="nav-icon"></a>
+        </div>
+    </div>
+</div>
+<script src="/static/js/test.js"></script>
+
 <!-- 로그인 되었을 때 구분 -->
 <div th:if="${session.auth != null}">
     <ul>
@@ -26,7 +91,7 @@
             <li><a href="/corner/cartList">장바구니</a></li>
             <li><a href="/purchase/orderList">주문목록</a></li>
         </th:block>
-      
+
         <!-- 로그아웃 -->
         <li><a href="login/logout">로그아웃</a></li>
     </ul>
@@ -57,29 +122,6 @@
 </form>
 </div>
 
-<a href="/category">카테고리</a>
 
-<!-- MainGoodsListService에서 model로 받아온 list를 출력합니다. -->
-<table align="center" width="600">
-    <tr><!-- 상품정보를 옆으로 출력해야 하므로 TD를 반복하겠습니다. -->
-        <th:block th:each="dto , idx : ${list}">
-            <!-- list로 받아온 값을 하나씩 변수 dto에 전달하고 index는 idx로 받는다, index는 반복할때마다 0부터 시작하는값이다, 1씩증가  -->
-            <td><!-- 이제 구매 페이지로 이동합니다 -->
-                <a th:href="|corner/detailView/${dto.goodsNum}|">
-                    <img th:src="|/static/upload/${dto.goodsMainStore}|"/><br />
-                    [[${dto.goodsName}]]<br />
-                    [[${dto.goodsPrice}]] <br />
-                    <!-- 배송비가 0이면 무료배송으로 출력한다. -->
-                    <span th:if="${dto.deliveryCost == 0}" >무료배송</span>
-                    <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
-                </a>
-            </td>
-            <!-- 옆으로 만 출력되기 때문에 3개마다 행을 변경할 수 있게 3개마다 </tr>로 막아주고 다시 <tr>을 열어준다. -->
-            <!-- idx에서 count를 불러올 수 있는데 count는 1부터 시작하는 값을 가져온다 idx를 3으로 나눈 나머지가 0일 때마다
-                 </tr><tr>을 출력-->
-            <th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'" />
-        </th:block>
-    </tr>
-</table>
 </body>
 </html>
