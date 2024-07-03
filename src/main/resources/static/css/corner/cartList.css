@@ -20,6 +20,7 @@
     align-items: flex-start;
     padding: 20px 0;
     border-bottom: 1px solid #E9EBEC;
+    position: relative;
 }
 
 .cart-each-check {
@@ -38,17 +39,20 @@
     border-radius: 8px;
 }
 
-.cart-details {
+.cart-section {
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
+
 .cart-product-name,
 .cart-quantity,
 .cart-price,
 .cart-delivery {
     margin-bottom: 10px;  /* 각 요소 사이의 간격 */
 }
+
 .cart-product-name {
     font-size: 18px;
     font-weight: bold;
@@ -72,8 +76,20 @@
     margin-bottom: 10px;
 }
 
+.cart-select-button input[type="button"] {
+    background-color: #FC6B70;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .cart-button {
-    margin-top: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
 }
 
 .cart-button input[type="button"] {
@@ -105,9 +121,9 @@
     background-color: #FC6B70;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     margin-top: 10px;
 }
@@ -129,5 +145,10 @@
 
     .cart-details {
         width: 100%;
+    }
+
+    .cart-button {
+        position: static;
+        margin-top: 10px;
     }
 }

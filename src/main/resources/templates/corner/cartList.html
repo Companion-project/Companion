@@ -17,7 +17,7 @@
                 <div class="cart-container">
                     <div class="cart-header">
                         <div class="cart-all-check"><input type="checkbox" id="checkBoxs" checked="checked"/>전체선택</div>
-                        <div class="cart-button"><input type="button" value="선택 상품 삭제" onclick="del1();"/></div>
+                        <div class="cart-select-button"><input type="button" value="선택 상품 삭제" onclick="del1();"/></div>
                     </div>
                     <div th:each=" dto: ${list}" class="cart-row">
                         <div class="cart-each-check"><input type="checkbox" name="prodCk" checked="checked"
