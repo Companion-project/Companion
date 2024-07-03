@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/test.css">
     <link rel="stylesheet" href="/static/css/corner/cartList.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 </head>
@@ -16,7 +17,6 @@
     <div class="left-container">
         <img src="/static/images/logo.png" id="logo">
         <img src="/static/images/main-text.png" id="main-text">
-
         <div class="search-container">
             <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
             <form id="searchForm" class="search-form">
@@ -36,33 +36,30 @@
             <form action="/purchase/goodsBuy" method="post" class="purchase-form">
                 <div class="cart-container">
                     <div class="cart-header">
-                        <div class="cart-checkbox"><input type="checkbox" id="checkBoxs" checked="checked"/></div>
-                        <div class="menu-item">이미지</div>
+                        <div class="cart-all-check"><input type="checkbox" id="checkBoxs" checked="checked"/>전체선택</div>
                         <div class="menu-item">제품명</div>
                         <div class="menu-item">수량</div>
                         <div class="menu-item">합계금액</div>
-                        <div class="menu-item">배송비</div>
                         <div class="cart-button"><input type="button" value="선택 상품 삭제" onclick="del1();"/></div>
                     </div>
                     <div th:each=" dto: ${list}" class="cart-row">
-                        <div><input type="checkbox" name="prodCk" checked="checked"
+                        <div class="cart-each-check"><input type="checkbox" name="prodCk" checked="checked"
                                     th:value="${dto.goodsDTO.goodsNum}"/></div>
-                        <div><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" /></div>
-                        <div>[[${dto.goodsDTO.goodsName}]]</div>
-                        <div>
+                        <div class="cart-image"><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|"/></div>
+                        <div class="cart-product-name">[[${dto.goodsDTO.goodsName}]]</div>
+                        <div class="cart-quantity">
                             <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}');|"> - </a>
                             <span th:id="${dto.goodsDTO.goodsNum}">[[${dto.cartDTO.cartQty}]]</span>
                             <a th:href="|javascript:cartAdd('${dto.goodsDTO.goodsNum}','${dto.goodsDTO.goodsPrice}')|"> + </a>
                         </div>
-                        <div><span th:id="${'t_'+ dto.goodsDTO.goodsNum}" class="totalPrice">[[${dto.totalPrice}]]</span></div>
-                        <div><span class="deliveryCost">[[${dto.goodsDTO.deliveryCost}]]</span></div>
+                        <div class="cart-price">합계: <span th:id="${'t_'+ dto.goodsDTO.goodsNum}" class="totalPrice">[[${dto.totalPrice}]]</span>원</div>
+                        <div class="cart-delivery">배송비: <span class="deliveryCost">[[${dto.goodsDTO.deliveryCost}]]</span>원</div>
                         <div class="cart-button"><input type="button" value="삭제" th:attr="onclick=|del('${dto.goodsDTO.goodsNum}');|"/></div>
                     </div>
                     <div class="cart-footer">
                         <div class="cart-summary">
-                            상품수 : <span id="prodCnt">[[${list.size}]]</span>개<br />
-                            전체 금액 : <span id="sumPrice">[[${sumPrice}]]</span>원<br />
-
+                            상품수 : <span id="prodCnt">[[${list.size}]]</span>개<br/>
+                            전체 금액 : <span id="sumPrice">[[${sumPrice}]]</span>원<br/>
                             <input type="submit" value="구매하기" />
                         </div>
                     </div>
@@ -175,8 +172,6 @@
             return false;
         }
     }
-
-
 </script>
 <script src="/static/js/test.js"></script>
 </body>

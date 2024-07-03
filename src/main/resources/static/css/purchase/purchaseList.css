@@ -244,7 +244,6 @@ cursor: pointer;
         height: 40px;
     }
 }
-
 .order-list {
     width: 99%;
     border: 1px solid #E9EBEC;
@@ -272,7 +271,7 @@ cursor: pointer;
     border-bottom: none;
 }
 
-.order-date-payment, .order-product-number, .order-status {
+.order-date-payment, .order-product-info, .order-status {
     padding: 0 5px;
     display: flex;
     flex-direction: column;
@@ -285,6 +284,10 @@ cursor: pointer;
     max-width: 25%;
 }
 
+.order-product-info {
+    flex: 2;
+    max-width: 50%;
+}
 .order-product-number {
     flex: 2;
     max-width: 50%;
@@ -295,7 +298,6 @@ cursor: pointer;
     max-width: 25%;
     align-items: flex-end;
 }
-
 .order-date, .order-payment,
 .order-product, .order-number {
     margin: 2px 0;
