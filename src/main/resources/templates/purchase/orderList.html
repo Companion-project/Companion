@@ -7,57 +7,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <script src="/static/js/test.js"></script>
     <link rel="stylesheet" href="/static/css/purchase/orderList.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            background-image: url("/static/images/background.png");
-            background-repeat: no-repeat;
-            background-position: center;
-            background-attachment: fixed;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: "Noto Sans KR", sans-serif;
-            font-optical-sizing: auto;
-        }
-        .search-container {
-            margin-top: 20px;
-            width: 340px;
-            height: 52px;
-            background-image: url("/static/images/button-search.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            z-index: 1000;
-        }
-
-        @media screen and (max-width: 1024px) {
-        body {
-            background-image: none;
-            background-color: rgb(244, 237, 237);
-        }
-        .left-container {
-            display: none;
-        }
-
-        .main-container {
-        margin-left: 0;
-    }
-    }
-    </style>
 </head>
 <body>
+<img src="/static/images/background.png" id="back-img">
 <div class="companion-container">
     <div class="left-container">
         <img src="/static/images/logo.png" id="logo">
         <img src="/static/images/main-text.png" id="main-text">
-
         <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
             <form id="searchForm" class="search-form">
                 <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
                 <button type="submit" class="search-button" aria-label="검색"></button>
@@ -68,95 +27,103 @@
     <div class="main-container">
         <div class="header">
             <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-            <h3>구매목록</h3>
+            <h3>주문목록</h3>
         </div>
 
         <div class="index">
-<table width="800" align="center">
-    <tr><td>주문일(결제번호)</td>
-        <td>상품명/주문번호</td>
-        <td>주문상태</td>
-    </tr>
-    <tr th:each=" orderListDTO : ${list}" >
-        <td>[[${#dates.format(orderListDTO.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]](
-            <!-- 결제 시간이 없다는 건 아직 결제가 안되었다는 의미입니다. -->
-            <th:block th:if="${orderListDTO.paymentDTO.appltime == null}">
-                결제대기중
-            </th:block>
-            <!-- 결제 시간이 있다는 건 결제가 이루어졌다는 의미입니다. -->
-            <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
-                <!-- 현금결제인 경우 승인번호가 없을 수 있습니다. -->
-                <th:block th:if="${orderListDTO.paymentDTO.confirmnumber == null}">
-                    <!-- 결제시간은 있는데 승인번호가 없다는 건 --> 현금결제
-                </th:block>
-                <th:block th:if="${orderListDTO.paymentDTO.confirmnumber != null}">
-                    [[${orderListDTO.paymentDTO.confirmnumber}]]<!-- 승인번호 -->
-                </th:block>
-            </th:block>
-            )</td>
-        <!-- 결제정보 하나에 상품은 여러개 일 수 있어 collection으로 받아 욌습니다. -->
-        <td>
-            <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}" >
-                ([[${dto.goods.goodsName}]])
-            </th:block>
-            /[[${orderListDTO.purchaseDTO.purchaseNum}]]
-        </td>
-        <td>
-            <!-- 상품준비중인 경우 결제취소는 안보이고 상품준비중으로 표시되게 한다. -->
-            <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
-                <th:block th:if="${orderListDTO.deliveryDTO.deliveryNumber == null}">
+            <div class="order-list">
+                <div class="order-list-header">
+                    <div class="order-date-payment">주문일</div>
+                    <div class="order-product-number">상품명/주문번호</div>
+                    <div class="order-status">주문상태</div>
+                </div>
+                <div class="order-item" th:each=" orderListDTO : ${list}">
+                    <div class="order-date-payment">
+                        <div class="order-date">[[${#dates.format(orderListDTO.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]</div>
+                        <div class="order-payment">
+                        <th:block th:if="${orderListDTO.paymentDTO.appltime == null}">
+                            결제대기중
+                        </th:block>
+                        <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
+                            <th:block th:if="${orderListDTO.paymentDTO.confirmnumber == null}">
+                                현금결제
+                            </th:block>
+                            <th:block th:if="${orderListDTO.paymentDTO.confirmnumber != null}">
+                                [[${orderListDTO.paymentDTO.confirmnumber}]]<!-- 승인번호 -->
+                            </th:block>
+                        </th:block>
+                        </div>
+                    </div>
+                    <!-- 결제정보 하나에 상품은 여러개 일 수 있어 collection으로 받아 욌습니다. -->
+                    <div class="order-product-number">
+                        <div class="order-product">
+                        <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
+                            <div class="img-section"><img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="100"/></div>
+                            [[${dto.goods.goodsName}]]
+                        </th:block>
+                            </div>
+                        <div class="order-number">
+                        [[${orderListDTO.purchaseDTO.purchaseNum}]]
+                        </div>
+                    </div>
+                    <div class="order-status">
+                        <!-- 상품준비중인 경우 결제취소는 안보이고 상품준비중으로 표시되게 한다. -->
+                        <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
+                            <th:block th:if="${orderListDTO.deliveryDTO.deliveryNumber == null}">
                     <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '결제완료'}">
                         <!-- 배송정보가 있으면 결제 취소가 되서는 안됨 -->
                         <a th:href="|paymentDel?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">결제취소</a>
                     </span>
-                    <!-- 배송정보가 입력이 되었다면 상품준비중이 뜨면 안됨 -->
-                    <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '상품준비중'} ">
-                        상품준비중
-                    </span>
-                </th:block>
-                <!-- 구매확정을 하였으니 구매확정이 아닐 때만 표시를 하고 구매 확정인 경우에 표시되지 않게 합니다. -->
-                <th:block th:if="${orderListDTO.purchaseDTO.purchaseStatus !='구매확정' }">
-                    <!-- 배송정보가 있는 경우에는 배송중이나 배송완료가 출력되게 변경 -->
-                    <span th:if="${orderListDTO.deliveryDTO.deliveryNumber != null }">[[${orderListDTO.deliveryDTO.deliveryState}]]</span>
-                    <!-- 이제 주문 상태에 따라 상태정보가 다 출력되게 하였습니다. -->
-                    <!-- 이제 배송완료가 되면 구매확정을 하도록합니다. -->
-                    <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송완료'}">
+                                <!-- 배송정보가 입력이 되었다면 상품준비중이 뜨면 안됨 -->
+                                <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '상품준비중'} ">상품준비중</span>
+                            </th:block>
+                            <!-- 구매확정을 하였으니 구매확정이 아닐 때만 표시를 하고 구매 확정인 경우에 표시되지 않게 합니다. -->
+                            <th:block th:if="${orderListDTO.purchaseDTO.purchaseStatus !='구매확정' }">
+                                <!-- 배송정보가 있는 경우에는 배송중이나 배송완료가 출력되게 변경 -->
+                                <span th:if="${orderListDTO.deliveryDTO.deliveryNumber != null }">[[${orderListDTO.deliveryDTO.deliveryState}]]</span>
+                                <!-- 이제 주문 상태에 따라 상태정보가 다 출력되게 하였습니다. -->
+                                <!-- 이제 배송완료가 되면 구매확정을 하도록합니다. -->
+                                <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송완료'}">
 					    <a th:href="@{/purchase/purchaseOk(purchaseNum=${orderListDTO.purchaseDTO.purchaseNum})}">주문확정</a>
 				    </span>
-                </th:block >
-                <!-- 구매확정이면 구매확정이라고 출력되고 후기를 작성하도록합니다. -->
-                <th:block th:if="${orderListDTO.purchaseDTO.purchaseStatus =='구매확정' }">
-                    <!-- 후기를 쓰려면 후기가 있는지 알아야 하므로 후기를 가지고와야합니다. -->
-                    구매확정 |
-                    <!-- 후기는 주문번호 하나에 여러개의 상품이고 각 상품별로 후기를 달아야 하므로 collection으로 받아왔습니다. -->
-                    <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
-                        <!-- 후기는 구매확정이고 후기가 없어야 합니다. -->
-                        <a th:if="${dto.review == null}" th:href="@{/review/goodsReview(goodsNum=${dto.goods.goodsNum}
+                            </th:block>
+                            <!-- 구매확정이면 구매확정이라고 출력되고 후기를 작성하도록합니다. -->
+                            <th:block th:if="${orderListDTO.purchaseDTO.purchaseStatus =='구매확정' }">
+                                <!-- 후기를 쓰려면 후기가 있는지 알아야 하므로 후기를 가지고와야합니다. -->
+                                구매확정
+                                <!-- 후기는 주문번호 하나에 여러개의 상품이고 각 상품별로 후기를 달아야 하므로 collection으로 받아왔습니다. -->
+                                <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
+                                    <!-- 후기는 구매확정이고 후기가 없어야 합니다. -->
+                                    <a th:if="${dto.review == null}" th:href="@{/review/goodsReview(goodsNum=${dto.goods.goodsNum}
 				   								,purchaseNum=${orderListDTO.purchaseDTO.purchaseNum})}">후기쓰기</a>
-                        <!-- 이제 후기를 등록했으니 수정 또는 삭제를 해야지요. -->
-                        <th:block th:if="${dto.review != null}">
-                            <a th:href="@{/review/goodsReviewUpdate(reviewNum=${dto.review.reviewNum},
-															goodsNum=${dto.goods.goodsNum})}">후기 수정</a> |
-                            <a th:href="@{/review/goodsReviewDelete(reviewNum=${dto.review.reviewNum},
+                                    <!-- 이제 후기를 등록했으니 수정 또는 삭제를 해야지요. -->
+                                    <th:block th:if="${dto.review != null}">
+                                        <a th:href="@{/review/goodsReviewUpdate(reviewNum=${dto.review.reviewNum},
+															goodsNum=${dto.goods.goodsNum})}">후기 수정</a>
+                                        <a th:href="@{/review/goodsReviewDelete(reviewNum=${dto.review.reviewNum},
 															goodsNum=${dto.goods.goodsNum})}">후기 삭제</a>
+                                    </th:block>
+                                </th:block>
+                            </th:block>
                         </th:block>
-                    </th:block>
-                </th:block>
-            </th:block>
-            <th:block th:if="${orderListDTO.paymentDTO.appltime == null }">
-                <!-- 이미 만들어져 있어서 경로만 잡아주면 됩니다. -->
-                <a th:href="|paymentOk?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">결제하기</a>
-            </th:block>
-        </td>
-    </tr>
-</table>
-        </div>
-        <div class="bottom-nav">
-                <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png" class="nav-icon"></a>
-                <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png" class="nav-icon"></a>
-                <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png" class="nav-icon"></a>
+                        <th:block th:if="${orderListDTO.paymentDTO.appltime == null }">
+                            <!-- 이미 만들어져 있어서 경로만 잡아주면 됩니다. -->
+                            <a th:href="|paymentOk?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">결제하기</a>
+                        </th:block>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="bottom-nav">
+            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png"
+                                                                       class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png"
+                                                                   class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png"
+                                                                    class="nav-icon"></a>
+        </div>
     </div>
+</div>
+<script src="/static/js/test.js"></script>
 </body>
 </html>
