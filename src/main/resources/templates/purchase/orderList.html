@@ -15,7 +15,6 @@
     <div class="left-container">
         <img src="/static/images/logo.png" id="logo">
         <img src="/static/images/main-text.png" id="main-text">
-
         <div class="search-container">
             <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
             <form id="searchForm" class="search-form">
@@ -28,7 +27,7 @@
     <div class="main-container">
         <div class="header">
             <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-            <h3>구매목록</h3>
+            <h3>주문목록</h3>
         </div>
 
         <div class="index">
@@ -59,7 +58,7 @@
                     <div class="order-product-number">
                         <div class="order-product">
                         <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
-                            <div class="img-section"><img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="100" /></div>
+                            <div class="img-section"><img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="100"/></div>
                             [[${dto.goods.goodsName}]]
                         </th:block>
                             </div>
