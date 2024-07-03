@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>companion</title>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-<script src="/static/js/employee/employeeList.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/css/employee/employeeList.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/employee/employeeList.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/employee/employeeList.css">
 </head>
 <body>
 <img src="/static/images/background.png" id="back-img">
@@ -36,22 +36,23 @@
             <!-- index 내용 -->
             <span>
 
-					<button class="empRegist" onclick="location.href='empRegist'">직원등록</button>
-
-					<form  action="employeeList" method="get" id="searchbar" >
+				    <div id="adminwork">
+					<div id="searchb">
+					<form action="employeeList" method="get" id="searchbar">
 								<input type="search" id="searchbarinput" name="searchWord" th:value="${searchWord}"/>
-								<input type="submit" id="searchbutton" value="직원검색" />
-					</form>
+								<input type="submit" id="searchbutton" value="직원검색"/></form></div>
+					<div id="regb"><button class="regbutton" onclick="location.href='empRegist'">직원등록</button>
+					</div></div>
 					<form action="empsDelete" method="post" id="frm">
 					<table border=1 width=600px id="employeetable">
 						<tr>
 							<td>직원번호</td>
 							<td>직원아이디</td>
 							<td>직원이름</td>
-							<td>&nbsp;&nbsp;&nbsp;등록일</td>
+							<td>등록일</td>
 							<td>연락처</td>
 							<td><input type="checkbox" id="checkBoxs"/>
-								<input type="submit" value="삭제" />
+								<input type="submit" value="삭제"/>
 							</td>
 						</tr>
 					<tr th:each="dto : ${dtos}">
@@ -60,10 +61,10 @@
 						<td>[[${dto.empName}]]</td>
 						<td>[[${#dates.format(dto.empRegiDate,'yyyy-MM-dd')}]]</td>
 						<td>[[${dto.empPhone}]]</td>
-						<td><input type="checkbox" name="empDels" th:value="${dto.empNum}" /></td>
+						<td><input type="checkbox" name="empDels" th:value="${dto.empNum}"/></td>
 					</tr>
 
-					<tr align="center"><td colspan="6" class="pagination-cell" >
+					<tr align="center"><td colspan="6" class="pagination-cell">
 						<th:block th:if="${page <= 1}">
 						[이전]
 						</th:block>
@@ -88,9 +89,12 @@
         </div>
 
         <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png" class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png" class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png" class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png"
+                                                                       class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png"
+                                                                   class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png"
+                                                                    class="nav-icon"></a>
         </div>
     </div>
 </div>

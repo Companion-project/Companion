@@ -231,42 +231,42 @@ body {
     margin-top: 10px;
 }
 
-#employeetable {
+#membertable {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
 }
 
-#employeetable th,
-#employeetable td {
+#membertable th,
+#membertable td {
     border: 1px solid #ddd;
     padding: 4px;
     text-align: center;
 }
 
-#employeetable th {
+#membertable th {
     background-color: #f2f2f2;
     font-weight: bold;
 }
 
-#employeetable a,
-#employeetable .pagination-cell a,
-#employeetable .pagination-cell span {
+#membertable a,
+#membertable .pagination-cell a,
+#membertable .pagination-cell span {
     color: #0066cc;
     text-decoration: none;
     display: inline-block;
 }
 
-#employeetable a:hover,
-#employeetable .pagination-cell a:hover {
+#membertable a:hover,
+#membertable .pagination-cell a:hover {
     color: #004080;
 }
 
-#employeetable input[type="checkbox"] {
+#membertable input[type="checkbox"] {
     margin-right: 5px;
 }
 
-#employeetable input[type="submit"] {
+#membertable input[type="submit"] {
     padding: 4px 10px;
     font-size: 12px;
     font-weight: bold;
@@ -278,23 +278,23 @@ body {
     transition: background-color 0.3s;
 }
 
-#employeetable input[type="submit"]:hover {
+#membertable input[type="submit"]:hover {
     background-color: #fb5256;
 }
 
-#employeetable .pagination-cell {
+#membertable .pagination-cell {
     text-align: center;
     padding: 5px 0;
 }
 
-#employeetable .pagination-cell a,
-#employeetable .pagination-cell span {
+#membertable .pagination-cell a,
+#membertable .pagination-cell span {
     padding: 5px 10px;
     margin: 0 2px;
     border: 1px solid #ddd;
 }
 
-#employeetable .pagination-cell span {
+#membertable .pagination-cell span {
     color: #999;
 }
 
