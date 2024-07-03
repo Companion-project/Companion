@@ -27,7 +27,7 @@ public class LoginController {
 
     @GetMapping("/loginForm")
     public String loginForm(LoginCommand loginCommand) {
-        return "loginForm";  // 이 부분은 그대로 두세요.
+        return "loginForm";
     }
 
     @PostMapping("userIdCheck")

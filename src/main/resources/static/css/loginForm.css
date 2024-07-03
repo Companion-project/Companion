@@ -1,0 +1,67 @@
+.index ul{
+    list-style-type: none; /* 리스트 스타일을 없앱니다 */
+    padding: 0; /* 기본 패딩을 없앱니다 */
+}
+
+
+
+.index li {
+    margin: 30px 0px; /* 각 항목 사이의 여백을 설정하세요 */
+    border-bottom: 1px solid #E9EBEC;
+    padding-bottom: 30px;
+
+}
+
+.index li a {
+    margin: 0px 30px;
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+
+}
+
+.input-style {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+
+    }
+
+.input-style:not([type="radio"]){
+width: 500px;
+}
+
+.input-style:focus {
+  border-color: #007bff;
+}
+
+#loginButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #FC6B70;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      width: 500px;
+    }
+
+
+.userLoginInfo {
+    text-align: center; /* 텍스트를 가운데 정렬합니다 */
+    margin-top: 20px; /* 위쪽 여백을 설정합니다 */
+}
+
+.userLoginInfo a {
+    text-decoration: none;
+    color: black;
+    margin: 0 5px; /* 각 링크 사이의 여백을 설정합니다 */
+}
+
+#login-form{
+    margin:0 auto;
+}
