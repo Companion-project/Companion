@@ -59,7 +59,7 @@
                     <div class="order-product-number">
                         <div class="order-product">
                         <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
-                            <img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="50" />
+                            <div class="img-section"><img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="100" /></div>
                             [[${dto.goods.goodsName}]]
                         </th:block>
                             </div>

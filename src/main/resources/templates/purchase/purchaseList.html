@@ -2,7 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/purchase/purchaseList.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <script type="text/javascript">
         function detail(purchaseNum){
@@ -11,55 +16,93 @@
         }
     </script>
 </head>
-<body>
-<table width="800" align="center">
-    <tr><td>주문일(결제번호)</td>
-        <td>상품명/주문번호</td>
-        <td>주문상태</td>
-    </tr>
-    <tr th:each=" orderListDTO : ${list}">
-        <td>[[${#dates.format(orderListDTO.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]
-            (
-            <th:block th:if="${orderListDTO.paymentDTO.appltime == null}">
-                결제대기중 <!--  결제일이 없다는 것은 아직 결제를 하지 않은 상태입니다. -->
-            </th:block>
-            <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
-                <th:block th:if="${orderListDTO.paymentDTO.confirmnumber == null}">
-                    현금결제 <!-- 결제일은 있는데 승인번호가 없는 것 -->
-                </th:block>
-                <th:block th:if="${orderListDTO.paymentDTO.confirmnumber != null}">
-                    [[${orderListDTO.paymentDTO.confirmnumber}]]
-                </th:block>
-            </th:block>
-            )
-        </td>
-        <td><!-- 주문 상품은 주문번호하나에 여러개 일 수 있어서 마이바티스에서 collection-->
-            <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}" >
-                [[${dto.goods.goodsName}]]
-            </th:block>
-            /[[${orderListDTO.purchaseDTO.purchaseNum}]]</td>
-        <td>
-            <a th:href="|javascript:detail('${orderListDTO.purchaseDTO.purchaseNum}')|">주문상세보기</a>
-            <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '입금대기중'}">
-				결제대기중
-			</span>
-            <span th:if="${orderListDTO.purchaseDTO.purchaseStatus != '입금대기중'}">
-				<!-- 결제 완료가 된 것은 성품준비중으로 변경. 배송종보가 null 이어야 한다는 조건을 추가-->
-				<span th:if="${orderListDTO.deliveryDTO.deliveryState == null}">
-				<a th:href="@{purchaseStatus(
-									purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}
-								)}">[[${orderListDTO.purchaseDTO.purchaseStatus}]]</a>
-				</span>
-			</span>
-            <!-- 배송상태이면 배송완료로 바꿔줘야 합니다. 배송상태가 배송중인 경우 배송정보에서 상태 출력-->
-            <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송중' }">
-				<a th:href="|/delivery/deliveryState?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">[[${orderListDTO.deliveryDTO.deliveryState}]]</a>
-			</span>
-            <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송완료' }">
-					[[${orderListDTO.deliveryDTO.deliveryState}]]
+<img src="/static/images/background.png" id="back-img">
+<div class="companion-container">
+    <div class="left-container">
+        <img src="/static/images/logo.png" id="logo">
+        <img src="/static/images/main-text.png" id="main-text">
+
+        <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
+                <button type="submit" class="search-button" aria-label="검색"></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="header">
+            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+            <h3>주문목록</h3>
+        </div>
+
+        <div class="index">
+            <div class="order-list">
+                <div class="order-list-header">
+                    <div class="order-date-payment">주문일</div>
+                    <div class="order-product-number">상품명/주문번호</div>
+                    <div class="order-status">주문상태</div>
+                </div>
+                <div class="order-item" th:each="orderListDTO : ${list}">
+                    <div class="order-date-payment">
+                        <div class="order-date">[[${#dates.format(orderListDTO.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]</div>
+                        <div class="order-payment">
+                        <th:block th:if="${orderListDTO.paymentDTO.appltime == null}">
+                            결제대기중
+                        </th:block>
+                        <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
+                            <th:block th:if="${orderListDTO.paymentDTO.confirmnumber == null}">
+                                현금결제
+                            </th:block>
+                            <th:block th:if="${orderListDTO.paymentDTO.confirmnumber != null}">
+                                [[${orderListDTO.paymentDTO.confirmnumber}]]
+                            </th:block>
+                        </th:block>
+                        </div>
+                    </div>
+                    <div class="order-product-info">
+                        <div class="order-product">
+                        <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}" >
+                            [[${dto.goods.goodsName}]]
+                        </th:block>
+                        </div>
+                            <div class="order-number">
+                            [[${orderListDTO.purchaseDTO.purchaseNum}]]
+                            </div>
+                    </div>
+                    <div class="order-status">
+                        <a th:href="|javascript:detail('${orderListDTO.purchaseDTO.purchaseNum}')|">주문상세보기</a>
+                        <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '입금대기중'}">
+                결제대기중
             </span>
-        </td>
-    </tr>
-</table>
+                        <span th:if="${orderListDTO.purchaseDTO.purchaseStatus != '입금대기중'}">
+                <span th:if="${orderListDTO.deliveryDTO.deliveryState == null}">
+                    <a th:href="@{purchaseStatus(
+                        purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}
+                    )}">[[${orderListDTO.purchaseDTO.purchaseStatus}]]</a>
+                </span>
+            </span>
+                        <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송중' }">
+                <a th:href="|/delivery/deliveryState?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">[[${orderListDTO.deliveryDTO.deliveryState}]]</a>
+            </span>
+                        <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송완료' }">
+                [[${orderListDTO.deliveryDTO.deliveryState}]]
+            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="bottom-nav">
+                <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png"
+                                                                           class="nav-icon"></a>
+                <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png"
+                                                                       class="nav-icon"></a>
+                <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png"
+                                                                        class="nav-icon"></a>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/test.js"></script>
 </body>
 </html>
