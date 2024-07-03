@@ -193,6 +193,7 @@ body {
 }
 
 .index {
+    margin-bottom: 60px;
     margin-top: 80px;
     flex: 1; /* 남은 공간을 모두 차지 */
     width: 100%;
