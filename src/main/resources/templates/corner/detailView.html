@@ -4,6 +4,7 @@
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 	<meta charset="UTF-8">
 	<th:block th:replace="common/mainCommon :: head"></th:block>
+	<link rel="stylesheet" href="/static/css/corner/detailView.css">
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
@@ -14,62 +15,50 @@
 </div>
 
 <div class="index">
-	<table width="800" align="center">
-		<tr><td colspan="2">([[${dto.goodsDTO.goodsName}]]) 상품정보 입니다. | 상품 조회수 : [[${dto.goodsDTO.visitCount}]]</td></tr>
-		<tr><td rowspan="6" width="300px">
-			<img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" alt="상품이미지"/></td>
-			<td>상품명 : [[${dto.goodsDTO.goodsName}]]</td>
-		</tr>
-		<tr><td>카테고리 : [[${dto.goodsDTO.goodsCategory}]]</td></tr>
-		<tr><td>가격 : [[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice)+'원'}]]</td></tr>
-		<tr><td>배송비 <span th:if="${dto.goodsDTO.deliveryCost == 0}">무료배송</span>
-			<span th:if="${dto.goodsDTO.deliveryCost != 0}">
-						[[${#numbers.formatCurrency(dto.goodsDTO.deliveryCost) + '원'}]]</span>
-		</td></tr>
+	<div> 상품 조회수 : [[${dto.goodsDTO.visitCount}]] </div>
+	<div><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|" alt="상품이미지"/></div>
+	<div>카테고리 : [[${dto.goodsDTO.goodsCategory}]]</div>
+	<div>상품명 : [[${dto.goodsDTO.goodsName}]]</div>
 
-		<!--<tr th:if="${dto.stock > 0 }" ><td>수량 : <input type="number" min=1 step="1" value="1" id="qty" name="qty" /></td></tr>-->
-		<tr th:if="${dto.stock > 0 }" >
-			<td>수량
-				<button id="decrement" class="qty-button">-</button>
-				<input type="number" id="qty" name="qty" class="qty-input" value="1">
-				<button id="increment" class="qty-button">+</button>
-			</td>
-		</tr>
+	<div>
+		<div th:if="${dto.stock > 0 }">
+			<button id="decrement" class="qty-button">-</button>
+			<input type="number" id="qty" name="qty" class="qty-input" value="1">
+			<button id="increment" class="qty-button">+</button>
+		</div>
 
-		<tr th:if="${dto.stock > 0 }" ><td>총 상품금액 : <span id="tot">[[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice) + '원'}]]</span></td></tr>
-		<span th:if="${dto.stock <= 0 }" >  품절  </span>
-		<tr><td><!--  재고가 있을 때만 버튼이 보이게  -->
-			<button type="button" id="buyItem" > 바로구매  |</button>
-			<button type="button" id="cartBtn" > 장바구니 |</button>
-			<th:block th:if="${wish == null}">
-				<img src="/static/images/heart1.png" id="wish" width="20" />
-			</th:block>
-			<th:block th:if="${wish != null}">
-				<img src="/static/images/heart.png" id="wish" width="20" />
-			</th:block> 찜
-		</td>
-		</tr>
-		<!--<tr><td colspan="2">남은 수량 :[[${dto.stock}]] 개</td></tr>-->
-		<tr><td colspan="2">
-			<p>
-			<!--<span id="descript">제품 상세 설명</span> |-->
-			<table width="800" align="center">
-				<tr><td>
-					<span th:utext="${#strings.replace(goodsCommand.goodsContent ,newLine,'&lt;br /&gt;' )}" ></span>
-					<br />
-					<th:block  th:each=" goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-')}">
-						<img th:src="|/static/upload/${goodsImage}|" />
-					</th:block>
-				</td></tr>
-			</table>
-			<span id="review">리뷰</span> |
-			<span id="inquire" >상품문의</span>
-			</p>
-			<!--  제품 상세 설명를 클릭하면 제품정보가, 리뷰를 클릭하면 리뷰정보가, 상품문의를 클릭하면 상품문의가 나오게 해봅니다.-->
-			<!-- 먼저 상품정보 부터 가져오겠습니다. -->
-			<div id="notice"></div>
-		</td></tr>
-	</table>
+		<div>가격 : [[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice)+'원'}]]</div>
+		<div>배송비
+			<span th:if="${dto.goodsDTO.deliveryCost == 0}">무료배송</span>
+			<span th:if="${dto.goodsDTO.deliveryCost != 0}">[[${#numbers.formatCurrency(dto.goodsDTO.deliveryCost) + '원'}]]</span>
+		</div>
+	</div>
+	<div th:if="${dto.stock > 0 }">총 상품 금액 <span id="tot">[[${#numbers.formatCurrency(dto.goodsDTO.goodsPrice) + '원'}]]</span></div>
+	<div th:if="${dto.stock <= 0 }" >품절</div>
+	<div>
+		<button type="button" id="buyItem" >구매하기</button>
+		<button type="button" id="cartBtn" >장바구니</button>
+		<th:block th:if="${wish == null}">
+			<button id="wish">
+			<img src="/static/images/heart1.png" width="20" />찜하기
+			</button>
+		</th:block>
+		<th:block th:if="${wish != null}">
+			<button id="wish">
+			<img src="/static/images/heart.png" id="wish" width="20" />찜하기
+			</button>
+		</th:block>
+	</div>
+	<div>
+	<th:block  th:each=" goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-')}">
+		<img th:src="|/static/upload/${goodsImage}|" />
+	</th:block>
+	</div>
+	<div th:utext="${#strings.replace(goodsCommand.goodsContent ,newLine,'&lt;br /&gt;' )}" ></div>
+	<br/>
+	<span id="review">리뷰</span> |
+	<span id="inquire" >상품문의</span>
+	<div id="notice"></div>
 </div>
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 

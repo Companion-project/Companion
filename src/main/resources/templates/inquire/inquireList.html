@@ -7,39 +7,44 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 </head>
 <body>
-    <table width="600" align="center" border="1">
-        <tr><td align="right" colspan="6" ><button type="button"  id="btn" data-authenticated="${session.auth}">문의하기</button></td></tr>
+        <div>
+            <button type="button"  id="btn" data-authenticated="${session.auth}">문의하기</button>
+        </div>
         <th:block th:each=" dto , idx : ${list}">
-            <tr><td>[[${idx.count}]]</td>
-                <td><!-- 답변 내용이 없으면 검토, 답변 내용이 있으면 답변완료 -->
+            <div><span>[[${idx.count}]]</span>
+                <div>[[${dto.memberId}]]</div>
+                <div>
+                    <span>[[${dto.inquireKind}]]</span>
+                    <span>[[${dto.inquireSubject}]]</span>
+                </div>
+                <div><!-- 답변 내용이 없으면 검토, 답변 내용이 있으면 답변완료 -->
                     <span th:if="${dto.inquireAnswer == null}" >검토</span>
                     <span th:if="${dto.inquireAnswer != null}" >답변완료</span>
-                </td>
-                <td>[[${dto.memberId}]]</td>
-                <td>[[${#dates.format(dto.inquireDate,'yyyy-MM-dd')}]]</td>
-                <td>[[${dto.inquireKind}]]</td><td>[[${dto.inquireSubject}]]</td>
-            </tr>
-            <tr><td colspan="6">
-                <span th:utext="${#strings.replace(dto.inquireContent,newLineChar,'&lt;br /&gt;')}"></span><br />
+                </div>
+                <div>[[${#dates.format(dto.inquireDate,'yyyy-MM-dd')}]]</div>
+            </div>
+                <span th:utext="${#strings.replace(dto.inquireContent,newLineChar,'&lt;br /&gt;')}"></span>
+
                 <!-- 질문 당자자만 이 기능을 사용할 수 있습니다. -->
                 <th:block th:if="${session.auth != null}">
                     <th:block th:if="${session.auth.userId == dto.memberId}">
-
-                        <button type="button" th:attr="onclick=|inquireUpdate('${dto.inquireNum}');|">문의수정</button>
-                        <button type="button" th:attr="onclick=|inquireDelete('${dto.inquireNum}');|">문의삭제</button>
+                        <div>
+                            <button type="button" th:attr="onclick=|inquireUpdate('${dto.inquireNum}');|">문의수정</button>
+                            <button type="button" th:attr="onclick=|inquireDelete('${dto.inquireNum}');|">문의삭제</button>
+                        </div>
                     </th:block>
                 </th:block>
-                <button type="button" th:id="inq_+${dto.inquireNum}"
-                        th:attr="onclick=|contentOpen('inq_${dto.inquireNum}');|"
-                >답변열기</button>
-            </td></tr>
-            <tr th:if="${dto.inquireAnswer != null}" style="display:none;" th:class="inq_+${dto.inquireNum}"> <!-- 답변내용이 안보인다. -->
+            <div>
+                <button type="button" th:id="inq_+${dto.inquireNum}" th:attr="onclick=|contentOpen('inq_${dto.inquireNum}');|">답변열기</button>
+            </div>
+            <div th:if="${dto.inquireAnswer != null}" style="display:none;" th:class="inq_+${dto.inquireNum}"> <!-- 답변내용이 안보인다. -->
             <!-- 답변이 있어야 보이게 합니다. -->
-            <td  colspan="6">답변일 : [[${#dates.format(dto.inquireAnswerDate,'yyyy-MM-dd')}]]<br />
-                <span th:utext="${#strings.replace(dto.inquireAnswer,newLineChar,'&lt;br /&gt;')}"></span>
-            </td></tr>
+                <div>
+                    <div>답변일 : [[${#dates.format(dto.inquireAnswerDate,'yyyy-MM-dd')}]]</div>
+                    <div th:utext="${#strings.replace(dto.inquireAnswer,newLineChar,'&lt;br /&gt;')}"></div>
+                </div>
+            </div>
         </th:block>
-    </table>
     <!-- 스크립트 변수 및 링크 -->
     <script th:inline="javascript">
         /*<![CDATA[*/

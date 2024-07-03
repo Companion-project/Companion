@@ -5,15 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-    <table width="600" align="center" border="1">
-        <th:block th:each=" dto : ${list}">
-            <tr><th>[[${dto.memberId}]] | [[${dto.purchaseNum}]]</th>
-                <th>[[${#dates.format(dto.reviewDate,'yyyy-MM-dd')}]]</th></tr>
-            <tr><td colspan="2">
-            <span
-                    th:utext="${#strings.replace(dto.reviewContent, newLineChar, '&lt;br /&gt;')}"></span>
-            </td></tr>
-        </th:block>
-    </table>
+<th:block th:each=" dto : ${list}">
+    <div>
+        <div>[[${dto.memberId}]]</div>
+        <div>[[${dto.purchaseNum}]]</div>
+        <div>[[${#dates.format(dto.reviewDate,'yyyy-MM-dd')}]]</div>
+        <span th:utext="${#strings.replace(dto.reviewContent, newLineChar, '&lt;br /&gt;')}"></span>
+    </div>
+</th:block>
 </body>
 </html>
