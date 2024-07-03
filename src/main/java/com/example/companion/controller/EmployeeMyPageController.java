@@ -28,6 +28,12 @@ public class EmployeeMyPageController {
     @RequestMapping("empMyPage")
     public String empMyPage(HttpSession session, Model model){
         employeeInfoService.execute(session, model);
+        return "worker/empPage";
+    }
+
+    @RequestMapping("empInfo")
+    public String empInfo(HttpSession session, Model model){
+        employeeInfoService.execute(session, model);
         return "worker/myInfo";
     }
 

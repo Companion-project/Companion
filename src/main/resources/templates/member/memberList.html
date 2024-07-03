@@ -2,68 +2,106 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<script src="/static/js/member/memberList.js"></script>
-
+    <title>companion</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/static/js/member/memberList.js"></script>
+    <script src="/static/js/test.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/member/memberList.css">
 </head>
 <body>
-<a href="memberRegist">회원등록</a> |
-<a href="/">이전페이지</a><br />
-<table border="1" width="600">
+<img src="/static/images/background.png" id="back-img">
+<div class="companion-container">
+    <div class="left-container">
+        <img src="/static/images/logo.png" id="logo">
+        <img src="/static/images/main-text.png" id="main-text">
 
-<!-- 회원 조회 -->
-<form action="memberList" method="get">
-    <tr>
-        <td colspan="5">검색:
-            <input type="search" name="searchWord" size="60" th:value="${searchWord}"/>
-            <input type="submit" value="검색" />
-        </td>
-    </tr>
-</form>
-<form action="membersDelete" method="post" id="frm">
-    <!-- 체크박스를 이용해 원하는 회원 선택 삭제 -->
-    <tr>
-        <td>번호</td>
-        <td>이름</td>
-        <td>아이디</td>
-        <td>등록일</td>
-        <td>
-            <input type="checkbox" id="checkBoxs"/>
-            <input type="submit" value="삭제"/>
-        </td>
-    </tr>
-    <tr th:each="dto : ${dtos}">
-        <!-- 타임리프에서 href 사용하는 방법: | 또는 @{} -->
-        <td><a th:href="|memberDetail?memberNum=${dto.memberNum}|">[[${dto.memberNum}]]</a></td>
-        <td><a th:href="@{memberDetail(memberNum=${dto.memberNum})}">[[${dto.memberName}]]</a></td>
-        <td>[[${dto.memberId}]]</td>
-        <td>[[${#dates.format(dto.memberRegistDate,'yyyy-MM-dd')}]]</td>
-        <td>
-            <input type="checkbox" name="memDels" th:value="${dto.memberNum}"/>
-        </td>
-    </tr>
-    <tr align="center"><td colspan="5">
-    <th:block th:if="${page <= 1}">
-    [이전]
-    </th:block>
-    <th:block th:if="${page > 1}">
-        <a th:href="@{memberList(page=${page - 1}, searchWord=${searchWord})}">[이전]</a>
-    </th:block>
-    <th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}">
-        <a th:href="@{memberList(page=${i}, searchWord=${searchWord})}">[[${i}]]</a>
-    </th:block>
-    <th:block th:if="${page >= maxPage}">
-        [다음]
-    </th:block>
-    <th:block th:if="${page < maxPage}">
-        <a th:href="@{memberList(page=${page + 1}, searchWord=${searchWord})}">[다음]</a>
-    </th:block>
-    </td></tr>
+        <div class="search-container">
+            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
+                <button type="submit" class="search-button" aria-label="검색"></button>
+            </form>
+        </div>
+    </div>
 
-</form>
+    <div class="main-container">
+        <div class="header">
+            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+            <h3>회원목록</h3>
+        </div>
 
-</table>
+        <div class="index">
+            <!-- index 내용 -->
+            <span>
 
+
+
+                <!-- 회원 조회 -->
+                <div id="adminwork">
+                    <div id="searchb">
+                <form action="memberList" method="get" id="searchbar">
+                            <input type="search" id="searchbarinput" name="searchWord" size="60" th:value="${searchWord}"/>
+                            <input type="submit" id="searchbutton" value="회원검색"/></form></div>
+                   <div id="regb"><button class="regbutton" onclick="location.href='memberRegist'">회원등록</button>
+                   </div></div>
+                <form action="membersDelete" method="post" id="frm">
+                    <table border="1" width="600" id="membertable">
+                    <!-- 체크박스를 이용해 원하는 회원 선택 삭제 -->
+                    <tr>
+                        <td>번호</td>
+                        <td>이름</td>
+                        <td>아이디</td>
+                        <td>등록일</td>
+                        <td>
+                            <input type="checkbox" id="checkBoxs"/>
+                            <input type="submit" value="삭제"/>
+                        </td>
+                    </tr>
+                    <tr th:each="dto : ${dtos}">
+                        <!-- 타임리프에서 href 사용하는 방법: | 또는 @{} -->
+                        <td><a th:href="|memberDetail?memberNum=${dto.memberNum}|">[[${dto.memberNum}]]</a></td>
+                        <td><a th:href="@{memberDetail(memberNum=${dto.memberNum})}">[[${dto.memberName}]]</a></td>
+                        <td>[[${dto.memberId}]]</td>
+                        <td>[[${#dates.format(dto.memberRegistDate,'yyyy-MM-dd')}]]</td>
+                        <td>
+                            <input type="checkbox" name="memDels" th:value="${dto.memberNum}"/>
+                        </td>
+                    </tr>
+                    <tr align="center"><td colspan="5" class="pagination-cell">
+                    <th:block th:if="${page <= 1}">
+                    [이전]
+                    </th:block>
+                    <th:block th:if="${page > 1}">
+                        <a th:href="@{memberList(page=${page - 1}, searchWord=${searchWord})}">[이전]</a>
+                    </th:block>
+                    <th:block th:each=" i : ${#numbers.sequence(startPage, endPage)}">
+                        <a th:href="@{memberList(page=${i}, searchWord=${searchWord})}">[[${i}]]</a>
+                    </th:block>
+                    <th:block th:if="${page >= maxPage}">
+                        [다음]
+                    </th:block>
+                    <th:block th:if="${page < maxPage}">
+                        <a th:href="@{memberList(page=${page + 1}, searchWord=${searchWord})}">[다음]</a>
+                    </th:block>
+                    </td></tr>
+                    </table>
+                </form>
+
+            </span>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png"
+                                                                       class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png"
+                                                                   class="nav-icon"></a>
+            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png"
+                                                                    class="nav-icon"></a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
