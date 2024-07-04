@@ -1,9 +1,11 @@
 package com.example.companion.controller;
 
 import com.example.companion.command.LoginCommand;
+import com.example.companion.service.CookiesService;
 import com.example.companion.service.login.IdcheckService;
 import com.example.companion.service.login.UserLoginService;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,15 @@ public class LoginController {
     @Autowired
     UserLoginService userLoginService;
 
+    @Autowired
+    CookiesService cookiesService;
 
+
+    @GetMapping("/loginForm")
+    public String loginForm(@ModelAttribute("loginCommand") LoginCommand loginCommand, Model model, HttpServletRequest request) {
+        cookiesService.execute(request, model);
+        return "loginForm";
+    }
 
     @PostMapping("userIdCheck")
     //html문서가 아닌 텍스트를 전달하기 위해서는 @ResponseBody필요
@@ -46,7 +56,7 @@ public class LoginController {
         userLoginService.execute(loginCommand, session, result, response);
         //오류가 있으면 index.html페이지 열리도록 구현.
         if(result.hasErrors()){
-            return "index";
+            return "loginForm";
 
         }
         return "redirect:/";
@@ -65,7 +75,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "item.login", method = RequestMethod.GET)
-    public String item(LoginCommand loginCommand){
+    public String item(@ModelAttribute("loginCommand") LoginCommand loginCommand, Model model, HttpServletRequest request) {
+        cookiesService.execute(request, model);
         return "login";
     }
     @RequestMapping(value = "item.login", method = RequestMethod.POST)

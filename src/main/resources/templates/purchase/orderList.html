@@ -1,35 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Companion</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <th:block th:replace="common/mainCommon :: head"></th:block>
     <link rel="stylesheet" href="/static/css/purchase/orderList.css">
 </head>
 <body>
-<img src="/static/images/background.png" id="back-img">
-<div class="companion-container">
-    <div class="left-container">
-        <img src="/static/images/logo.png" id="logo">
-        <img src="/static/images/main-text.png" id="main-text">
-        <div class="search-container">
-            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
-            <form id="searchForm" class="search-form">
-                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
-                <button type="submit" class="search-button" aria-label="검색"></button>
-            </form>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div class="header">
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+    <div class="header">
             <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
             <h3>주문목록</h3>
         </div>
-
         <div class="index">
             <div class="order-list">
                 <div class="order-list-header">
@@ -114,16 +94,7 @@
                 </div>
             </div>
         </div>
-        <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png"
-                                                                       class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png"
-                                                                   class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png"
-                                                                    class="nav-icon"></a>
-        </div>
-    </div>
-</div>
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 <script src="/static/js/test.js"></script>
 </body>
 </html>
