@@ -14,7 +14,7 @@
 
 <div class="header">
     <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-    <h3>페이지명</h3>
+    <h3 th:text="${session.auth != null ? session.auth.grade == 'emp' ? '직원 페이지' : '회원 페이지' : '로그인'}"></h3>
 </div>
 
 <div class="index">
@@ -47,7 +47,7 @@
 
 <!-- 로그인이 되지 않았을 떄 -->
 <div th:if="${session.auth == null}" >
-    <div id="login-form">
+    <div class="loginForm">
         <form action="/login/login" method="post" th:object="${loginCommand}">
             <input type="text" id="login-id" class="input-style" name="userId" placeholder="아이디" th:value="${loginCommand.userId}"/><br/>
             <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span><br/>

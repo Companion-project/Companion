@@ -4,13 +4,8 @@
     <th:block th:replace="common/mainCommon :: head"></th:block>
     <meta charset="UTF-8">
     <title>Companion</title>
+    <link rel="stylesheet" href="/static/css/memberRegist/userForm.css">
 
-
-<link rel="stylesheet" href="/static/css/memberRegist/userForm.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -28,59 +23,59 @@ th:object, th:value를 통해 오류가 있어 되돌아 올 경우 입력값을
 
 <div class="index">
     <form action="userRegist" class="regist-form" method="post" id="frm" th:object="${memberCommand}">
-    회원아이디<br/>
-    <input type="text" name="memberId" id="memberId" class="input-style"/><br/>
-    <span style="color:red; font-size: 14px;" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span>
+        회원아이디<br/>
+        <input type="text" name="memberId" id="memberId" class="input-style"/><br/>
+        <span style="color:red; font-size: 14px;" th:if="${#fields.hasErrors('memberId')}" th:errors="*{memberId}"></span>
 
-    <span id='idCheck'></span><br/><br/>
+        <span id='idCheck'></span><br/>
 
-    회원비밀번호 <br/>
-    <input type="password" name="memberPw" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></span><br/>
+        회원비밀번호 <br/>
+        <input type="password" name="memberPw" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberPw')}" th:errors="*{memberPw}"></span><br/>
 
-    회원비밀번호 확인 <br/>
-    <input type="password" name="memberPwCon" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberPwCon')}" th:errors="*{memberPwCon}"></span><br />
+        회원비밀번호 확인 <br/>
+        <input type="password" name="memberPwCon" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberPwCon')}" th:errors="*{memberPwCon}"></span><br />
 
-    회원이름 <br/>
-    <input type="text" name="memberName" th:value="${memberCommand.memberName}" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></span><br/>
+        회원이름 <br/>
+        <input type="text" name="memberName" th:value="${memberCommand.memberName}" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></span><br/>
 
-    회원주소 <br/>
-    <input type="text" name="memberAddr" id="sample4_roadAddress" onclick="execDaumPostcode();" th:value="${memberCommand.memberAddr}" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberAddr')}" th:errors="*{memberAddr}"></span><br/>
+        회원주소 <br/>
+        <input type="text" name="memberAddr" id="sample4_roadAddress" onclick="execDaumPostcode();" th:value="${memberCommand.memberAddr}" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberAddr')}" th:errors="*{memberAddr}"></span><br/>
 
-    회원상세주소 <br/>
-    <input type="text" name="memberAddr2" th:value="${memberCommand.memberAddr2}" class="input-style"/><br/><br/>
+        회원상세주소 <br/>
+        <input type="text" name="memberAddr2" th:value="${memberCommand.memberAddr2}" class="input-style"/><br/><br/>
 
-    우편번호 <br/>
-    <input type="text" name="memberPost" id="sample4_postcode" th:value="${memberCommand.memberPost}" class="input-style"/><br/>
-    <div class="input-r">
-    성별 <br/>
-    <input type="radio" name="memberGender" value="M" id="gender-male" class="input-style">
-    <label for="gender-male">남자</label>
-    <input type="radio" name="memberGender" value="F" id="gender-female" class="input-style">
-    <label for="gender-female">여자</label><br/>
-    </div>
+        우편번호 <br/>
+        <input type="text" name="memberPost" id="sample4_postcode" th:value="${memberCommand.memberPost}" class="input-style"/><br/>
+        <div class="input-r">
+            성별 <br/>
+            <input type="radio" name="memberGender" value="M" id="gender-male" class="input-style">
+            <label for="gender-male">남자</label>
+            <input type="radio" name="memberGender" value="F" id="gender-female" class="input-style">
+            <label for="gender-female">여자</label><br/>
+        </div>
 
-    연락처1 <br/>
-    <input type="tel" name="memberPhone1" th:value="${memberCommand.memberPhone1}" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberPhone1')}" th:errors="*{memberPhone1}"></span><br/>
+        연락처1 <br/>
+        <input type="tel" name="memberPhone1" th:value="${memberCommand.memberPhone1}" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberPhone1')}" th:errors="*{memberPhone1}"></span><br/>
 
-    연락처2 <br/>
-    <input type="tel" name="memberPhone2" th:value="${memberCommand.memberPhone2}" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberPhone2')}" th:errors="*{memberPhone2}"></span><br/>
+        연락처2 <br/>
+        <input type="tel" name="memberPhone2" th:value="${memberCommand.memberPhone2}" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberPhone2')}" th:errors="*{memberPhone2}"></span><br/>
 
-    이메일 <br/>
-    <input type="email" name="memberEmail" id="memberEmail" th:value="${memberCommand.memberEmail}" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
-    <span id='emailCheck'></span><br/><br/>
+        이메일 <br/>
+        <input type="email" name="memberEmail" id="memberEmail" th:value="${memberCommand.memberEmail}" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberEmail')}" th:errors="*{memberEmail}"></span>
+        <span id='emailCheck'></span><br/><br/>
 
-    생년월일 <br/>
-    <input type="date" name="memberBirth" th:value="${#dates.format(memberCommand.memberBirth, 'yyyy-MM-dd')}" class="input-style"/><br/>
-    <span style="color:red" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></span><br/><br/>
+        생년월일 <br/>
+        <input type="date" name="memberBirth" th:value="${#dates.format(memberCommand.memberBirth, 'yyyy-MM-dd')}" class="input-style"/><br/>
+        <span style="color:red" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></span><br/><br/>
 
-    <input type="submit" id="button" value="가입하기" class="input-style"/>
+        <input type="submit" id="button" value="가입하기" class="input-style"/>
     </form>
 </div>
 
