@@ -170,6 +170,7 @@ body {
     width: 100%;
     max-width: 100%;
     overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
+    margin-bottom: 80px;
 }
 
 
@@ -208,6 +209,7 @@ body {
 @media screen and (max-width: 1024px) {
     #back-img {
         display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
+
 
     }
     body {
