@@ -26,7 +26,7 @@ public class MainController {
          //index.html페이지가 열릴 때 상품정보를 가지고 와야 합니다.
 
          //index.html페이지가 열릴 때 쿠키가 있는지 확인해야겠죠..
-         cookiesService.execute(request, model); //로그인꺼임
+         //cookiesService.execute(request, model); 로그인꺼임
          mainGoodsListService.execute(model);
         return "index";
     }

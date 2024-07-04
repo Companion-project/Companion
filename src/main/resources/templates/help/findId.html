@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="common/mainCommon :: head"></th:block>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Companion</title>
+    <link rel="stylesheet" href="/static/css/membership/myPw.css">
 </head>
 <body>
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>아이디 찾기</h3>
+</div>
+<div class="index">
 <form action="findId" name="frm" id="frm" method="post">
-    <table border="1" width="600" align="center">
-        <tr>
-            <th>전화번호</th>
-            <td><input type="text" name="userPhone"/></td>
-        </tr>
-        <tr>
-            <th>이메일</th>
-            <td><input type="email" name="userEmail"/></td>
-        </tr>
-        <th colspan="2"><input type="submit" value="아이디 찾기"/></th>
-    </table>
-
+    <div class="area">
+    전화번호<br/><input type="text" name="userPhone"/><br/>
+    이메일<br/><input type="email" name="userEmail"/><br/><br/>
+    <input type="submit" id="button" value="아이디 찾기"/>
+    </div>
 </form>
+</div>
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 
 </body>
 </html>
