@@ -13,12 +13,10 @@ $(function(){
 });
 
 function contentOpen(id){
-    if($("."+id).css("display") == "none"){ // 답글이 안보인 다면
-        $("."+id).css("display", "");  // 답글을 보이게 하고
-        $("#"+id).text("답변닫기"); // 버튼은 닫기로 변경
-    }else{  // 답글이 보이면 안보이게 하고
+    if($("."+id).css("display") == "none"){ // 문의 내용 및 답변 보이지 않을시
+        $("."+id).css("display", "");  // 보이게하기
+    }else{  // 문의 내용 및 답변 보이면 안보이게 하고
         $("."+id).css("display", "none");
-        $("#"+id).text("답변열기");  // 버튼은 열기로 변경
     }
 }
 
