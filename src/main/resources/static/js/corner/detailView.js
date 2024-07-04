@@ -4,45 +4,63 @@ $(function() {
 
     //수량
     document.getElementById('decrement').addEventListener('click', function() {
-        let qty = document.getElementById('qty');
-        qty.value = parseInt(qty.value) - 1;
-        totalPrice();
+        let qty;
+        if(stock > 0) {
+            qty = document.getElementById('qty');
+            qty.value = parseInt(qty.value) - 1;
+            totalPrice();
+        }else{
+            alert("품절입니다");
+        }
     });
     document.getElementById('increment').addEventListener('click', function() {
-        let qty = document.getElementById('qty');
-        qty.value = parseInt(qty.value) + 1;
-        totalPrice();
+        let qty;
+        if(stock > 0) {
+            qty = document.getElementById('qty');
+            qty.value = parseInt(qty.value) + 1;
+            totalPrice();
+        }else{
+            alert("품절입니다");
+        }
     });
     document.getElementById('qty').addEventListener('input', function() {
-        let qty = document.getElementById('qty');
-        if (isNaN(qty.value) || qty.value === '') {
-            qty.value = 0;
+        let qty
+        if(stock > 0) {
+            qty = document.getElementById('qty');
+            if (isNaN(qty.value) || qty.value === '') {
+                qty.value = 0;
+            }
+            totalPrice();
+        }else{
+            alert("품절입니다");
         }
-        totalPrice();
     });
 
     //수량 변경시 총 가격 변경
     function totalPrice () {
         const money = goodsPrice * $("#qty").val();
-        const moneyFormatter = new Intl.NumberFormat('ko-KR', {style: 'currency', currency: 'KRW'});
-        const formattedMoney = moneyFormatter.format(money);
-        $("#tot").text(formattedMoney + '원');
+        $("#tot").text(money.toLocaleString() + '원');
     }
 
     //바로구매
     $("#buyItem").click(function () {
-        if (auth == null) {
+        if(stock <= 0){
+            alert("품절입니다");
+        }
+        else if (auth == null) {
             window.open("/login/item.login", "login", "width=315, height=200,top = 100, left=100");
         } else if (stock > 0 && stock >= $("#qty").val()) {
             location.href = "../buyItem?goodsNum=" + goodsNum + "&qty=" + $("#qty").val();
         } else {
-            alert("재고가 부족합니다.");
+            alert("재고가 부족합니다");
         }
     });
 
     //장바구니
     $("#cartBtn").click(function () {
-        if (auth == null) {
+        if(stock <= 0){
+            alert("품절입니다");
+        } else if (auth == null) {
             window.open("/login/item.login", "login", "width=315, height=200,top = 100, left=100");
         } else if (stock > 0 && stock >= $("#qty").val()) {
             $.ajax({
