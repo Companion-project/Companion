@@ -5,8 +5,6 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <meta charset="UTF-8">
     <title>Companion</title>
-
-
     <link rel="stylesheet" href="/static/css/membership/myModify.css">
 
 </head>
@@ -38,20 +36,22 @@
 <span style="color:red" th:if="${#fields.hasErrors('memberAddr')}" th:errors="*{memberAddr}"></span><br/>
 
 회원상세주소<br/>
-    <input type="text" class="input-style" name="memberAddr2"  th:value="${memberCommand.memberAddr2}"><br/>
+    <input type="text" class="input-style" name="memberAddr2"  th:value="${memberCommand.memberAddr2}"><br/><br/>
 
 우편번호<br/>
     <input type="text" class="input-style" name="memberPost" id="sample4_postcode" readonly="readonly" th:value="${memberCommand.memberPost}"/><br />
-
+<div class="input-r">
 성별<br/>
     <input type="radio" name="memberGender" value="M" th:checked="${memberCommand.memberGender == 'M' or memberCommand.memberGender == null}">남자
      <input type="radio" name="memberGender" value="F" th:checked="${memberCommand.memberGender == 'F'}">여자<br/>
+
+</div>
 연락처1<br/>
     <input type="tel" class="input-style" name="memberPhone1"  th:value="${memberCommand.memberPhone1}"><br/>
 <span style="color:red" th:if="${#fields.hasErrors('memberPhone1')}" th:errors="*{memberPhone1}"></span><br/>
 
 연락처2<br/>
-    <input type="tel" class="input-style" name="memberPhone2"  th:value="${memberCommand.memberPhone2}"><br/>
+    <input type="tel" class="input-style" name="memberPhone2"  th:value="${memberCommand.memberPhone2}"><br/><br/>
 
 이메일<br/>
     <input type="email" class="input-style" name="memberEmail" id="memberEmail"  th:value="${memberCommand.memberEmail}"><br/>

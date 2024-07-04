@@ -49,7 +49,7 @@
 <div th:if="${session.auth == null}" >
     <div id="login-form">
         <form action="/login/login" method="post" th:object="${loginCommand}">
-            <input type="text" class="input-style" name="userId" placeholder="아이디" th:value="${loginCommand.userId}"/><br/>
+            <input type="text" id="login-id" class="input-style" name="userId" placeholder="아이디" th:value="${loginCommand.userId}"/><br/>
             <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span><br/>
 
             <input type="password" class="input-style" name="userPw" placeholder="비밀번호" /><br/>
@@ -62,13 +62,14 @@
             <label for="idStore">아이디 저장</label><br/><br/>
 
             <input type="submit" id="loginButton" value="로그인"><br/>
+        </div>
                 <div class="userLoginInfo">
                     <a href="/register/userWrite">회원가입</a> |
-                    <a href="/help/findId">아이디</a>|
+                    <a href="/help/findId">아이디 찾기</a>|
                     <a href="/help/findPassword">비밀번호 찾기</a>
                 </div>
         </form>
-    </div>
+
 </div>
 </div>
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
