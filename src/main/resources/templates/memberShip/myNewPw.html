@@ -4,7 +4,7 @@
     <th:block th:replace="common/mainCommon :: head"></th:block>
     <meta charset="UTF-8">
     <title>Companion</title>
-    <link rel="stylesheet" href="/static/css/membership/myNewPw.css">
+    <link rel="stylesheet" href="/static/css/membership/myPw.css">
 
 </head>
 <body>
@@ -17,6 +17,7 @@
 <div class="index">
 
     <form action="myPwUpdate" method="post" name="from" id="frm">
+        <div class="area">
         현재비밀번호 <br/> <input type="password" name="oldPw" id="oldPw"/>
         <span id="pwErr"></span><br/>
 
@@ -26,6 +27,7 @@
         새 비밀번호 확인 <br/> <input type="password" name="newPwCon" id="newPwCon"/>
         <span id="pwConErr"></span><br/><br/>
         <input type="submit" id="button" value="비밀번호 변경"/>
+        </div>
     </form>
 </div>
 <!-- 여기까지 -->

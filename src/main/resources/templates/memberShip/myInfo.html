@@ -23,7 +23,10 @@
         상세주소<br/> <div class="value">[[${memberCommand.memberAddr2}]]</div><br/>
         우편번호 <br/> <div class="value">[[${memberCommand.memberPost}]]</div><br/>
         연락처1 <br/> <div class="value">[[${memberCommand.memberPhone1}]]</div><br/>
-        연락처2<br/><div class="value">[[${memberCommand.memberPhone2}]]</div><br/>
+        연락처2<br/><div th:if="${memberCommand.memberPhone2 != null and !#strings.isEmpty(memberCommand.memberPhone2)}"
+                      class="value" th:text="${memberCommand.memberPhone2}"></div>
+        <div th:unless="${memberCommand.memberPhone2 != null and !#strings.isEmpty(memberCommand.memberPhone2)}"
+             class="value"></div><br/>
         성별 <br/>
         <span th:if="${memberCommand.memberGender=='M'}" th:text="남자"></span>
         <span th:if="${memberCommand.memberGender=='F'}">여자</span><br/><br/>

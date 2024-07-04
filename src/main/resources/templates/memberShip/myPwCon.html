@@ -4,7 +4,7 @@
     <th:block th:replace="common/mainCommon :: head"></th:block>
     <meta charset="UTF-8">
     <title>Companion</title>
-    <link rel="stylesheet" href="/static/css/membership/myPwCon.css">
+    <link rel="stylesheet" href="/static/css/membership/myPw.css">
 
 </head>
 <body>
@@ -16,10 +16,13 @@
 </div>
 <div class="index">
     <form action="memberPwModify" method="post" id="frm" name="frm">
+        <div class="area">
+
         비밀번호 확인 <br/>
         <input type="password" name="memberPw" required = "required"/><br/><br/>
         <input type="submit" id="button" value="확인"/>
         <div style="color:red">[[${errPw}]]</div>
+        </div>
     </form>
 </div>
 <!-- 여기까지 -->

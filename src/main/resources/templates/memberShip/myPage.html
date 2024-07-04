@@ -16,8 +16,10 @@
 </div>
 <div class="index">
     <div class="myPage-top">
-        <span th:text="${session.memberName} + '님 안녕하세요!'">마이페이지입니다.</span>
-    </div>
+<span>
+    <span class="bold-text" th:text="${authInfoDTO.userName}"></span>님의 마이페이지입니다.
+</span>
+</div>
     <ul>
         <li><a th:href="@{/mypage/myDetail}">내정보 보기</a></li>
         <li><a th:href="@{/mypage/memberUpdate}">내정보 수정</a></li>

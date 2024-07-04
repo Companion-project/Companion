@@ -38,6 +38,7 @@ public class UserLoginService {
                           System.out.println("비밀번호가 일치");
                           //아이디, 비밀번호 일치 -> session 로그인 정보 저장
                           session.setAttribute("auth", dto);
+                          session.setAttribute("authInfoDTO", dto);
                           // 로그인이 정상적으로 되면 쿠키가 만들어지도록 합니다.
                           // 먼저 아이디 저장을 하기위 해 idStore를 읽어 오겠습니다.
                           //아이디 저장에 체크가 된 경우
