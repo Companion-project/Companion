@@ -1,38 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!-- 리뷰 정보를 ajax를 이용해서 json으로 받아오겠습니다. -->
+    <th:block th:replace="common/mainCommon :: head"></th:block>
+    <link rel="stylesheet" href="/static/css/review/goodsReviewUpdate.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 </head>
 <body>
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>주문수정</h3>
+</div>
+<div class="index">
     <div id="container"></div>
-    <table align="center" width="600">
-        <caption>상품 상세보기</caption>
-        <tr><th width="150">상품번호</th><td>[[${goodsCommand.goodsNum }]]</td></tr>
-        <tr><th>상품명</th><td>[[${goodsCommand.goodsName }]]</td></tr>
-        <tr><th>상품가격</th><td>[[${goodsCommand.goodsPrice }]]</td></tr>
-        <tr><th>배송비</th><td>[[${goodsCommand.deliveryCost }]]</td></tr>
-        <tr><th>상품설명</th><td>
-            <span th:utext="${#strings.replace(goodsCommand.goodsContent,newLine,'&lt;br /&gt;')}"></span>
-        </td></tr>
-        <tr><th>조회수</th><td>[[${goodsCommand.visitCount }]]</td></tr>
-        <tr><td colspan="2">
-            <img th:src="|/static/upload/${goodsCommand.goodsMainStore }|" />
-        </td></tr>
-        <tr><td colspan="2">
-            <th:block th:each="goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-') }">
-                <img th:src="|/static/upload/${goodsImage}|" /><br />
+    <div class="product-details">
+        <h2 class="product-details-title">상품 정보</h2>
+        <div class="product-info">
+            <div class="info-row">
+                <div class="info-label">상품번호</div>
+                <div class="info-value" th:text="${goodsCommand.goodsNum}"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">상품명</div>
+                <div class="info-value" th:text="${goodsCommand.goodsName}"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">상품가격</div>
+                <div class="info-value" th:text="${goodsCommand.goodsPrice}"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">배송비</div>
+                <div class="info-value" th:text="${goodsCommand.deliveryCost}"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">상품설명</div>
+                <div class="info-value" th:utext="${#strings.replace(goodsCommand.goodsContent,newLine,'&lt;br /&gt;')}"></div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">조회수</div>
+                <div class="info-value" th:text="${goodsCommand.visitCount}"></div>
+            </div>
+        </div>
+        <div class="product-images">
+            <img th:src="@{|/static/upload/${goodsCommand.goodsMainStore}|}" alt="Main Product Image" />
+            <th:block th:each="goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-')}">
+                <img th:src="@{|/static/upload/${goodsImage}|}" alt="Product Image"/>
             </th:block>
-        </td></tr>
-    </table>
+        </div>
+    </div>
+</div>
     <script th:inline="javascript">
         /*<![CDATA[*/
         const reviewNum = [[${reviewNum}]];
         /*]]>*/
     </script>
     <script src="/static/js/review/goodsReviewUpdate.js"></script>
+    <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>
