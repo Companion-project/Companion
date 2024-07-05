@@ -58,7 +58,7 @@ th:object, th:value를 통해 오류가 있어 되돌아 올 경우 입력값을
             <label for="gender-female">여자</label><br/>
         </div>
 
-        연락처1 <br/>
+        연락처1<span class="phone1">(필수입력)</span> <br/>
         <input type="tel" name="memberPhone1" th:value="${memberCommand.memberPhone1}" class="input-style"/><br/>
         <span style="color:red" th:if="${#fields.hasErrors('memberPhone1')}" th:errors="*{memberPhone1}"></span><br/>
 

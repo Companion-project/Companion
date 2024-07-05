@@ -50,10 +50,10 @@
     <div class="loginForm">
         <form action="/login/login" method="post" th:object="${loginCommand}">
             <input type="text" id="login-id" class="input-style" name="userId" placeholder="아이디" th:value="${loginCommand.userId}"/><br/>
-            <span th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span><br/>
+            <span style="color:red" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span><br/>
 
             <input type="password" class="input-style" name="userPw" placeholder="비밀번호" /><br/>
-            <span th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></span><br/>
+            <span style="color:red" th:if="${#fields.hasErrors('userPw')}" th:errors="*{userPw}"></span><br/>
 
             <input type="checkbox" name="autoLogin" id="autoLogin"/>
             <label for="autoLogin">자동로그인</label>

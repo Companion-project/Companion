@@ -12,7 +12,6 @@ public class LoginCommand {
     String userId;
 
     @NotEmpty(message = "비밀번호를 입력하세요.")
-    @Size(min = 8, max = 20)
     String userPw;
 
     Boolean autoLogin;
