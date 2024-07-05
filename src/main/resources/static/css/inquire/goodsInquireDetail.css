@@ -1,0 +1,72 @@
+.index {
+    text-align: center;
+
+}
+.inquire-container{
+    padding: 0 5px;
+}
+
+.inquire-table-row, .inquire-info-table-row{
+    display: table;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px 0;
+    table-layout: fixed;
+}
+
+.inquire-table-row {
+    border-top: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+}
+
+.inquire-product,.inquire-product-number, .inquire-kind, .inquire-memberId, .inquire-date {
+    display: table-cell;
+}
+.inquire-product {
+    width: 160px;
+}
+.inquire-product-number {
+    width: 150px;
+}
+.inquire-kind {
+    width: 125px;
+}
+.inquire-memberId {
+    width: 80px;
+}
+.inquire-date {
+    width: 85px;
+}
+
+.inquire, .answer {
+    text-align: left;
+}
+.inquire-title, .inquire-content, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: none;
+    font-size: 14px;
+}
+
+textarea {
+    width: 100%;
+}
+
+input[type=submit] {
+    background-color: rgba(252, 107, 112, 0.8);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #fc6b70;
+}
+
