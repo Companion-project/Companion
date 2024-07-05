@@ -29,6 +29,7 @@
       cursor: pointer;
       transition: background-color 0.3s;
       width: 500px;
+      margin-left: 12px;
     }
 .input-r{
     margin: 15px 0px;
@@ -36,4 +37,8 @@
 
 .regist-form{
     margin-left: 30px;
+}
+
+.phone1{
+    color: red;
 }
