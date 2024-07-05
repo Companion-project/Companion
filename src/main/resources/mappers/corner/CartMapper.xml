@@ -38,6 +38,7 @@ select goods_Num , goods_name , goods_price ,goods_content , delivery_cost , emp
        ,goods_regist , goods_main_store ,goods_main_store_img , goods_images
        ,goods_images_img , visit_count ,update_Emp_Num , goods_Update_Date, goods_category
 from goods
+order by goods_regist desc
 </select>
 
     <resultMap type="com.example.companion.domain.CartGoodsDTO" id="CartListResultMap">
