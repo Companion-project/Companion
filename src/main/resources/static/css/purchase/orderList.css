@@ -64,7 +64,6 @@
 
 .order-status a, .order-status span {
     font-size: 12px;
-    color: #007bff;
     text-decoration: none;
     margin-left: 5px;
     white-space: nowrap;
@@ -72,4 +71,24 @@
 
 .order-status a:hover {
     text-decoration: underline;
+}
+
+.payment-request {
+    color: #FF0000; /* 결제하기 */
+}
+
+.payment-cancelled {
+    color: #F06292; /* 결제취소 */
+}
+
+.status-ongoing {
+    color: #A621C5; /* 상품 준비 중 */
+}
+
+.status-complete {
+    color: #00CC00; /* 주문 확정 */
+}
+
+.status-confirmed {
+    color: #009900; /* 구매 확정 */
 }
