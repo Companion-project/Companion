@@ -1,69 +1,111 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>companion</title>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-<script src="/static/js/goods/goodsModify.js"></script>
+	<th:block th:replace="common/mainCommon :: head"></th:block>
+	<link rel="stylesheet" href="/static/css/goods/goodsModify.css">
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+	<script src="/static/js/goods/goodsModify.js"></script>
 </head>
 <body>
-<form action="goodsUpdate" method="post" name="frm" id="frm" th:object="${goodsCommand}" enctype="multipart/form-data" >
-<table border=1 align="center" width="600" >
-<caption>상품 상세보기</caption>
-<tr><th width="150">상품번호</th>
-	<td><input type="text" name="goodsNum" th:field="*{goodsNum}" readonly="readonly"/></td></tr>
-<tr><th>상품명</th>
-	<td><input type="text" name="goodsName"  th:field="*{goodsName}" /><br />
-		<span style="color:red" th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span></td></tr>
-
-<tr><th>카테고리</th>
-    <td>
-        <select id="goodsCategory" name="goodsCategory" th:field="*{goodsCategory}" required>
-            <option value="">카테고리 선택</option>
-            <option value="사료">사료</option>
-            <option value="간식">간식</option>
-            <option value="용품">용품</option>
-        </select>
-    </td>
-</tr>
-
-<tr><th>상품가격</th>
-	<td><input type="number" name="goodsPrice" th:field="*{goodsPrice}"/><br />
-		<span style="color:red" th:if="${#fields.hasErrors('goodsPrice')}"  th:field="*{goodsPrice}"></span></td></tr>
-<tr><th>배송비</th>
-	<td><input type="number" name="deliveryCost" th:field="*{deliveryCost}"/><br />
-		<span style="color:red" th:if="${#fields.hasErrors('deliveryCost')}"  th:field="*{deliveryCost}"></span></td></tr>
-<tr><th>상품설명</th>
-	<td><textarea rows="5" cols="50" name="goodsContent">[[${goodsCommand.goodsContent}]]</textarea><br />
-		<span style="color:red" th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></span></td></tr>
-<tr><th>조회수</th>
-	<td><input type="number"  min = "0" name="visitCount"  th:field="*{visitCount}"/></td></tr>
-<tr><th>등록한 사원</th><td>[[${goodsCommand.empNum }]]</td></tr>
-<tr><th>등록일</th><td>[[${#dates.format(goodsCommand.goodsRegist,'yyyy-MM-dd' )}]]</td></tr>
-<tr><th>마지막 수정 사원</th><td>[[${goodsCommand.updateEmpNum }]]</td></tr>
-<tr><th>마지막 수정일</th><td>[[${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd' )}]]</td></tr>
-
-<tr><th>메인이미지</th>
-	<td><input type="file" name="goodsMainStore" id="mainFile" style="display:none"/>
-		<span id="main">[[${goodsCommand.goodsMainStoreImg}]]</span>
-		<button type="button" th:attr="onclick=|fileDel('${goodsCommand.goodsMainStoreImg}',
-		                                                '${goodsCommand.goodsMainStore}',
-		                                                 this,'main')|">삭제</button>
-		<br/><span style="color:red">[[${error}]]</span>
-	</td>
-</tr>
-<tr><th>설명이미지</th>
-	<td><div th:each="file, idx : ${#strings.arraySplit(goodsCommand.goodsImagesImg,'-')}">
-		[[${file}]]<button type="button" th:attr="onclick=|fileDel('${file}',
-		                                                           '${#strings.arraySplit(goodsCommand.goodsImages,'-')[idx.index]}'
-		                                                            ,this)|">삭제</button>
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<div class="header">
+	<div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+	<h3>상품 수정</h3>
+</div>
+<div class="index">
+	<form action="goodsUpdate" method="post" name="frm" id="frm" th:object="${goodsCommand}" enctype="multipart/form-data" class="goods-update-form">
+		<div class="goods-details-container">
+			<h2 class="goods-details-title">상품 상세보기</h2>
+			<div class="goods-info">
+				<div class="info-row">
+					<div class="info-label">상품번호</div>
+					<div class="info-value"><input type="text" name="goodsNum" th:field="*{goodsNum}" readonly="readonly"/></div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">상품명</div>
+					<div class="info-value">
+						<input type="text" name="goodsName" th:field="*{goodsName}" />
+						<span class="error-message" th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span>
+					</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">카테고리</div>
+					<div class="info-value">
+						<select id="goodsCategory" name="goodsCategory" th:field="*{goodsCategory}" required>
+							<option value="">카테고리 선택</option>
+							<option value="사료">사료</option>
+							<option value="간식">간식</option>
+							<option value="용품">용품</option>
+						</select>
+					</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">상품가격</div>
+					<div class="info-value">
+						<input type="number" name="goodsPrice" th:field="*{goodsPrice}"/>
+						<span class="error-message" th:if="${#fields.hasErrors('goodsPrice')}" th:errors="*{goodsPrice}"></span>
+					</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">배송비</div>
+					<div class="info-value">
+						<input type="number" name="deliveryCost" th:field="*{deliveryCost}"/>
+						<span class="error-message" th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></span>
+					</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">상품 설명</div>
+					<div class="info-value">
+						<textarea rows="5" cols="50" name="goodsContent">[[${goodsCommand.goodsContent}]]</textarea>
+						<span class="error-message" th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></span>
+					</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">조회수</div>
+					<div class="info-value"><input type="number" min="0" name="visitCount" th:field="*{visitCount}"/></div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">등록한 사원</div>
+					<div class="info-value">[[${goodsCommand.empNum}]]</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">등록일</div>
+					<div class="info-value">[[${#dates.format(goodsCommand.goodsRegist,'yyyy-MM-dd')}]]</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">마지막 수정 사원</div>
+					<div class="info-value">[[${goodsCommand.updateEmpNum}]]</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">마지막 수정일</div>
+					<div class="info-value">[[${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}]]</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">메인 이미지</div>
+					<div class="info-value">
+						<input type="file" name="goodsMainStore" id="mainFile" class="file-input" style="display:none"/>
+						<span id="main">[[${goodsCommand.goodsMainStoreImg}]]</span>
+						<button type="button" th:attr="onclick=|fileDel('${goodsCommand.goodsMainStoreImg}', '${goodsCommand.goodsMainStore}', this,'main')|" class="delete-button">삭제</button>
+						<span class="error-message">[[${error}]]</span>
+					</div>
+				</div>
+				<div class="info-row">
+					<div class="info-label">설명 이미지</div>
+					<div class="info-value">
+						<div th:each="file , idx : ${#strings.arraySplit(goodsCommand.goodsImagesImg,'-')}">
+							[[${file}]]<button type="button" th:attr="onclick=|fileDel('${file}'
+											 ,'${#strings.arraySplit(goodsCommand.goodsImages,'-')[idx.index]}'
+											 , this)|" class="delete-button">삭제</button>
+						</div>
+						<input type="file" name="goodsImages" multiple="multiple" class="file-input"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions">
+				<input type="submit" value="수정완료" class="submit-button"/>
+			</div>
 		</div>
-		<input type = "file" name="goodsImages" multiple="multiple"/>
-	</td>
-</tr>
-
-<tr><th colspan="2"><input type="submit" value="수정완료" /></th></tr>
-</table>
-</form>
+	</form>
+	<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>
