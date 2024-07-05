@@ -2,21 +2,16 @@
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
-      border-radius: 5px;
-      outline: none;
-      transition: border-color 0.3s;
-      width: 500px;
-
+      border-radius: 10px;
+      width: 400px;
     }
 
 .info{
-    margin-bottom: 80px;
-    margin-left: 20px;
+    padding-left: 90px;
 }
 
 .index{
-    margin-left: 10px;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 
