@@ -1,0 +1,148 @@
+/* 문의 리스트 */
+.inquire-list-frame {
+    font-size: 12px;
+}
+
+.inquire-notice {
+    padding: 10px 0 10px 0;
+    font-size: 10px;
+    color: #757575;
+}
+
+.inquire-write-btn {
+    margin-bottom: 10px;
+    width: 120px;
+    height: 30px;
+    background-color: #333333;
+    color: white;
+    border-style: none;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* 문의 리스트 헤더 및 문의 기본 정보*/
+.inquire-first-row , .inquire-info{
+    text-align: center;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 10px 0 10px 0;
+}
+
+/* 문의 리스트 헤더 */
+.inquire-first-row {
+    border-top: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+}
+
+/* 문의 기본 정보 */
+ .inquire-info {
+    border-bottom: 1px solid #eaeced;
+}
+
+.inquire-info > .inquire-title {
+    cursor: pointer;
+}
+ul, li{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 답변상태, 문의유형, 제목, 작성자, 작성일 */
+.inquire-status-frame, .inquire-kind, .inquire-title, .inquire-memberId, .inquire-date{
+    display: table-cell;
+    align-content: center;
+    height: 25px;
+}
+/* 답변 상태 */
+.inquire-status-frame {
+    width: 65px;
+}
+/* 문의 유형 */
+.inquire-kind {
+    width: 125px;
+}
+/* 문의 제목 */
+.inquire-title{
+    width: auto;
+    overflow: hidden;
+    vertical-align: top;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+/* 작성자 */
+.inquire-memberId{
+    width: 80px;
+}
+/* 작성일 */
+.inquire-date, .inquire-answer-date {
+    width: 85px;
+}
+/* 숨겨진 q&a와 답변 프레임 */
+.inquire-hide-frame {
+    text-align: left;
+    padding: 10px 5px 10px 5px;
+    background-color: #fafafb;
+    border-bottom: 1px solid #eaeced;
+}
+/* 숨겨진 q&a 제목*/
+.inquire-hide-title {
+    font-weight: 600;
+    padding-left:65px
+}
+/* 숨겨진 q&a 내용 */
+.inquire-hide-content {
+    padding: 10px 0 10px 65px;
+}
+/* q&a 수정 삭제 */
+.inquire-update-delete-frame {
+    padding: 5px 0 5px 65px;
+    font-size: 10px;
+    color: #757575;
+}
+.inquire-update-delete-frame > button {
+    padding: 0px 2px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 10px;
+    color: #757575;
+}
+/* 답변 프레임 */
+.inquire-answer-list-frame{
+    display: table;
+    border-top: 1px solid #eaeced;
+    width: 435px;
+    padding: 10px 0 10px 0;
+    margin-left:65px;
+}
+/* 답변 */
+.inquire-answer, .inquire-answer-content, .inquire-answer-date {
+    display: table-cell;
+}
+/* 답변 아이콘 및 글자 */
+.inquire-answer {
+    width: 50px;
+}
+/* 답변 아이콘 */
+.inquire-answer > img {
+    width: 13px;
+}
+/* 답변 글자 */
+.inquire-answer > span {
+    background-color: rgb(117, 117, 117);
+    padding: 2px 3px 2px 3px;
+    border-radius: 2px;
+    color: white;
+    font-size: 10px;
+}
+/* 답변 내용 */
+.inquire-answer-content {
+    width:300px;
+}
+/* 답변 작성일 */
+.inquire-answer-date {
+    text-align: center;
+}
