@@ -45,23 +45,23 @@
   <div class="section order-info">
     <div>
       <h2>주문내용</h2>
-      주문번호 : [[${dto.purchaseDTO.purchaseNum}]]<br />
-      주문날짜 : [[${#dates.format(dto.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]<br />
-      주문금액 : [[${dto.purchaseDTO.purchasePrice}]]<br />
-      배송지 : [[${dto.purchaseDTO.deliveryAddr +' '+ dto.purchaseDTO.deliveryAddrDetail}]]<br />
-      연락처 : [[${dto.purchaseDTO.deliveryPhone}]]<br />
-      받는사람 : [[${dto.purchaseDTO.deliveryName}]] <br />
-      주문메세지 : [[${dto.purchaseDTO.message}]]<br />
+      주문번호 : [[${dto.purchaseDTO.purchaseNum}]]<br/>
+      주문날짜 : [[${#dates.format(dto.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]<br/>
+      주문금액 : [[${dto.purchaseDTO.purchasePrice}]]<br/>
+      배송지 : [[${dto.purchaseDTO.deliveryAddr +' '+ dto.purchaseDTO.deliveryAddrDetail}]]<br/>
+      연락처 : [[${dto.purchaseDTO.deliveryPhone}]]<br/>
+      받는사람 : [[${dto.purchaseDTO.deliveryName}]] <br/>
+      주문메세지 : [[${dto.purchaseDTO.message}]]<br/>
     </div>
   </div>
   <div class="section payment-info">
     <div th:if="${dto.paymentDTO.appldate != null}">
       <h2>결제내용</h2>
-      결제번호 : [[${dto.paymentDTO.confirmnumber}]]<br />
-      결제방법 : [[${dto.paymentDTO.paymethod}]]<br />
-      결제금액 : [[${dto.paymentDTO.totalprice}]]<br />
-      결제 일 : [[${dto.paymentDTO.appldate +' '+ dto.paymentDTO.appltime}]]<br />
-      카드번호 : [[${dto.paymentDTO.cardnum}]]<br />
+      결제번호 : [[${dto.paymentDTO.confirmnumber}]]<br/>
+      결제방법 : [[${dto.paymentDTO.paymethod}]]<br/>
+      결제금액 : [[${dto.paymentDTO.totalprice}]]<br/>
+      결제 일 : [[${dto.paymentDTO.appldate +' '+ dto.paymentDTO.appltime}]]<br/>
+      카드번호 : [[${dto.paymentDTO.cardnum}]]<br/>
     </div>
     <div th:if="${dto.paymentDTO.appldate == null}">결제 정보가 없습니다.</div>
   </div>

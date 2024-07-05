@@ -75,13 +75,7 @@ body {
     align-items: flex-start;
 }
 
-.info .price {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #FC6B70;
-}
-
-.info .quantity, .info .shipping {
+.info .quantity, .info .shipping, , .info .price {
     margin-bottom: 5px;
 }
 
