@@ -57,7 +57,7 @@ public class UserWriteService {
         if(i >= 1) {
             //메일링
             String html = "<html><body>"
-                    + dto.getMemberName() + "님 회원가입을 축하합니다. <br/>"
+                    + dto.getMemberName() + " 님 회원가입을 축하합니다. <br/>"
                     + "가입을 완료하시려면"
                     + "<a href='http://localhost:8089/userConfirm?chk=" + dto.getMemberEmail()
                     + "'>여기</a>"
