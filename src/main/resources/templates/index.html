@@ -3,6 +3,7 @@
 <head>
     <th:block th:replace="common/mainCommon :: head"></th:block>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+     <script src="/static/js/index.js"></script>
     <meta charset="UTF-8">
     <title>Companion</title>
 </head>
@@ -16,31 +17,57 @@
 
 <div class="index">
 
-<!-- MainGoodsListService에서 model로 받아온 list를 출력합니다. -->
-<table align="center" width="600">
-    <tr><!-- 상품정보를 옆으로 출력해야 하므로 TD를 반복하겠습니다. -->
-        <th:block th:each="dto , idx : ${list}">
-            <!-- list로 받아온 값을 하나씩 변수 dto에 전달하고 index는 idx로 받는다, index는 반복할때마다 0부터 시작하는값이다, 1씩증가  -->
-            <td><!-- 이제 구매 페이지로 이동합니다 -->
-                <a th:href="|corner/detailView/${dto.goodsNum}|">
-                    <img th:src="|/static/upload/${dto.goodsMainStore}|"/><br />
-                    [[${dto.goodsName}]]<br />
-                    [[${dto.goodsPrice}]] <br />
-                    <!-- 배송비가 0이면 무료배송으로 출력한다. -->
-                    <span th:if="${dto.deliveryCost == 0}" >무료배송</span>
-                    <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
-                </a>
-            </td>
-            <!-- 옆으로 만 출력되기 때문에 3개마다 행을 변경할 수 있게 3개마다 </tr>로 막아주고 다시 <tr>을 열어준다. -->
-            <!-- idx에서 count를 불러올 수 있는데 count는 1부터 시작하는 값을 가져온다 idx를 3으로 나눈 나머지가 0일 때마다
-                 </tr><tr>을 출력-->
-            <th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'" />
-        </th:block>
-    </tr>
-</table>
+<!-- MainGoodsListService에서 model로 받아온 Map 출력 -->
+<!-- 대분류 카테고리 탭 -->
+<div id="categorynav">
+   <button data-category="all">전체</button>
+   <button th:each="category : ${categoryMap.keySet()}" th:data-category="${category}" th:text="${category}"></button>
+</div>
 
+<!-- 상품목록 출력과 관심상품 -->
+<div id="categoryindex">
+   <div id="allCategory" class="categoryContent">
+           <div>전체 상품</div>
+           <table align="center" width="600">
+               <tr>
+                   <th:block th:each="category : ${categoryMap.keySet()}">
+                       <th:block th:each="dto, idx : ${categoryMap.get(category)}">
+                           <td>
+                               <a th:href="|/corner/detailView/${dto.goodsNum}|">
+                                   <img th:src="@{|/static/upload/${dto.goodsMainStore}|}" /><br />
+                                   [[${dto.goodsName}]]<br/>
+                                   [[${dto.goodsPrice}]]<br/>
+                                   <span th:if="${dto.deliveryCost == 0}">무료배송</span>
+                                   <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
+                               </a>
+                           </td>
+                           <th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'"/>
+                       </th:block>
+                   </th:block>
+               </tr>
+           </table>
+   </div>
+   <!-- 각 카테고리별 상품 목록 -->
+   <div th:each="category : ${categoryMap.keySet()}" th:id="${category}" class="categoryContent" style="display: none;">
+           <div th:text="${category}"></div>
+           <table align="center" width="600">
+               <tr>
+                   <th:block th:each="dto, idx : ${categoryMap.get(category)}">
+                       <td>
+                           <a th:href="|/corner/detailView/${dto.goodsNum}|">
+                               <img th:src="@{|/static/upload/${dto.goodsMainStore}|}" /><br />
+                               [[${dto.goodsName}]]<br/>
+                               [[${dto.goodsPrice}]]<br/>
+                               <span th:if="${dto.deliveryCost == 0}">무료배송</span>
+                               <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
+                           </a>
+                       </td>
+                       <th:block th:if="${idx.count % 3 == 0}" th:utext="'</tr><tr>'"/>
+                   </th:block>
+               </tr>
+           </table>
+   </div>
 </div>
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
-<script src="/static/js/test.js"></script>
 </body>
 </html>
