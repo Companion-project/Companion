@@ -30,8 +30,6 @@
       border-right: none;
       border-bottom: 1px solid #ccc;
       width: 400px;
-      font-weight: 400;
-
     }
 
 .input-style:focus {
@@ -50,7 +48,6 @@
       width: 400px;
       height: 60px;
       margin-left: 12px;
-
     }
 
 
@@ -58,7 +55,6 @@
     text-align: center;
     margin-top: 12px;
     color: #9e9e9e;
-
 }
 
 .userLoginInfo a {
