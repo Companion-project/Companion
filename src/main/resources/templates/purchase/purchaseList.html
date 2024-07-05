@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="common/mainCommon :: head"></th:block>
     <link rel="stylesheet" href="/static/css/purchase/purchaseList.css">
@@ -7,73 +7,74 @@
 </head>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
 
-        <div class="header">
-            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-            <h3>주문내역</h3>
-        </div>
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>주문내역</h3>
+</div>
 
-        <div class="index">
-            <div class="order-list">
-                <div class="order-list-header">
-                    <div class="order-date-payment">주문일</div>
-                    <div class="order-product-number">상품명/주문번호</div>
-                    <div class="order-status">주문상태</div>
+<div class="index">
+    <div class="order-list">
+        <div class="order-list-header">
+            <div class="order-date-payment">주문일</div>
+            <div class="order-product-number">상품명/주문번호</div>
+            <div class="order-status">주문상태</div>
+        </div>
+        <div class="order-item" th:each="orderListDTO : ${list}">
+            <div class="order-date-payment">
+                <div class="order-date">[[${#dates.format(orderListDTO.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]</div>
+                <div class="order-payment">
+                    <th:block th:if="${orderListDTO.paymentDTO.appltime == null}">
+                        결제대기중
+                    </th:block>
+                    <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
+                        <th:block th:if="${orderListDTO.paymentDTO.confirmnumber == null}">
+                            현금결제
+                        </th:block>
+                        <th:block th:if="${orderListDTO.paymentDTO.confirmnumber != null}">
+                            [[${orderListDTO.paymentDTO.confirmnumber}]]
+                        </th:block>
+                    </th:block>
                 </div>
-                <div class="order-item" th:each="orderListDTO : ${list}">
-                    <div class="order-date-payment">
-                        <div class="order-date">[[${#dates.format(orderListDTO.purchaseDTO.purchaseDate,'yyyy-MM-dd')}]]</div>
-                        <div class="order-payment">
-                        <th:block th:if="${orderListDTO.paymentDTO.appltime == null}">
-                            결제대기중
-                        </th:block>
-                        <th:block th:if="${orderListDTO.paymentDTO.appltime != null}">
-                            <th:block th:if="${orderListDTO.paymentDTO.confirmnumber == null}">
-                                현금결제
-                            </th:block>
-                            <th:block th:if="${orderListDTO.paymentDTO.confirmnumber != null}">
-                                [[${orderListDTO.paymentDTO.confirmnumber}]]
-                            </th:block>
-                        </th:block>
-                        </div>
-                    </div>
-                    <div class="order-product-info">
-                        <div class="order-product">
-                        <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}" >
-                            [[${dto.goods.goodsName}]]
-                        </th:block>
-                        </div>
-                            <div class="order-number">
-                            [[${orderListDTO.purchaseDTO.purchaseNum}]]
-                            </div>
-                    </div>
-                    <div class="order-status">
-                        <a th:href="|javascript:detail('${orderListDTO.purchaseDTO.purchaseNum}')|">주문상세보기</a>
-                        <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '입금대기중'}">
-                결제대기중
+            </div>
+            <div class="order-product-info">
+                <div class="order-product">
+                    <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
+                        [[${dto.goods.goodsName}]]
+                    </th:block>
+                </div>
+                <div class="order-number">
+                    [[${orderListDTO.purchaseDTO.purchaseNum}]]
+                </div>
+            </div>
+            <div class="order-status">
+                <a th:href="|javascript:detail('${orderListDTO.purchaseDTO.purchaseNum}')|">주문상세보기</a>
+                <span th:if="${orderListDTO.purchaseDTO.purchaseStatus == '입금대기중'}">
+                    <span class="status-waiting">결제대기중</span>
             </span>
-                        <span th:if="${orderListDTO.purchaseDTO.purchaseStatus != '입금대기중'}">
+                <span th:if="${orderListDTO.purchaseDTO.purchaseStatus != '입금대기중'}">
                 <span th:if="${orderListDTO.deliveryDTO.deliveryState == null}">
                     <a th:href="@{purchaseStatus(
                         purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}
                     )}">[[${orderListDTO.purchaseDTO.purchaseStatus}]]</a>
                 </span>
-            </span>
-                        <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송중' }">
-                <a th:href="|/delivery/deliveryState?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">[[${orderListDTO.deliveryDTO.deliveryState}]]</a>
-            </span>
-                        <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송완료' }">
-                [[${orderListDTO.deliveryDTO.deliveryState}]]
-            </span>
-                    </div>
-                </div>
+                        </span>
+                <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송중' }">
+                            <a th:href="|/delivery/deliveryState?purchaseNum=${orderListDTO.purchaseDTO.purchaseNum}|">
+                                <span class="status-ongoing">[[${orderListDTO.deliveryDTO.deliveryState}]]</span></a>
+                        </span>
+                <span th:if="${orderListDTO.deliveryDTO.deliveryState == '배송완료' }">
+                            <span class="status-complete">[[${orderListDTO.deliveryDTO.deliveryState}]]</span>
+                        </span>
             </div>
         </div>
-    <script type="text/javascript">
-        function detail(purchaseNum){
-            window.open("purchaseDetail?purchaseNum="+purchaseNum
-                    ,"purchaseDetail","top='100',left='100',width=600,height=800");
-        }
-    </script>
+    </div>
+</div>
+<script type="text/javascript">
+    function detail(purchaseNum){
+        window.open("purchaseDetail?purchaseNum="+purchaseNum
+                ,"purchaseDetail","top='100',left='100',width=600,height=800");
+    }
+</script>
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>
