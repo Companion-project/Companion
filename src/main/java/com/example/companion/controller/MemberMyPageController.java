@@ -1,6 +1,7 @@
 package com.example.companion.controller;
 
 import com.example.companion.command.MemberCommand;
+import com.example.companion.domain.AuthInfoDTO;
 import com.example.companion.service.memberMyPage.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,11 @@ public class MemberMyPageController {
 
     @GetMapping("")
     public String myPage(HttpSession session, Model model) {
-        memberInfoService.execute(session, model);
+        AuthInfoDTO authInfoDTO = (AuthInfoDTO) session.getAttribute("authInfoDTO");
+        if (authInfoDTO == null) {
+            return "redirect:/login/loginForm"; // 로그인 페이지로 리다이렉트
+        }
+        model.addAttribute("authInfoDTO", authInfoDTO);
         return "memberShip/myPage";
     }
 

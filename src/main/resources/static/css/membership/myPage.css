@@ -1,12 +1,14 @@
 
 
 .myPage-top{
-    padding: 50px;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-bottom: 70px;
     border-bottom: 20px solid #e9ebec75;
 }
 
 .myPage-top span{
-margin: 0px 30px;
+    font-size: 20px;
 }
 
 .index ul {
@@ -30,3 +32,6 @@ margin: 0px 30px;
     }
 
 
+.bold-text {
+    font-weight: bold;
+}

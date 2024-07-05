@@ -7,39 +7,50 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
 </head>
 <body>
-    <table width="600" align="center" border="1">
-        <tr><td align="right" colspan="6" ><button type="button"  id="btn" data-authenticated="${session.auth}">문의하기</button></td></tr>
-        <th:block th:each=" dto , idx : ${list}">
-            <tr><td>[[${idx.count}]]</td>
-                <td><!-- 답변 내용이 없으면 검토, 답변 내용이 있으면 답변완료 -->
-                    <span th:if="${dto.inquireAnswer == null}" >검토</span>
-                    <span th:if="${dto.inquireAnswer != null}" >답변완료</span>
-                </td>
-                <td>[[${dto.memberId}]]</td>
-                <td>[[${#dates.format(dto.inquireDate,'yyyy-MM-dd')}]]</td>
-                <td>[[${dto.inquireKind}]]</td><td>[[${dto.inquireSubject}]]</td>
-            </tr>
-            <tr><td colspan="6">
-                <span th:utext="${#strings.replace(dto.inquireContent,newLineChar,'&lt;br /&gt;')}"></span><br />
-                <!-- 질문 당자자만 이 기능을 사용할 수 있습니다. -->
-                <th:block th:if="${session.auth != null}">
-                    <th:block th:if="${session.auth.userId == dto.memberId}">
+        <div>
+            <button type="button"  id="btn" data-authenticated="${session.auth}">문의하기</button>
+        </div>
+        <div>
+            <div class="inquire-first-row">
+                <div>답변상태</div>
+                <div>문의유형</div>
+                <div>제목</div>
+                <div>작성자</div>
+                <div>작성일</div>
+            </div>
+            <th:block th:each=" dto , idx : ${list}">
+                <div class="inquire-info">
+                    <div class="inquire-status-frame"> <!-- 답변 내용이 없으면 검토, 답변 내용이 있으면 답변완료 -->
+                        <div class="inquire-status" th:if="${dto.inquireAnswer == null}" >미답변</div>
+                        <div class="inquire-status" th:if="${dto.inquireAnswer != null}" >답변완료</div>
+                    </div>
+                    <div class="inquire-kind">[[${dto.inquireKind}]]</div>
+                    <div class="inquire-title" th:id="inq_+${dto.inquireNum}" th:attr="onclick=|contentOpen('inq_${dto.inquireNum}');|">[[${dto.inquireSubject}]]</div>
+                    <div class="inquire-memberId">[[${dto.memberId}]]</div>
+                    <div class="inquire-date">[[${#dates.format(dto.inquireDate,'yyyy-MM-dd')}]]</div>
+                </div>
+                <div style="display:none;" th:class="inq_+${dto.inquireNum}">
+                    <div class="inquire-content" th:utext="${#strings.replace(dto.inquireContent,newLineChar,'&lt;br /&gt;')}"></div>
+                        <!-- 질문 당자자만 이 기능을 사용할 수 있습니다. -->
+                        <th:block th:if="${session.auth != null}">
+                            <th:block th:if="${session.auth.userId == dto.memberId}">
+                                <div class="q&a-update-delete-frame">
+                                    <button type="button" th:attr="onclick=|inquireUpdate('${dto.inquireNum}');|">문의수정</button>
+                                    <button type="button" th:attr="onclick=|inquireDelete('${dto.inquireNum}');|">문의삭제</button>
+                                </div>
+                            </th:block>
+                        </th:block>
 
-                        <button type="button" th:attr="onclick=|inquireUpdate('${dto.inquireNum}');|">문의수정</button>
-                        <button type="button" th:attr="onclick=|inquireDelete('${dto.inquireNum}');|">문의삭제</button>
-                    </th:block>
-                </th:block>
-                <button type="button" th:id="inq_+${dto.inquireNum}"
-                        th:attr="onclick=|contentOpen('inq_${dto.inquireNum}');|"
-                >답변열기</button>
-            </td></tr>
-            <tr th:if="${dto.inquireAnswer != null}" style="display:none;" th:class="inq_+${dto.inquireNum}"> <!-- 답변내용이 안보인다. -->
-            <!-- 답변이 있어야 보이게 합니다. -->
-            <td  colspan="6">답변일 : [[${#dates.format(dto.inquireAnswerDate,'yyyy-MM-dd')}]]<br />
-                <span th:utext="${#strings.replace(dto.inquireAnswer,newLineChar,'&lt;br /&gt;')}"></span>
-            </td></tr>
-        </th:block>
-    </table>
+                    <div class="inquire-answer-list-frame" th:if="${dto.inquireAnswer != null}" >
+                        <div class="inquire-answer" > ㄴ답변 </div><!-- 답변내용이 안보인다. -->
+                        <div class="inquire-answer-content-frame" >
+                            <div class="inquire-answer-date" >답변일 : [[${#dates.format(dto.inquireAnswerDate,'yyyy-MM-dd')}]]</div>
+                            <div class="inquire-answer-content"  th:utext="${#strings.replace(dto.inquireAnswer,newLineChar,'&lt;br /&gt;')}"></div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        </div>
     <!-- 스크립트 변수 및 링크 -->
     <script th:inline="javascript">
         /*<![CDATA[*/

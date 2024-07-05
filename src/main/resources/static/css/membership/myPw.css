@@ -7,27 +7,21 @@
 
 
 
-.input-style {
+input {
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 5px;
       outline: none;
       transition: border-color 0.3s;
+       width: 500px;
 
     }
 
-    .input-style:not([type="radio"]){
-    width: 500px;
-    }
-
-    .input-style:focus {
+    input:focus {
       border-color: #007bff;
     }
 
-    .input-r{
-        margin: 15px 0px;
-    }
 
     #button {
           padding: 10px 20px;
@@ -41,7 +35,8 @@
           width: 500px;
         }
 
-.mod{
-    padding: 10px;
-}
 
+
+.area{
+    padding: 30px;
+}

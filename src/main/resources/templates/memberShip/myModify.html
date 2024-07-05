@@ -18,6 +18,7 @@
 <div class="index">
 <form name="frm" action="memberUpdate" method="post" th:object="${memberCommand}" style="padding: 10px">
 <input type="hidden" name="memberPwCon" value="11111111" />
+    <div class="mod">
 회원아이디<br/>
     <input type="text" class="input-style" name="memberId" id="memberId" readonly="readonly" th:value="${memberCommand.memberId}">
     <br/><span style="color:red; font-size: 14px;">회원 아이디는 변경할 수 없습니다.</span><br/><br/>
@@ -62,14 +63,16 @@
 <span style="color:red" th:if="${#fields.hasErrors('memberBirth')}" th:errors="*{memberBirth}"></span><br/>
 
 <input type="submit" id="button" value="회원정보수정">
+    </div>
 </form>
         </div>
 
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 
 
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/memberShip/myModify.js"></script>
-<script src="/static/js/test.js"></script>
 </body>
 </html>

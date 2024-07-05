@@ -244,6 +244,7 @@ body {
     width: 100%;
     max-width: 100%;
     overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
+    margin-bottom: 80px;
 }
 
 

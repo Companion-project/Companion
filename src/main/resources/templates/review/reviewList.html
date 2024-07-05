@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/static/css/review/reviewList.css">
 </head>
 <body>
-    <table width="600" align="center" border="1">
-        <th:block th:each=" dto : ${list}">
-            <tr><th>[[${dto.memberId}]] | [[${dto.purchaseNum}]]</th>
-                <th>[[${#dates.format(dto.reviewDate,'yyyy-MM-dd')}]]</th></tr>
-            <tr><td colspan="2">
-            <span
-                    th:utext="${#strings.replace(dto.reviewContent, newLineChar, '&lt;br /&gt;')}"></span>
-            </td></tr>
-        </th:block>
-    </table>
+<th:block th:each=" dto : ${list}">
+    <div class="single-review-frame">
+        <div class="memberId">[[${dto.memberId}]]</div>
+        <div class="review-date">[[${#dates.format(dto.reviewDate,'yyyy-MM-dd')}]]</div>
+        <div class="review-content" th:utext="${#strings.replace(dto.reviewContent, newLineChar, '&lt;br /&gt;')}"></div>
+    </div>
+</th:block>
 </body>
 </html>
