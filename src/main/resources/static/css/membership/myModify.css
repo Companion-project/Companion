@@ -44,3 +44,21 @@
     padding-left: 90px;
 }
 
+/*스크롤바*/
+.index::-webkit-scrollbar{
+    width:10px;
+}
+.index::-webkit-scrollbar-track{
+    background-color: rgba(255, 81, 0, 0.05);
+}
+.index::-webkit-scrollbar-thumb{
+    background-color: rgba(255, 81, 0, 0.2);
+}
+.index::-webkit-scrollbar-button{
+    display: none;
+}
+.index::-webkit-scrollbar-track,
+.index::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+}
+
