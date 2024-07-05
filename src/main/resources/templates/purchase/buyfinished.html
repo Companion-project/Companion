@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="common/mainCommon :: head"></th:block>
+    <link rel="stylesheet" href="/static/css/purchase/buyfinished.css">
     <meta charset="UTF-8">
     <title>companion</title>
 </head>
 <body>
-[[${userId }]]님 [[${price }]]원이 결제 완료되었습니다.<br />
-<a href="orderList">구매리스트로 가기</a> | <a href="/">홈</a>
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>결제완료</h3>
+</div>
+<div class="index">
+    <div class="confirmation-container">
+        <div class="confirmation-text">
+            [[${userId }]]님 [[${price }]]원이 결제 완료되었습니다.
+        </div>
+        <div class="links">
+            <a href="orderList">구매리스트로 가기</a>
+            |
+            <a href="/">홈</a>
+        </div>
+    </div>
+</div>
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>

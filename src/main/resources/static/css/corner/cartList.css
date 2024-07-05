@@ -125,6 +125,10 @@
     cursor: pointer;
     margin-top: 10px;
 }
+.empty-cart-message {
+    text-align: center;
+    margin-top: 200px;
+}
 
 @media screen and (max-width: 768px) {
     .cart-row {

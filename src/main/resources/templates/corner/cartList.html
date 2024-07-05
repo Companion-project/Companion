@@ -13,7 +13,10 @@
         </div>
 
         <div class="index">
-            <form action="/purchase/goodsBuy" method="post" class="purchase-form">
+            <div th:if="${#lists.isEmpty(list)}" class="empty-cart-message">
+                구매하실 제품을 장바구니에 담아 주세요.
+            </div>
+            <form th:if="${not #lists.isEmpty(list)}" action="/purchase/goodsBuy" method="post" class="purchase-form">
                 <div class="cart-container">
                     <div class="cart-header">
                         <div class="cart-all-check"><input type="checkbox" id="checkBoxs" checked="checked"/>전체선택</div>
@@ -22,8 +25,11 @@
                     <div th:each=" dto: ${list}" class="cart-row">
                         <div class="cart-each-check"><input type="checkbox" name="prodCk" checked="checked"
                                     th:value="${dto.goodsDTO.goodsNum}"/></div>
-                        <div class="cart-image"><img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|"/></div>
-                        <div class="cart-section">
+                        <div class="cart-image">
+                            <a th:href="@{/corner/detailView/{goodsNum}(goodsNum=${dto.goodsDTO.goodsNum})}">
+                                <img th:src="|/static/upload/${dto.goodsDTO.goodsMainStore}|"/>
+                            </a>
+                        </div>                        <div class="cart-section">
                         <div class="cart-product-name">[[${dto.goodsDTO.goodsName}]]</div>
                         <div class="cart-quantity">
                             <a th:href="|javascript:checkQty('${dto.goodsDTO.goodsNum}');|"> - </a>
@@ -39,7 +45,7 @@
                         <div class="cart-summary">
                             상품수 : <span id="prodCnt">[[${list.size}]]</span>개<br/>
                             전체 금액 : <span id="sumPrice">[[${sumPrice}]]</span>원<br/>
-                            <input type="submit" value="구매하기" />
+                            <input type="submit" value="구매하기" id="purchaseButton"/>
                         </div>
                     </div>
                 </div>
@@ -48,6 +54,17 @@
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 <script type="text/javascript">
     $(function(){
+        function checkEmptyCart() {
+            if ($('.cart-row').length === 0) {
+                $('.empty-cart-message').show();
+                $('#purchaseButton').hide();
+        } else {
+                $('.empty-cart-message').hide();
+                $('#purchaseButton').show();
+            }
+        }
+        checkEmptyCart();
+
         $("#checkBoxs").click(function(){
             if($("#checkBoxs").prop("checked")){
                 $("input:checkbox[name=prodCk]").prop("checked", true);
@@ -83,6 +100,7 @@
                 }else{
                     alert("삭제되지 않았습니다.");
                 }
+                checkEmptyCart();
             },
             error : function () {
                 alert("삭제할 상품을 하나 이상 선택하여 주세요.");
@@ -114,13 +132,17 @@
             data : {"goodsNum" : goodsNum , "qty" : 1},
             success : function(result){
                 if(result.trim() == "200"){
-                    $("#"+goodsNum).text(Number($("#"+goodsNum).text()) + 1);
-                    $("#t_"+goodsNum).text(Number($("#t_"+goodsNum).text()) + Number(goodsPrice));
+                var currentQty = Number($("#"+goodsNum).text()) + 1;
+                var newTotalPrice = currentQty * Number(goodsPrice);
+                $("#"+goodsNum).text(currentQty);
+                $("#t_"+goodsNum).text(newTotalPrice);
+                goodsChk();
                 }
             },
             error : function(){
                 alert('에러 발생');
             },
+            complete:goodsChk
         });
     }
     function checkQty(goodsNum){
@@ -134,6 +156,7 @@
                     var data = JSON.parse(result);
                     $("#"+goodsNum).text(data.cartDTO.cartQty);
                     $("#t_"+goodsNum).text(data.cartDTO.cartQty * data.goodsDTO.goodsPrice);
+                    goodsChk();
                 },
                 error : function(){
                     alert('에러 발생');
