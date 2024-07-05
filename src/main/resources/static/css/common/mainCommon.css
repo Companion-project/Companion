@@ -160,9 +160,6 @@ body {
     margin-bottom: 16px;
     height: 52px;
 }
-
-
-
 .index {
     margin-bottom: 60px;
     margin-top: 80px;
@@ -171,6 +168,20 @@ body {
     max-width: 100%;
     overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
     margin-bottom: 80px;
+}
+
+.index::-webkit-scrollbar{
+    width:10px;
+}
+.index::-webkit-scrollbar-thumb{
+    background-color: rgba(252, 107, 112, 0.5);
+}
+.index::-webkit-scrollbar-button{
+    display: none;
+}
+.index::-webkit-scrollbar-track,
+.index::-webkit-scrollbar-thumb {
+    border-radius: 3px;
 }
 
 
