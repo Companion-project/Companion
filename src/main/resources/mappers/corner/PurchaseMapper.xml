@@ -54,6 +54,7 @@
         ,delivery_name, member_num
         from purchase
         where purchase_num = #{purchaseNum}
+        ORDER BY PURCHASE_date DESC
     </select>
     <select id="purchaseGoodsCount" parameterType="string" resultType="integer">
         select count(*) from purchase_list
@@ -153,6 +154,7 @@
                 p.purchase_Num = #{purchaseNum}
             </if>
         </where>
+        ORDER BY p.PURCHASE_date DESC
     </select>
     <delete id="paymentDelete" parameterType="string">
         delete from payment
