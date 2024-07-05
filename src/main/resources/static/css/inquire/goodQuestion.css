@@ -1,0 +1,60 @@
+/* 문의 리스트 */
+.index {
+    font-size: 12px;
+    text-align: center;
+}
+
+/* 문의 리스트 헤더 및 문의 기본 정보*/
+.inquire-first-row , .inquire-info{
+    text-align: center;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    padding: 10px 0 10px 0;
+}
+
+/* 문의 리스트 헤더 */
+.inquire-first-row {
+    border-top: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+}
+
+/* 문의 기본 정보 */
+.inquire-info {
+    border-bottom: 1px solid #eaeced;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul, li{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 테이블헤더 */
+.inquire-index, .inquire-product, .inquire-kind, .inquire-title, .inquire-memberId, .inquire-status-frame{
+    display: table-cell;
+    align-content: center;
+    height: 25px;
+}
+/* 글 번호 */
+.inquire-index {
+    width: 30px;
+}
+/* 상품명, 문의 유형, 작성자, 답변 상태 */
+.inquire-product, .inquire-kind, .inquire-memberId, .inquire-status-frame  {
+    width: 100px;
+}
+/* 문의 제목 */
+.inquire-title{
+    width: auto;
+    overflow: hidden;
+    vertical-align: top;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
