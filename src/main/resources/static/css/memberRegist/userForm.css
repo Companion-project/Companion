@@ -6,13 +6,11 @@
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s;
+    border-radius: 10px;
 }
 
 .input-style:not([type="radio"]){
-    width: 500px;
+    width: 400px;
 }
 
 .input-style:focus {
@@ -25,10 +23,11 @@
       background-color: #FC6B70;
       color: #fff;
       border: none;
-      border-radius: 4px;
+      border-radius: 10px;
       cursor: pointer;
       transition: background-color 0.3s;
-      width: 500px;
+      width: 400px;
+      height: 60px;
       margin-left: 12px;
     }
 .input-r{
@@ -36,7 +35,7 @@
 }
 
 .regist-form{
-    margin-left: 30px;
+    padding-left: 90px;
 }
 
 .phone1{

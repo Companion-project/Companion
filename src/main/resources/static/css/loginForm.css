@@ -23,14 +23,11 @@
 .input-style {
       padding: 10px;
       font-size: 16px;
-      outline: none;
-      transition: border-color 0.3s;
       border-top: none;
       border-left: none;
       border-right: none;
       border-bottom: 1px solid #ccc;
       width: 400px;
-
     }
 
 .input-style:focus {
@@ -47,24 +44,24 @@
       cursor: pointer;
       transition: background-color 0.3s;
       width: 400px;
+      height: 60px;
       margin-left: 12px;
-
     }
 
 
 .userLoginInfo {
     text-align: center;
     margin-top: 12px;
+    color: #9e9e9e;
 }
 
 .userLoginInfo a {
     text-decoration: none;
-    color: black;
+    color: #9e9e9e;
     margin: 0 5px;
 }
 
 .loginForm{
     padding-top: 50px;
     padding-left: 90px;
-    padding-right: 90px;
 }
