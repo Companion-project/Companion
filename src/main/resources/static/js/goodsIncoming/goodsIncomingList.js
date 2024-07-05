@@ -5,7 +5,7 @@ $(function(){
         datatype:"json",
         success:function(result){
             var item = "";
-				item +='<table width=600 border=1>';
+				item +='<table width=600 border=1 id="incomingTable">';
 				item +='	<tr><th>번호</th><th>상품 번호</th><th>수량</th><th>입고일</th><th>가격</th></tr>';
 
 				$.each( result.list ,function(idx, dto){
