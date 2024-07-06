@@ -39,3 +39,7 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #fc6b70;
 }
+
+.inquire-write-btn {
+    text-align: right;
+}

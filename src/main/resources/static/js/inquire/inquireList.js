@@ -22,7 +22,7 @@ function contentOpen(id){
 
 function inquireUpdate(inquireNum){
     window.open("/inquire/inquireUpdate?inquireNum="+inquireNum, "",
-        "width=700, height=650, top=100, left=100")
+        "width=600, height=800, top=100, left=100")
 }
 
 function inquireDelete(inquireNum){
