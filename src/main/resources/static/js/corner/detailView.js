@@ -1,6 +1,9 @@
 $(function() {
     // 페이지가 열릴 때 리뷰정보가 출력되게 함수를 실행.
     goodsReivew();
+    $("#review").css("background-color", "#FC6B70");
+    $("#review").css("color", "white");
+    $("#review").css("border-color", "#FC6B70");
 
     //수량
     document.getElementById('decrement').addEventListener('click', function() {
@@ -48,7 +51,7 @@ $(function() {
             alert("품절입니다");
         }
         else if (auth == null) {
-            window.open("/login/item.login", "login", "width=315, height=200,top = 100, left=100");
+            window.open("/login/item.login", "login", "width=600, height=800,top = 100, left=100");
         } else if (stock > 0 && stock >= $("#qty").val()) {
             location.href = "../buyItem?goodsNum=" + goodsNum + "&qty=" + $("#qty").val();
         } else {
@@ -61,7 +64,7 @@ $(function() {
         if(stock <= 0){
             alert("품절입니다");
         } else if (auth == null) {
-            window.open("/login/item.login", "login", "width=315, height=200,top = 100, left=100");
+            window.open("/login/item.login", "login", "width=600, height=800,top = 100, left=100");
         } else if (stock > 0 && stock >= $("#qty").val()) {
             $.ajax({
                 type: "get",
@@ -91,7 +94,7 @@ $(function() {
     //찜하기
     $("#wish").click(function () {
         if (auth == null) {
-            window.open("/login/item.login", "login", "width=315, height=200,top = 100, left=100");
+            window.open("/login/item.login", "login", "width=600, height=800,top = 100, left=100");
         } else {
             $.ajax({
                 type: "post",
@@ -100,9 +103,11 @@ $(function() {
                 data: {"goodsNum": goodsNum},
                 success: function (result) {
                     if (result.trim() == "1") {
-                        $("#wish").attr("src", "/static/images/heart.png");
+                        $("this").css("background-color", "#fc6b70");
+                        $("this").css("color", "white")
                     } else if (result.trim() == "0") {
-                        $("#wish").attr("src", "/static/images/heart1.png");
+                        $("this").css("background-color", "");
+                        $("this").css("color", "")
                     } else if (result.trim() == "999") {
                         alert("관리자는 사용할 수 없습니다.");
                     }
@@ -116,11 +121,31 @@ $(function() {
 
     //리뷰 클릭시
     $("#review").click(function () {
+        $(this).css("background-color", "#FC6B70");
+        $(this).css("color", "white");
+        $(this).css("border-color", "#FC6B70");
+
+        $("#inquire").css("background-color", "");
+        $("#inquire").css("color", "");
+        $("#inquire").css("border-color", "");
+
         goodsReivew();
+
     });
 
     //문의 클릭시
     $("#inquire").click(function () {
+
+        // #inquire의 배경색과 글자색을 변경
+        $(this).css("background-color", "#FC6B70");
+        $(this).css("color", "white");
+        $(this).css("border-color", "#FC6B70");
+
+        // #review의 배경색과 글자색을 원래대로 변경
+        $("#review").css("background-color", "");
+        $("#review").css("color", "");
+        $("#review").css("border-color", "");
+
         inquire();
     });
 
