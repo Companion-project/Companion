@@ -41,13 +41,13 @@
 			<button type="button" id="buyItem" >구매하기</button>
 			<button type="button" id="cartBtn" >장바구니</button>
 			<th:block th:if="${wish == null}">
-				<button id="wish">
-				<img src="/static/images/heart1.png" width="20" />찜하기
+				<button id="wish" class="wish-off">
+				<img src="/static/images/icon/like.png" width="20" />찜하기
 				</button>
 			</th:block>
 			<th:block th:if="${wish != null}">
-				<button id="wish">
-				<img src="/static/images/heart.png" id="wish" width="20" />찜하기
+				<button id="wish" class="wish-on">
+				<img src="/static/images/icon/like.png" width="20" />찜하기
 				</button>
 			</th:block>
 		</div>
@@ -58,8 +58,10 @@
 		</div>
 		<div class="deatil-product-content" th:utext="${#strings.replace(goodsCommand.goodsContent ,newLine,'&lt;br /&gt;' )}" ></div>
 		<div class="detail-review-frame">
-			<span id="review">리뷰</span>
-			<span id="inquire" >Q&A</span>
+			<div class="review-inquire-menu">
+				<div id="review">리뷰</div>
+				<div id="inquire">Q&A</div>
+			</div>
 			<div id="notice"></div>
 		</div>
 	</div>

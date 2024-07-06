@@ -1,6 +1,5 @@
 /* 제품 상세 정보 */
 .detail-frame{
-    text-align: center;
     padding-left:50px;
     padding-right:40px;
 }
@@ -8,6 +7,7 @@
 .main-image-frame{
     width:500px;
     height:500px;
+    margin-bottom: 10px;
 }
 
 /* 상품 메인 이미지 */
@@ -15,53 +15,68 @@
     width:500px;
     height:500px;
     object-fit: cover;
+    border-radius: 5px;
 }
 
 /* 카테고리 */
 .category{
+    font-size: 14px;
     width:60px;
-    height: 30px;
+    padding: 2px o;
     text-align: center;
     align-content: space-evenly;
     color: #FC6B70;
-    font-weight: 600;
+    font-weight: 700;
     border: #FC6B70 solid 1px;
     border-radius: 20px;
+    margin-bottom: 10px;
 }
 
 /* 상품명 */
 .product-name{
-    font-size: 30px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 /* 수량,가격,배송비 */
 .price-qty-frame{
     text-align: right;
     align-items: center;
-    height: 70px;
+    height: 50px;
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 30px 20px;
 }
 /*수량*/
 .qty-frame{
     grid-column: 1 / 2;
-    grid-row: 1 / 2;
+    grid-row: 1 / 3;
     text-align: left;
 }
 /* 수량 버튼 */
 .qty-button{
     padding: 0px;
-    width:30px;
     height: 30px;
+    border: none;
+    background: none;
+    align-items:center;
+    justify-content:center;
+    font-size: 1.5em;
+    color: #FC6B70;
+    font-weight: 700;
 }
 /* 수량 입력창 */
 .qty-input{
     padding: 0px;
-    width: 25px;
+    width: 40px;
     height: 25px;
     text-align: center;
+    border: none;
+    font-size: 20px;
+    color: #FC6B70;
+    font-weight: 700;
 }
 /* 수량 화살표 제거 */
 input::-webkit-outer-spin-button,
@@ -69,32 +84,40 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+
 /* 상품 가격*/
 .price{
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    font-size: 18px;
+    font-weight: 700;
 }
 /* 배송비*/
 .delivery-fee-frame{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    font-size: 12px;
 }
 
 /* 총 금액 */
 .total-price-frame{
     text-align: right;
     font-size: 12px;
+    margin-bottom: 10px;
+    font-weight: 700;
 }
 .total-price{
-    font-weight: bold;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 24px;
     color:red;
 }
 /* 품절 */
 .sold-out{
-    font-weight: bold;
-    font-size: 18px;
+    text-align: right;
+    font-weight: 700;
+    font-size: 24px;
     color:red;
+    margin-bottom: 10px;
 }
 
 /* 구매|찜하기|장바구니 */
@@ -102,22 +125,60 @@ input::-webkit-inner-spin-button {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-rows: 50px 50px;
-    border-bottom: dimgray solid 1px;
     padding-bottom: 20px;
 }
+
+#buyItem, #cartBtn, .wish-off {
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid #FC6B70;
+    background-color: white;
+    border-radius: 5px;
+    color: #fc6b70;
+}
+#buyItem:hover, #cartBtn:hover, .wish-off:hover {
+    background-color: #fc6b70;
+    color:white;
+}
+
+.wish-on:hover {
+    background-color: white;
+    color: #fc6b70;
+}
+
 /* 구매하기 버튼 */
 #buyItem {
     grid-column: 1 / 3;
+    margin-bottom : 2.5px;
+
 }
 /* 장바구니 버튼 */
 #cartBtn {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    margin-left : 2.5px;
+    margin-top: 2.5px;
 }
 /* 찜하기 버튼 */
 #wish{
     grid-column: 1 / 2;
     grid-row: 2 / 3;
+    margin-right: 2.5px;
+    margin-top: 2.5px;
+}
+#wish > img {
+    border: none;
+    background: none;
+}
+.wish-on {
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid #FC6B70;
+    border-radius: 5px;
+    background-color: #fc6b70;
+    color:white;
 }
 
 /* 상세설명 이미지 */
@@ -125,6 +186,7 @@ input::-webkit-inner-spin-button {
     width:500px;
     height: 100%;
     object-fit: cover;
+    margin-bottom: 15px;
 }
 
 /* 상세설명 */
@@ -136,10 +198,20 @@ input::-webkit-inner-spin-button {
     text-align: left;
 }
 
+.review-inquire-menu {
+    display: grid;
+    grid-template-columns:  50% 50%;
+}
 #review, #inquire {
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 700;
     cursor: pointer;
+    text-align: center;
+    border-top: 1px solid #eaeced;
+    border-bottom: 1px solid #eaeced;
+    padding: 5px 0;
+    margin-top: 15px;
+    color: #FC6B70;
 }
 
 /* 리뷰,문의사항 */

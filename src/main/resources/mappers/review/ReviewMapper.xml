@@ -37,6 +37,7 @@
                REVIEW_CONTENT reviewContent, MEMBER_ID memberId
         from review
         where GOODS_NUM = #{goodsNum}
+        order by reviewDate desc;
     </select>
 
 </mapper>
