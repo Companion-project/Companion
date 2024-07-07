@@ -1,48 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<th:block th:replace="common/mainCommon :: head"></th:block>
+    <link rel="stylesheet" href="/static/css/worker/myModify.css">
     <meta charset="UTF-8">
-    <title>companion</title>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/worker/myModify.js"></script>
-
 </head>
 <body>
-<ul>
-	<li><a href="empMyPage">내정보 보기</a></li>
-	<li> <a  href="employeeUpdate">내정보 수정</a></li>
-	<li> <a href="employeePwModify"> 비밀번호변경</a></li>
-	<li><a href="/">홈</a> </li>
-</ul>
-직원 정보 수정페이지<br />
-<form action="employeeUpdate" method="post" th:object="${employeeCommand}">
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>직원 정보 수정</h3>
+</div>
+<div class="index">
+    <span>
+<form action="employeeUpdate" method="post" id="frm" th:object="${employeeCommand}">
 <input type="hidden" name="empPwCon" value="123432423411">
 
-직원번호 : <input type="text" name="empNum"  id="empNum" readonly='readonly'  th:value="${employeeCommand.empNum}"/>
-		  <span style="color:red">자동 부여</span><br />
-아이디 : <input type="text" name="empId"  id="empId" th:value="${employeeCommand.empId}" readonly="readonly"/>
-	      <span style="color:red">수정 불가</span><br />
-		<span style="color:red" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span><br />
-비밀번호 : <input type="password" name="empPw" id="empPw" /><br />
+직원번호<span style="color:red">수정 불가</span><br />
+    <input type="text" name="empNum"  id="empNum" readonly='readonly'  th:value="${employeeCommand.empNum}"/><br /><br />
+아이디<span style="color:red">수정 불가</span><br />
+    <input type="text" name="empId"  id="empId" th:value="${employeeCommand.empId}" readonly="readonly"/>
+    <span style="color:red" th:if="${#fields.hasErrors('empId')}" th:errors="*{empId}"></span><br /><br />
+비밀번호<br />
+    <input type="password" name="empPw" id="empPw" /><br />
 		 <span style="color:red" th:if="${#fields.hasErrors('empPw')}" th:errors="*{empPw}"></span><br />
-
-이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}"/><br />
+이름<br />
+    <input type="text" name="empName" th:value="${employeeCommand.empName}"/><br />
       <span style="color:red" th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
-주소 : <input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}" readonly="readonly">
-      <button type="button" onclick="execDaumPostcode()">주소검색</button><br />
-상세주소 : <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}"/><br />
-우편번호 : <input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}" readonly="readonly"/>
-          <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
-연락처 : <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/>
-		<span style="color:red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br />
-이메일 : <input type="email" name="empEmail"  id="empEmail" th:value="${employeeCommand.empEmail}"/>
-		<span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span>
+주소<br />
+    <input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}" onclick="execDaumPostcode()" readonly="readonly"><br /><br />
+상세주소<br />
+    <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}"/><br /><br />
+우편번호<br />
+    <input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}" readonly="readonly"/>
+          <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br /><br />
+연락처<br />
+    <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/>
+		<span style="color:red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br /><br />
+이메일<br />
+    <input type="email" name="empEmail"  id="empEmail" th:value="${employeeCommand.empEmail}"/>
+		<span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br />
 		<span id='emailCheck'></span><br />
-주민번호: <input type="text" name="empssn" th:value="${employeeCommand.empssn}"/>
-		<span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br />
-<input type="submit" value="수정" />
+주민번호<br />
+    <input type="text" name="empssn" th:value="${employeeCommand.empssn}"/>
+		<span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br /><br />
+
+    <input type="submit" id="button" value="수정" />
 </form>
+</span>
+</div>
+<!-- 여기까지 -->
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>
