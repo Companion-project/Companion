@@ -35,26 +35,6 @@ body {
         overflow: hidden;
     }
 
-/* 스크롤바 전체 */
-::-webkit-scrollbar {
-  width: 10px; /* 스크롤바의 너비 (기본값) */
-}
-
-/* 스크롤바 트랙 */
-::-webkit-scrollbar-track {
-  background-color: transparent; /* 트랙 배경색 투명 처리 */
-}
-
-/* 스크롤바 썸 */
-::-webkit-scrollbar-thumb {
-  background-color: #FC6B70; /* 썸 색상 (버튼과 동일) */
-  border-radius: 8px; /* 썸 둥글기 */
-}
-
-/* 스크롤바 버튼 */
-::-webkit-scrollbar-button {
-  background-color: transparent; /* 버튼 색상 */
-}
 
   @media screen and (max-width: 1024px) {
         #back-img {
