@@ -103,15 +103,14 @@ $(function() {
                 data: {"goodsNum": goodsNum},
                 success: function (result) {
                     if (result.trim() == "1") {
-                        $("this").css("background-color", "#fc6b70");
-                        $("this").css("color", "white")
+                        $("#wish").css("background-color", "#fc6b70");
+                        $("#wish").css("color", "white")
                     } else if (result.trim() == "0") {
-                        $("this").css("background-color", "");
-                        $("this").css("color", "")
+                        $("#wish").css("background-color", "");
+                        $("#wish").css("color", "")
                     } else if (result.trim() == "999") {
                         alert("관리자는 사용할 수 없습니다.");
                     }
-                    location.reload();
                 },
                 error: function () {
                     alert("관리자는 사용할 수 없습니다.");
