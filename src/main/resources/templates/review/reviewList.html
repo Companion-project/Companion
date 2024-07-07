@@ -13,7 +13,7 @@
         </div>
         <th:block th:each=" dto : ${list}">
             <div class="single-review-frame" th:if="${dto.memberId != null}">
-                <div class="memberId"><img src="/static/images/icon/review-feedback.png" alt="review-icon"/>[[${dto.memberId}]]</div>
+                <div class="memberId"><img src="/static/images/icon/pets-foot.png" alt="review-icon"/>[[${dto.memberId}]]</div>
                 <div class="review-date">[[${#dates.format(dto.reviewDate,'yyyy-MM-dd')}]]</div>
                 <div class="review-content" th:utext="${#strings.replace(dto.reviewContent, newLineChar, '&lt;br /&gt;')}"></div>
             </div>
