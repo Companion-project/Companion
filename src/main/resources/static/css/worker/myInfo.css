@@ -1,0 +1,49 @@
+.value {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+      width: 500px;
+      margin-top: 6px;
+
+    }
+
+.info{
+    margin-bottom: 80px;
+    margin-left: 20px;
+}
+
+.index{
+    margin-left: 10px;
+    margin-bottom: 80px;
+}
+
+#regb{
+    margin-right: 42px;
+}
+
+.regbutton {
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #FC6B70;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 5px;
+    margin-bottom: 3px;
+    float: right;
+}
+
+.regbutton:hover {
+    background-color: #fb5256;
+}
+
+.regbutton a {
+   color: #fff;
+   text-decoration: none;
+}

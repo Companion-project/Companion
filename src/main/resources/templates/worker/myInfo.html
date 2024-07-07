@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<th:block th:replace="common/mainCommon :: head"></th:block>
+   <link rel="stylesheet" href="/static/css/employee/empDetail.css">
     <meta charset="UTF-8">
-    <title>companion</title>
 </head>
 <body>
-<ul>
-	<li><a href="empMyPage">내정보 보기</a></li>
-	<li> <a  href="employeeUpdate">내정보 수정</a></li>
-	<li> <a href="employeePwModify"> 비밀번호변경</a></li>
-	<li><a href="/">홈</a> </li>
-</ul>
-내정보<br />
-직원번호 :[[ ${employeeCommand.empNum } ]] <br />
-직원명 :[[ ${employeeCommand.empName }]] <br />
-직원아이디 :[[${employeeCommand.empId }]] <br />
-직원연락처 :[[${employeeCommand.empPhone }]] <br />
-직원이메일 :[[ ${employeeCommand.empEmail }]]<br />
-직원주소 :[[${employeeCommand.empAddr }]] <br />
-직원상세주소 :[[${employeeCommand.empAddrDetail }]] <br />
-직원우편번호 :[[ ${employeeCommand.empPost }]]<br />
-직원주민번호 : [[${employeeCommand.empssn }]]<br />
-직원입사일 : [[${#dates.format(employeeCommand.empRegiDate,'yyyy-MM-dd')}]] <br />
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>내정보</h3>
+</div>
+<div class="index">
+    <span>
+<div class="info">
+
+직원번호<br/> <div class="value">[[ ${employeeCommand.empNum } ]]</div><br/>
+직원명<br/> <div class="value">[[ ${employeeCommand.empName }]]</div><br/>
+직원아이디<br/> <div class="value">[[${employeeCommand.empId }]]</div><br/>
+직원연락처<br/> <div class="value">[[${employeeCommand.empPhone }]]</div><br/>
+직원이메일<br/> <div class="value">[[ ${employeeCommand.empEmail }]]</div><br/>
+직원주소<br/> <div class="value">[[${employeeCommand.empAddr }]]</div><br/>
+직원상세주소<br/> <div class="value">[[${employeeCommand.empAddrDetail }]]</div><br/>
+직원우편번호<br/> <div class="value">[[ ${employeeCommand.empPost }]]</div><br/>
+직원주민번호<br/> <div class="value">[[${employeeCommand.empssn }]]</div><br/>
+직원입사일<br/> <div class="value">[[${#dates.format(employeeCommand.empRegiDate,'yyyy-MM-dd')}]]</div><br/>
+</div>
+	</span>
+</div>
+<!-- 여기까지 -->
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 
 </html>
