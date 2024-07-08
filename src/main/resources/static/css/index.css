@@ -1,0 +1,84 @@
+.index {
+        margin-bottom: 60px;
+        margin-top: 80px;
+        flex: 1;
+        width: 100%;
+        max-width: 100%;
+        overflow-y: auto;
+        margin-bottom: 80px;
+    }
+
+    .card {
+        border: none;
+    }
+
+    .card img {
+
+        height: auto;
+        border-radius: 15px;
+    }
+
+     .card a {
+            text-decoration: none;
+            color: black;
+        }
+
+        #categorynav {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #categorynav button {
+        background: none;
+        border: none;
+        color: black;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    #categorynav button:hover,
+    #categorynav button:focus {
+        background: #ff4081;
+        color: white;
+        outline: none;
+    }
+
+    .categoryContent {
+        display: none;
+    }
+
+    .categoryContent.active {
+        display: block;
+    }
+
+    .text-center a{
+        text-decoration: none;
+        color: #9CA1AA;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .text-center a: hover{
+        color: #FC6B70;
+    }
+
+    .delivery-badge {
+        width: 20px;
+        height: auto;
+        margin-right: 5px;
+    }
+
+    .card-text{
+        color: #FC6B70;
+        font-weight: 600;
+    }
+
+    .cate-title{
+        text-align: center;
+        font-weight: lighter;
+        color: #FC6B70;
+    }
