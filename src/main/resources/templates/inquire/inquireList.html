@@ -52,10 +52,10 @@
                             <div class="inquire-answer-list-frame" th:if="${dto.inquireAnswer != null}" >
                                 <div class="inquire-answer">
                                     <img src="/static/images/icon/answer-arrow.png"/>
-                                    <span> 답변 </span>
+                                    <span>답변</span>
                                 </div><!-- 답변내용이 안보인다. -->
-                                <div class="inquire-answer-content"  th:utext="${#strings.replace(dto.inquireAnswer,newLineChar,'&lt;br /&gt;')}"></div>
                                 <div class="inquire-answer-date" >[[${#dates.format(dto.inquireAnswerDate,'yyyy-MM-dd')}]]</div>
+                                <div class="inquire-answer-content"  th:utext="${#strings.replace(dto.inquireAnswer,newLineChar,'&lt;br /&gt;')}"></div>
                             </div>
                         </div>
                     </div>
