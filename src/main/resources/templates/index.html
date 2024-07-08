@@ -54,7 +54,7 @@
     <!-- 상품목록 출력과 관심상품 -->
     <div id="categoryindex">
         <div id="allCategory" class="categoryContent active">
-            <div class="cate-title">전체 상품</div><br/>
+            <div class="cate-title"></div><br/>
             <div class="container">
                 <div class="row">
                     <th:block th:each="category : ${categoryMap.keySet()}">
@@ -84,7 +84,7 @@
 
         <!-- 각 카테고리별 상품 목록 -->
         <div th:each="category : ${categoryMap.keySet()}" th:id="${category}" class="categoryContent">
-            <div class="cate-title" th:text="${category}"></div><br/>
+            <div class="cate-title" ></div><br/>
             <div class="container">
                 <div class="row">
                     <th:block th:each="dto, idx : ${categoryMap.get(category)}">
