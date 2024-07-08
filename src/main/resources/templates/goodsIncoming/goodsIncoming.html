@@ -1,24 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="common/mainCommon :: head"></th:block>
+    <link rel="stylesheet" href="/static/css/goodsIncoming/goodsIncoming.css">
     <meta charset="UTF-8">
-    <title>companion</title>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/goodsIncoming/goodsIncoming.js"></script>
 
 </head>
 <body>
-<form action="incomingRegist" method="post">
-입고번호 : <input type="text" name= "goodsIncomingNum" th:value="${incomingNum}"/>자동부여<br />
-상품번호 : <input type="text" name= "goodsNum" id="goodsNum" readonly="readonly"/>
-		 <button type="button" id="btn" >상품 검색</button><br /><!-- 팝업창을 이용하여 입고 할 상품 검색-->
-상품명 : <input type="text" name= "goodsName" id="goodsName"/><br />
-입고일 : <input type="date" name= "IncomingDate" /><br />
-입고 수량 : <input type="number" name= "IncomingQty"  min="0" /><br />
-제조일 : <input type="datetime-local" name= "productionDate" /><br />
-가격 : <input type="number" name= "IncomingPrice" min="0"/><br />
-<input type="submit" value="입고 등록" />
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>상품 입고</h3>
+</div>
+<div class="index">
+
+<form action="incomingRegist" method="post" name="frm" id="frm">
+<div class="goods-details-container">
+<div class="goods-info">
+             <div class="info-row">
+                    <div class="info-label">입고번호<span style="color:red; font-size: 13px;">(자동 부여)</span></div>
+                        <div class="info-value"><input type="text" name= "goodsIncomingNum" th:value="${incomingNum}"/>
+                     </div>
+             </div>
+        <div class="info-row">
+                <div class="info-label">상품번호</div>
+            <div class="info-value">
+            <div id = "side-button">
+    <input type="text" name= "goodsNum" id="goodsNum" readonly="readonly"/>
+        <button type="button" id="btn" >상품 검색</button></div><!-- 팝업창을 이용하여 입고 할 상품 검색-->
+            </div>
+        </div>
+               <div class="info-row">
+                   <div class="info-label"> 상품명</div>
+                        <div class="info-value">
+    <input type="text" name= "goodsName" id="goodsName"/>
+                        </div>
+               </div>
+                            <div class="info-row">
+                                <div class="info-label">입고일</div>
+   <div class="info-value"> <input type="date" name= "IncomingDate" />
+   </div>
+                            </div>
+       <div class="info-row">
+           <div class="info-label">입고 수량</div>
+    <div class="info-value"><input type="number" name= "IncomingQty"  min="0" />
+    </div>
+       </div>
+       <div class="info-row">
+           <div class="info-label"> 제조일</div>
+    <div class="info-value"><input type="datetime-local" name= "productionDate" />
+    </div>
+       </div>
+        <div class="info-row">
+            <div class="info-label">가격</div>
+    <div class="info-value"><input type="number" name= "IncomingPrice" min="0"/>
+    </div>
+        </div>
+    <div class="form-actions">
+        <input type="submit" class="submit-button" id="button" value="입고 등록" />
+        </div>
+    </div>
+</div>
 </form>
+    <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
+</div>
 </body>
 </html>

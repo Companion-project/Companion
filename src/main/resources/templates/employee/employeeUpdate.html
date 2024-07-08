@@ -1,36 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+   <th:block th:replace="common/mainCommon :: head"></th:block>
+   <link rel="stylesheet" href="/static/css/employee/employeeUpdate.css">
     <meta charset="UTF-8">
-    <title>companion</title>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
 </head>
 <body>
-직원 정보 수정 <br/>
-<form action="empModify" method="post" name="frm" th:object="${employeeCommand}">
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>직원 정보 수정</h3>
+</div>
+<div class="index">
+    <span>
+
+<form action="empModify" method="post" id="frm" name="frm" th:object="${employeeCommand}">
+
     <!-- 유효성 검사 오류 방지용 hidden -->
 <input type="hidden" name="empPw" value="1111!qqqq" />
 <input type="hidden" name="empPwCon" value="111111" />
-직원번호 : <input type="text" name="empNum" th:value="${employeeCommand.empNum}" readonly="readonly"/><br />
-직원아이디 : <input type="text" name="empId" readonly="readonly" th:value="${employeeCommand.empId}" /><br />
-직원이름 : <input type="text" name="empName" th:value="${employeeCommand.empName}" />
-		 <span style="color:red" th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br />
-직원주소 : <input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}" />
-		 <button type="button" onclick="execDaumPostcode()">주소검색</button> <br />
-직원상세주소 : <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}" /><br />
-우편번호 : <input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}" />
-		 <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
-연락처 : <input type="tel" name="empPhone" th:value="${employeeCommand.empPhone}" />
-		<span style="color:red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br />
-이메일 : <input type="email" name="empEmail" th:value="${employeeCommand.empEmail}" />
-		<span id='emailCheck'></span>
-		<span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br />
-주민번호 :<input type="text" name="empssn" th:value="${employeeCommand.empssn}" />
-		<span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br />
-입사일 : <input type="date" name="empRegiDate" th:value="${#dates.format(employeeCommand.empRegiDate,'yyyy-MM-dd')}" /><br />
+직원번호<span style="color:red; font-size: 13px;">(수정 불가)</span><br/><input type="text" name="empNum" th:value="${employeeCommand.empNum}" readonly="readonly"/><br/><br/>
+직원아이디<span style="color:red; font-size: 13px;">(수정 불가)</span><br/><input type="text" name="empId" readonly="readonly" th:value="${employeeCommand.empId}" /><br/><br/>
+직원이름<br/><input type="text" name="empName" th:value="${employeeCommand.empName}" /><br/>
+		 <span style="color:red" th:if="${#fields.hasErrors('empName')}" th:errors="*{empName}"></span><br/>
+직원주소<br/><input type="text" name="empAddr" id="sample4_roadAddress" th:value="${employeeCommand.empAddr}" onclick="execDaumPostcode();" /><br/><br/>
 
-<input type="submit" value="직원정보 수정" />
+직원상세주소<br/><input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}" /><br/><br/>
+우편번호<br/><input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}" /><br/>
+		 <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br/>
+연락처<br/><input type="tel" name="empPhone" th:value="${employeeCommand.empPhone}" /><br/>
+		<span style="color:red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br/>
+이메일<br/><input type="email" name="empEmail" th:value="${employeeCommand.empEmail}" /><br/>
+		<span id='emailCheck'></span>
+		<span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br/>
+주민번호<br/><input type="text" name="empssn" th:value="${employeeCommand.empssn}" />
+		<span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br/><br/>
+입사일<br/><input type="date" name="empRegiDate" th:value="${#dates.format(employeeCommand.empRegiDate,'yyyy-MM-dd')}" /><br/><br/>
+
+<input type="submit" id="button" value="직원정보 수정" />
 </form>
+
+	</span>
+</div>
+<!-- 여기까지 -->
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>

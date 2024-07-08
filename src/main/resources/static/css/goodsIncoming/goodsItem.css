@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #ffffff;
+}
+#searchb {
+    margin-bottom: 20px;
+}
+#searchbar{
+    justify-content: center;
+    display: flex;
+}
+#searchWord {
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 500px;
+}
+
+#searchbarinput:focus {
+    border-color: #FC6B70;
+}
+
+#searchBtn {
+   padding: 3px 6px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #FC6B70;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 5px;
+    margin-top: 10px;
+    width: 80px;
+    height: 40px;
+}
+
+#searchbutton:hover {
+    background-color: #fb5256;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+
+}
+
+th, td {
+   border: 1px solid #ddd;
+    padding: 4px;
+    text-align: center;
+}
+
+th {
+    background-color: #ffffff;
+    font-weight: bold;
+}
+
+a {
+     color: #0066cc;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover {
+     color: #004080;
+}
+
+.pagination-cell {
+    text-align: center;
+    padding: 5px 0;
+}
+
+.pagination-cell a {
+   padding: 5px 10px;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+}

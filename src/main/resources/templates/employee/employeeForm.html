@@ -2,45 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>companion</title>
+   <th:block th:replace="common/mainCommon :: head"></th:block>
 <!-- 아이디 중복확인 이메일 중복확인 다음 주소검색 -->
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/employee/employeeForm.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/static/css/employee/employeeForm.css">
-
 </head>
-
 <body>
-<img src="/static/images/background.png" id="back-img">
-<div class="companion-container">
-    <div class="left-container">
-        <img src="/static/images/logo.png" id="logo">
-        <img src="/static/images/main-text.png" id="main-text">
-
-        <div class="search-container">
-            <img src="/static/images/button-search.png" class="search-img" alt="Search Button">
-            <form id="searchForm" class="search-form">
-                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
-                <button type="submit" class="search-button" aria-label="검색"></button>
-            </form>
-        </div>
-    </div>
-
-    <div class="main-container">
-        <div class="header">
-            <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-            <h3>직원등록 페이지</h3>
-        </div>
-
-        <div class="index">
-            <!-- index 내용 -->
-            <span><!-- EmployeeCommand에서 유효성 검사 후 에러메세지 전송 -->
+<th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+<!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
+<div class="header">
+    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+    <h3>직원 상세 페이지</h3>
+</div>
+<div class="index">
+    <span>
+<!-- EmployeeCommand에서 유효성 검사 후 에러메세지 전송 -->
 				<form action="empRegist" method="post" th:object="${employeeCommand}" id="frm">
 				직원번호&nbsp;<span style="color:red; font-size: 13px;">(자동 부여)</span><br/>
                     <input type="text" name="empNum"  id="empNum" readonly='readonly'  th:value="${employeeCommand.empNum}"/><br /><br/>
@@ -69,15 +49,7 @@
 				<input type="submit" id="button" value="직원등록" />
 				</form></span>
         </div>
-
-        <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item" id="nav-category"><img src="/static/images/inactive_category.png" class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-home"><img src="/static/images/inactive_home.png" class="nav-icon"></a>
-            <a href="#" class="bottom-nav-item" id="nav-login"><img src="/static/images/inactive_login.png" class="nav-icon"></a>
-        </div>
-    </div>
-</div>
-
+<th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 
 </body>
 </html>
