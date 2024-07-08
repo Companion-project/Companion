@@ -18,47 +18,45 @@ function itemList(page){
                 result.searchWord = "";
             }
             var item = "";
-            item +=    '<table>';
-            item +=    '    <tr><th>';
-            item +=    '        검색 : <input type="search" name="searchWord" id="searchWord" value="'+result.searchWord+'">';
-            item +=    '        <button type="button" id="searchBtn">검색</button>';
-            item +=    '    </th></tr>';
-            item +=    '</table>';
-            item +=    '<table border=1 width="600" align="center">';
-            item +=    '    <tr>';
-            item +=    '        <th>번호</th><th>상품 번호</th><th>상품명</th><th>가격</th>';
-            item +=    '    </tr>';
+            item += '<div id="searchb">';
+            item += '    <form id="searchbar">';
+            item += '        <input type="search" name="searchWord" id="searchWord" value="'+result.searchWord+'">';
+            item += '        <button type="button" id="searchBtn">검색</button>';
+            item += '    </form>';
+            item += '</div>';
+            item += '<table>';
+            item += '    <tr>';
+            item += '        <th>번호</th><th>상품 번호</th><th>상품명</th><th>가격</th>';
+            item += '    </tr>';
             $.each(result.dtos, function(idx, goodsDTO){
-                item +=    '    <tr>';
-                item +=    '        <th>'+ eval(idx + 1) +' </th>'
-                     +'         <th><a href="javascript:goodsItem(\'' + goodsDTO.goodsNum +'\''
-                     +'              , \''+ goodsDTO.goodsName + '\')">'+ goodsDTO.goodsNum +'</a></th>'
-                     +'         <th><a href="javascript:goodsItem(\'' + goodsDTO.goodsNum +'\''
-                     +'              , \''+ goodsDTO.goodsName + '\')">'+ goodsDTO.goodsName +'</a></th>'
-                     +'         <th>'+ goodsDTO.goodsPrice +'</th>';
+                item += '    <tr>';
+                item += '        <td>'+ eval(idx + 1) +' </td>'
+                     + '        <td><a href="javascript:goodsItem(\'' + goodsDTO.goodsNum +'\', \''+ goodsDTO.goodsName + '\')">'+ goodsDTO.goodsNum +'</a></td>'
+                     + '        <td><a href="javascript:goodsItem(\'' + goodsDTO.goodsNum +'\', \''+ goodsDTO.goodsName + '\')">'+ goodsDTO.goodsName +'</a></td>'
+                     + '        <td>'+ goodsDTO.goodsPrice +'</td>';
                 item += '    </tr>';
             });
-            item +=    '<tr align="center"><td colspan="6">';
+            item += '    <tr><td colspan="4" class="pagination-cell">';
             if(result.page <= 1){
-                item +=    '[이전]';
+                item += '[이전]';
             }
             if(result.page > 1){
-                item +=    '<a href="javascript:itemList('+ eval(result.page - 1) + ')">[이전]</a>';
+                item += '<a href="javascript:itemList('+ eval(result.page - 1) + ')">[이전]</a>';
             }
-            var startPage = result.startPage; console.log(startPage);
-            var endPage = result.endPage; console.log(endPage);
+            var startPage = result.startPage;
+            var endPage = result.endPage;
             while (startPage <= endPage){
-                item +=    '<a href="javascript:itemList('+ startPage + ')">['+startPage+']</a> ';
+                item += '<a href="javascript:itemList('+ startPage + ')">['+startPage+']</a> ';
                 startPage++;
             }
             if(result.page >= result.maxPage){
-                item +=    '[다음]';
+                item += '[다음]';
             }
             if(result.page < result.maxPage){
-                item +=    '<a href="javascript:itemList('+ eval(result.page + 1) + ')">[다음]</a>';
+                item += '<a href="javascript:itemList('+ eval(result.page + 1) + ')">[다음]</a>';
             }
-            item +=    '</td></tr>';
-            item +=    '</table>';
+            item += '    </td></tr>';
+            item += '</table>';
             $("#goodsList").html(item);
         },
         error:function(){
@@ -66,7 +64,6 @@ function itemList(page){
         }
     });
 }
-
 function goodsItem(goodsNum, goodsName){
     $(opener.document).find("#goodsNum").val(goodsNum);
     $(opener.document).find("#goodsName").val(goodsName);

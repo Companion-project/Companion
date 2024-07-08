@@ -29,28 +29,44 @@ $(function(){
         }
     });
 });
-function goodsIncomingDetail(incomingNum,goodsNum){
+function goodsIncomingDetail(incomingNum, goodsNum) {
     $.ajax({
-        type:"post",
-        url:"goodsIncomingDetail",
-        data:{"incomingNum":incomingNum,"goodsNum":goodsNum},
-        success : function(dto){
-			var item="";
-			item += '입고번호 : ' + dto.incomingNum +'<br />';
-			item += '상품번호 : ' + dto.goodsNum+'<br />';
-			item += '입고일 : ' + dto.incomingDate +'<br />';
-			item += '입고 수량 : ' + dto.incomingQty +'<br />';
-			item += '제조일 : ' + dto.productionDate +'<br />';
-			item += '가격 : ' + dto.incomingPrice +'<br />' ;
-            item += '<button type="button" onclick="incomingUpdate(\''+ dto.incomingNum + '\',\''+ dto.goodsNum +'\');" >입고 수정</button>';
-			item += '<button type="button" onclick="incomingDelete(\''+ dto.incomingNum + '\',\''+ dto.goodsNum +'\');">입고 삭제</button>';
+        type: "post",
+        url: "goodsIncomingDetail",
+        data: {"incomingNum": incomingNum, "goodsNum": goodsNum},
+        success: function(dto) {
+            var item = "";
+            item += '<div class="goods-details-container">';
+            item += '<div class="goods-info">';
 
-			$("#list").html(item);
-		},
-        error:function(){
+            item += createInfoRow("입고번호", dto.incomingNum);
+            item += createInfoRow("상품번호", dto.goodsNum);
+            item += createInfoRow("입고일", dto.incomingDate);
+            item += createInfoRow("입고 수량", dto.incomingQty);
+            item += createInfoRow("제조일", dto.productionDate);
+            item += createInfoRow("가격", dto.incomingPrice);
+
+            item += '<div class="form-actions">';
+            item += '<button class="submit-button" onclick="incomingUpdate(\'' + dto.incomingNum + '\',\'' + dto.goodsNum + '\');">입고 수정</button>';
+            item += '<button class="submit-button" onclick="incomingDelete(\'' + dto.incomingNum + '\',\'' + dto.goodsNum + '\');">입고 삭제</button>';
+            item += '</div>';
+
+            item += '</div>'; // goods-info 닫기
+            item += '</div>'; // goods-details-container 닫기
+
+            $("#list").html(item);
+        },
+        error: function() {
             alert("서버오류");
         }
-    })
+    });
+}
+
+function createInfoRow(label, value) {
+    return '<div class="info-row">' +
+           '<div class="info-label">' + label + '</div>' +
+           '<div class="info-value">' + value + '</div>' +
+           '</div>';
 }
 function incomingUpdate(incomingNum, goodsNum){
     location.href="goodsIncomingUpdate?incomingNum="+incomingNum+"&num="+goodsNum;

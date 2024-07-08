@@ -1,52 +1,86 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <th:block th:replace="common/mainCommon :: head"></th:block>
+    <link rel="stylesheet" href="/static/css/goods/goodsForm.css">
     <meta charset="UTF-8">
-    <title>companion</title>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
-<script src="/static/js/goods/goodsForm.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.js"></script>
+    <script src="/static/js/goods/goodsForm.js"></script>
 </head>
 <body>
-<form action="goodsWrite" method="post" id = "frm" th:object="${goodsCommand}" enctype="multipart/form-data" >
-	<table border = "1" width ="600" align="center">
-		<tr><th width="100">상품번호</th>
-			<td><input type="text" name="goodsNum" th:value="${goodsCommand.goodsNum}" readonly="readonly"/>자동부여</td></tr>
-
-	 <tr><th>카테고리</th>
-            <td>
-                <select id="goodsCategory" name="goodsCategory" th:field="*{goodsCategory}" required>
-                    <option value="">카테고리 선택</option>
-                    <option value="사료">사료</option>
-                    <option value="간식">간식</option>
-                    <option value="용품">용품</option>
-                </select>
-            </td>
-        </tr>
-
-		<tr><th>상품명</th>
-			<td><input type="text" name="goodsName"  th:value="${goodsCommand.goodsName}" /><br />
-				<span style="color:red" th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span></td></tr>
-		<tr><th>상품가격</th>
-			<td><input type="number" name="goodsPrice" min="0" th:field="*{goodsPrice}" /><br />
-				<span style="color:red" th:if="${#fields.hasErrors('goodsPrice')}" th:errors="*{goodsPrice}"></span></td></tr>
-		<tr><th>배송비</th>
-			<td><input type="number" name="deliveryCost" min="0" max="5000" step="50" th:field="*{deliveryCost}"  /><br />
-                <span style="color:red" th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></span></td></tr>
-		<tr><th>상품설명</th>
-			<td><textarea rows="10" cols="50" name="goodsContent" >[[${goodsCommand.goodsContent}]]</textarea><br />
-				<span style="color:red" th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></span></td></tr>
-
-		<tr><th>대문이미지</th>
-		<td><input type="file" name="goodsMainStore"/><br/>
-		    <span style="color:red" th:if="${#fields.hasErrors('goodsMainStore')}" th:errors="*{goodsMainStore}"></span></td>
-		</tr>
-		<tr><th>이미지</th>
-		<td><input type="file" name="goodsImages" multiple="multiple"/></td>
-		</tr>
-		<tr><th colspan="2"><input type="button" id="btn" value="상품 등록" /></th></tr>
-
-	</table>
-</form>
+    <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
+    <div class="header">
+        <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
+        <h3>상품 추가</h3>
+    </div>
+    <div class="index">
+        <form action="goodsWrite" method="post" name="frm" id="frm" th:object="${goodsCommand}" enctype="multipart/form-data">
+            <div class="goods-details-container">
+                <div class="goods-info">
+                    <div class="info-row">
+                        <div class="info-label">상품번호<span style="color:red; font-size: 13px;">(자동 부여)</span></div>
+                        <div class="info-value"><input type="text" name="goodsNum" th:value="${goodsCommand.goodsNum}" readonly="readonly"/></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">카테고리</div>
+                        <div class="info-value">
+                            <select id="goodsCategory" name="goodsCategory" th:field="*{goodsCategory}" required>
+                                <option value="">카테고리 선택</option>
+                                <option value="사료">사료</option>
+                                <option value="간식">간식</option>
+                                <option value="용품">용품</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">상품명</div>
+                        <div class="info-value">
+                            <input type="text" name="goodsName"  th:value="${goodsCommand.goodsName}" /><br />
+                            <span style="color:red" th:if="${#fields.hasErrors('goodsName')}" th:errors="*{goodsName}"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">상품가격</div>
+                        <div class="info-value">
+                            <input type="number" name="goodsPrice" min="0" th:field="*{goodsPrice}" /><br />
+                            <span style="color:red" th:if="${#fields.hasErrors('goodsPrice')}" th:errors="*{goodsPrice}"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">배송비</div>
+                        <div class="info-value">
+                            <input type="number" name="deliveryCost" min="0" max="5000" step="50" th:field="*{deliveryCost}"  /><br />
+                            <span style="color:red" th:if="${#fields.hasErrors('deliveryCost')}" th:errors="*{deliveryCost}"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">상품설명</div>
+                        <div class="info-value">
+                            <textarea rows="10" cols="50" name="goodsContent" th:text="${goodsCommand.goodsContent}"></textarea><br />
+                            <span style="color:red" th:if="${#fields.hasErrors('goodsContent')}" th:errors="*{goodsContent}"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">대문이미지</div>
+                        <div class="info-value">
+                            <input type="file" name="goodsMainStore" id="mainFile" class="file-input"/><br/>
+                            <span style="color:red" th:if="${#fields.hasErrors('goodsMainStore')}" th:errors="*{goodsMainStore}"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">설명 이미지</div>
+                        <div class="info-value">
+                            <input type="file" name="goodsImages" multiple="multiple" class="file-input"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <input type="button" id="btn" value="상품 등록" class="submit-button"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
 </body>
 </html>
