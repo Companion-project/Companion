@@ -48,6 +48,11 @@
         </div>
     </div>
 </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const auth = [[${session.auth}]];
+        /*]]>*/
+    </script>
 <script src="/static/js/common/common.js"></script>
 </th:block>
 
