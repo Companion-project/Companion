@@ -1,43 +1,10 @@
 #frm{
-    margin-left: 40px;
+    margin-left: 30px;
     margin-bottom: 90px;
 }
 
-    .bottom-nav {
-        position: fixed;
-        bottom: 0;
-        width: 580px;
-        height: 56px;
-        background-color: #ffffff;
-        border-top: 1px solid #E9EBEC;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-        z-index: 999;
-    }
 
-    .bottom-nav-item {
-        width: 35px;
-        height: 35px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        cursor: pointer;
-    }
-
-    .nav-icon {
-    width: 35px;
-    height: 35px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    cursor: pointer;
-
-
-}
-
-    input {
+    #frm > input {
       padding: 10px;
       font-size: 16px;
       border: 1px solid #ccc;
@@ -48,11 +15,11 @@
       margin-top: 5px;
     }
 
-    input:focus {
+    #frm input:focus {
       border-color: #007bff;
     }
 
-input[type="radio"] {
+#frm input[type="radio"] {
   width: auto;
   margin-right: 5px;
 }
@@ -77,4 +44,5 @@ input[type="radio"] {
           cursor: pointer;
           transition: background-color 0.3s;
           width: 523px;
+          margin-left: 11px;
         }

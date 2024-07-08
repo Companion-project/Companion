@@ -1,3 +1,7 @@
+.companion-container {
+    width: 100vw;
+}
+
 .goods-details-container {
     margin: 20px auto;
     padding-left: 15px;
