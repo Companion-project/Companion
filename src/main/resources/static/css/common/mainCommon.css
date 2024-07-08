@@ -146,7 +146,7 @@ body {
 .main-board-frame {
     grid-row: 2/3;
     white-space: nowrap;
-    overflow: auto;
+    overflow: scroll;
     padding: 10px 0 10px 10px;;
 }
 

@@ -12,12 +12,13 @@
 
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
 
-<div class="header">
-    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-    <h3 th:text="${session.auth != null ? session.auth.grade == 'emp' ? '직원 페이지' : '회원 페이지' : '로그인'}"></h3>
+<div class="main-header-frame">
+    <div class="header-back-btn" onclick="goBack()"><img src="/static/images/icon/arrow-small-left.png"></div>
+    <div class="page-name" th:text="${session.auth != null ? session.auth.grade == 'emp' ? '직원 페이지' : '회원 페이지' : '로그인'}"></div>
+    <a class="hear-cart-btn" th:href="@{/corner/cartList}"><img src="/static/images/icon/cart.png"></a>
 </div>
 
-<div class="index">
+<div class="main-board-frame">
 <!-- 로그인 되었을 때 구분 -->
 <div th:if="${session.auth != null}">
     <ul>
