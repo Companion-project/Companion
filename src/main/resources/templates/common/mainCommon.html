@@ -32,9 +32,9 @@
 </th:block>
 <!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
         <div class="main-header-frame">
-            <div class="header-back-btn" onclick="goBack()"><img src="/static/images/icon/arrow-small-left.png"></div>
+            <div class="header-back-btn" onclick="goBack()" ><img src="/static/images/icon/arrow-small-left.png"></div>
             <div class="page-name">페이지명</div>
-            <a class="hear-cart-btn" th:href="@{/corner/cartList}"><img src="/static/images/icon/cart.png"></a>
+            <div class="hear-cart-btn" onclick="goCartList()" ><img src="/static/images/icon/cart.png"></div>
         </div>
         <div class="main-board-frame">
             내용을 여기에 넣으세요.
@@ -42,13 +42,13 @@
 <!-- 여기까지 -->
 <th:block th:fragment="fromIndex">
         <div class="main-bottom-frame">
-            <a th:href="@{/purchase/orderList}" class="bottom-nav-item" id="nav-order"><img src="/static/images/icon/shopping-list.png" class="nav-order"></a>
+            <div onclick="goOrderList()" class="bottom-nav-item" id="nav-order"><img src="/static/images/icon/shopping-list.png" class="nav-order"></div>
             <a th:href="@{/}" class="bottom-nav-item" id="nav-home"><img src="/static/images/icon/house.png" class="nav-icon"></a>
             <a th:href="@{/login/loginForm}" class="bottom-nav-item" id="nav-login"><img src="/static/images/icon/user.png" class="nav-icon"></a>
         </div>
     </div>
 </div>
-<script src="/static/js/test.js"></script>
+<script src="/static/js/common/common.js"></script>
 </th:block>
 
 </body>
