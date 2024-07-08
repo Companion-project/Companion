@@ -34,7 +34,7 @@
         background: none;
         border: none;
         color: black;
-        padding: 10px 20px;
+        padding: 7px 30px;
         margin: 0 10px;
         border-radius: 30px;
         cursor: pointer;
@@ -42,9 +42,10 @@
 
     #categorynav button:hover,
     #categorynav button:focus {
-        background: #ff4081;
+        background: #FC6B70;
         color: white;
         outline: none;
+        font-weight: bold;
     }
 
     .categoryContent {
