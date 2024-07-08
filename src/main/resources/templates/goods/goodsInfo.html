@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="common/mainCommon :: head"></th:block>
     <link rel="stylesheet" href="/static/css/goods/goodsInfo.css">
@@ -9,86 +9,88 @@
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
 <!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
-    <div class="main-header-frame"> <!-- 클래스명 변경-->
-        <div class="header-back-btn" onclick="goBack()"><img src="/static/images/icon/arrow-small-left.png"></div> <!-- 아이콘 변경 -->
-        <div class="page-name">페이지명</div> <!-- 페이지명 태그 변경 -->
-        <div class="hear-cart-btn" onclick="goCartList()" ><img src="/static/images/icon/cart.png"></div> <!-- 장바구니 추가 -->
-    </div>
-    <div class="main-board-frame"> <!-- 전 index -->
+<div class="main-header-frame"> <!-- 클래스명 변경-->
+    <div class="header-back-btn" onclick="goBack()"><img src="/static/images/icon/arrow-small-left.png"></div>
+    <!-- 아이콘 변경 -->
+    <div class="page-name">페이지명</div> <!-- 페이지명 태그 변경 -->
+    <div class="hear-cart-btn" onclick="goCartList()"><img src="/static/images/icon/cart.png"></div> <!-- 장바구니 추가 -->
+</div>
+<div class="main-board-frame"> <!-- 전 index -->
 
-<div class="product-details-container">
-    <div class="product-info">
-        <div class="info-row">
-            <div class="info-label">상품번호</div>
-            <div class="info-value">[[${goodsCommand.goodsNum}]]</div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">상품명</div>
-            <div class="info-value">[[${goodsCommand.goodsName}]]</div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">카테고리</div>
-            <div class="info-value">
+    <div class="product-details-container">
+        <div class="product-info">
+            <div class="info-row">
+                <div class="info-label">상품번호</div>
+                <div class="info-value">[[${goodsCommand.goodsNum}]]</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">상품명</div>
+                <div class="info-value">[[${goodsCommand.goodsName}]]</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">카테고리</div>
+                <div class="info-value">
                 <span th:if="${goodsCommand.goodsCategory != null}">
                     [[${goodsCommand.goodsCategory}]]
                 </span>
-                <span th:unless="${goodsCommand.goodsCategory != null}">카테고리 정보 없음</span>
-            </div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">상품가격</div>
-            <div class="info-value">[[${goodsCommand.goodsPrice}]]</div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">배송비</div>
-            <div class="info-value">[[${goodsCommand.deliveryCost}]]</div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">상품설명</div>
-            <div class="info-value">
-                <span th:utext="${#strings.replace(goodsCommand.goodsContent,newLine,'&lt;br /&gt;')}"></span>
-            </div>
-        </div>
-        <div class="info-row">
-            <div class="info-label">조회수</div>
-            <div class="info-value">[[${goodsCommand.visitCount}]]</div>
-        </div>
-        <th:block th:if="${session.auth.grade == 'emp'}">
-            <div class="info-row">
-                <div class="info-label">등록한 사원</div>
-                <div class="info-value">[[${goodsCommand.empNum}]]</div>
+                    <span th:unless="${goodsCommand.goodsCategory != null}">카테고리 정보 없음</span>
+                </div>
             </div>
             <div class="info-row">
-                <div class="info-label">등록일</div>
-                <div class="info-value">[[${#dates.format(goodsCommand.goodsRegist,'yyyy-MM-dd')}]]</div>
+                <div class="info-label">상품가격</div>
+                <div class="info-value">[[${goodsCommand.goodsPrice}]]</div>
             </div>
             <div class="info-row">
-                <div class="info-label">마지막 수정 사원</div>
-                <div class="info-value">[[${goodsCommand.updateEmpNum}]]</div>
+                <div class="info-label">배송비</div>
+                <div class="info-value">[[${goodsCommand.deliveryCost}]]</div>
             </div>
             <div class="info-row">
-                <div class="info-label">마지막 수정일</div>
-                <div class="info-value">[[${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}]]</div>
+                <div class="info-label">상품설명</div>
+                <div class="info-value">
+                    <span th:utext="${#strings.replace(goodsCommand.goodsContent,newLine,'&lt;br /&gt;')}"></span>
+                </div>
             </div>
-        </th:block>
-    </div>
-    <div class="product-images">
-        <div class="main-image">
-            <img th:src="|/static/upload/${goodsCommand.goodsMainStore }|" />
-        </div>
-        <div class="additional-images">
-            <th:block th:each="goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-') }">
-                <img th:src="|/static/upload/${goodsImage}|" />
+            <div class="info-row">
+                <div class="info-label">조회수</div>
+                <div class="info-value">[[${goodsCommand.visitCount}]]</div>
+            </div>
+            <th:block th:if="${session.auth.grade == 'emp'}">
+                <div class="info-row">
+                    <div class="info-label">등록한 사원</div>
+                    <div class="info-value">[[${goodsCommand.empNum}]]</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">등록일</div>
+                    <div class="info-value">[[${#dates.format(goodsCommand.goodsRegist,'yyyy-MM-dd')}]]</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">마지막 수정 사원</div>
+                    <div class="info-value">[[${goodsCommand.updateEmpNum}]]</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">마지막 수정일</div>
+                    <div class="info-value">[[${#dates.format(goodsCommand.goodsUpdateDate,'yyyy-MM-dd')}]]</div>
+                </div>
             </th:block>
         </div>
-    </div>
-    <div class="product-actions">
-        <th:block th:if="${session.auth.grade == 'emp'}">
-            <a th:href="@{goodsUpdate(goodsNum=${goodsCommand.goodsNum})}">상품 수정</a>
-            <a th:href="@{'goodsDel/'+${goodsCommand.goodsNum}}">상품 삭제</a>
-            <a href="goodsList">상품목록</a>
-        </th:block>
-        <a href="javascript:history.back();">뒤로가기</a>
+        <div class="product-images">
+            <div class="main-image">
+                <img th:src="|/static/upload/${goodsCommand.goodsMainStore }|"/>
+            </div>
+            <div class="additional-images">
+                <th:block th:each="goodsImage : ${#strings.arraySplit(goodsCommand.goodsImages,'-') }">
+                    <img th:src="|/static/upload/${goodsImage}|"/>
+                </th:block>
+            </div>
+        </div>
+        <div class="product-actions">
+            <th:block th:if="${session.auth.grade == 'emp'}">
+                <a th:href="@{goodsUpdate(goodsNum=${goodsCommand.goodsNum})}">상품 수정</a>
+                <a th:href="@{'goodsDel/'+${goodsCommand.goodsNum}}">상품 삭제</a>
+                <a href="goodsList">상품목록</a>
+            </th:block>
+            <a href="javascript:history.back();">뒤로가기</a>
+        </div>
     </div>
 </div>
 <th:block th:replace="common/mainCommon :: fromIndex"></th:block>
