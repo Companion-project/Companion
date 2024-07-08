@@ -6,7 +6,11 @@ function goOrderList() {
     if (auth == null) {
         location.href = "/login/loginForm";
     } else {
-        location.href = "/purchase/orderList";
+        if (auth.grade === 'emp') {
+            location.href = "/purchase/purchaseList";
+        } else {
+            location.href = "/purchase/orderList";
+        }
     }
 };
 

@@ -138,6 +138,11 @@ body {
     object-fit: scale-down;
     cursor: pointer;
 }
+
+.hear-cart-btn-placeholder {
+    visibility: hidden; /* 내용은 숨기되 공간은 유지 */
+}
+
 .page-name {
     align-content: center;
     font-size: 24px;

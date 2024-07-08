@@ -9,7 +9,12 @@
 <div class="main-header-frame"> <!-- 클래스명 변경-->
     <div class="header-back-btn" onclick="goBack()"><img src="/static/images/icon/arrow-small-left.png"></div> <!-- 아이콘 변경 -->
     <div class="page-name">주문목록</div> <!-- 페이지명 태그 변경 -->
-    <div class="hear-cart-btn" onclick="goCartList()" ><img src="/static/images/icon/cart.png"></div> <!-- 장바구니 추가 -->
+    <!-- 직원이 아닐 때만 장바구니 버튼 표시 -->
+    <div th:if="${session.auth == null or session.auth.grade != 'emp'}" class="hear-cart-btn" onclick="goCartList()">
+        <img src="/static/images/icon/cart.png">
+    </div>
+    <!-- 직원일 때는 빈 div로 대체 -->
+    <div th:if="${session.auth != null and session.auth.grade == 'emp'}" class="hear-cart-btn-placeholder"></div>
 </div>
 <div class="main-board-frame"> <!-- 전 index -->
             <div class="order-list">
