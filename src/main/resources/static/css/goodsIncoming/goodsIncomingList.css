@@ -10,11 +10,13 @@
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
+    font-weight: normal;  
+
 }
 
 #incomingTable th {
     background-color: #ffffff;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 #incomingTable a {
