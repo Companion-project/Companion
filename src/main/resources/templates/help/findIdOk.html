@@ -8,11 +8,13 @@
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
-<div class="header">
+<div class="main-header-frame">
     <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-    <h3>아이디 찾기</h3>
+    <div class="page-name">아이디 찾기</h3>
+    <div class="hear-cart-btn" onclick="goCartList()" ><img src="/static/images/icon/cart.png"></div>
+
 </div>
-<div class="index">
+<div class="main-board-frame">
     <div class="area" style="text-align: center;">
 <div th:if="${userId != null}">
     당신의 아이디는 [[${#strings.substring(userId,0,4)}]]

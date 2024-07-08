@@ -8,17 +8,19 @@
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
-<div class="header">
+<div class="main-header-frame">
     <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-    <h3>비밀번호 찾기</h3>
+    <div class="page-name">비밀번호 찾기</div>
+    <div class="hear-cart-btn" onclick="goCartList()" ><img src="/static/images/icon/cart.png"></div>
+
 </div>
-<div class="index">
+<div class="main-board-frame">
 <!-- form action="findPassword" : 폼 제출 시 브라우저가 findPassword경로로 Post요청
      -> 이 요청은 HelpController클래스의 findPassword메서드와 연결! -->
 <form action="findPassword" name="frm" id="frm" method="post">
     <div class="area">
-        아이디<br/><input type="text" name="userId" required="required"/><br/>
-        전화번호<br/><input type="text" name="userPhone" required="required"/><br/><br/>
+        아이디<br/><input class="input-style" type="text" name="userId" required="required"/><br/>
+        전화번호<br/><input class="input-style" type="text" name="userPhone" required="required"/><br/><br/>
         <input type="submit" id="button" value="비밀번호 찾기"/>
     </div>
 </form>
