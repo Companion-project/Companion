@@ -1,3 +1,17 @@
+.card-body {
+    padding:0px;
+}
+#cate-title{
+        text-align: center;
+        font-weight: lighter;
+        color: #FC6B70;
+        padding-top: 15px;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 15px;
+    }
 
 
     .card {
@@ -68,13 +82,10 @@
     .card-text{
         color: #FC6B70;
         font-weight: 600;
+        margin: 0;
     }
 
-    .cate-title{
-        text-align: center;
-        font-weight: lighter;
-        color: #FC6B70;
-    }
+
 
     .search-form {
         box-sizing: unset;

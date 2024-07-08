@@ -38,6 +38,7 @@
     font-weight: 700;
     margin-bottom: 10px;
     text-align: center;
+    white-space: normal;
 }
 
 /* 수량,가격,배송비 */

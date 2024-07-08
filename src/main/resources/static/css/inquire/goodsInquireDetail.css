@@ -24,6 +24,8 @@
 }
 .inquire-product {
     width: 160px;
+    white-space: normal;
+    padding-right: 5px;
 }
 .inquire-product-number {
     width: 150px;

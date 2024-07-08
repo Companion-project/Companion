@@ -68,8 +68,8 @@
                                     <div class="card">
                                         <a th:href="|/corner/detailView/${dto.goodsNum}|">
                                             <img class="card-img-top" th:src="@{|/static/upload/${dto.goodsMainStore}|}" alt="상품 이미지">
-                                            <div class="card-body">
-                                                <h5 class="card-title" th:text="${dto.goodsName}"></h5>
+                                            <div id="card-body">
+                                                <div class="card-title" th:text="${dto.goodsName}"></div>
                                                 <p class="card-text" th:text="${dto.goodsPrice}"></p>
                                                 <img class="delivery-badge" src="/static/images/badge-vendor.png" alt="배송비 아이콘">
                                                 <span th:if="${dto.deliveryCost == 0}">무료배송</span>
@@ -97,8 +97,8 @@
                                 <div class="card">
                                     <a th:href="|/corner/detailView/${dto.goodsNum}|">
                                         <img class="card-img-top" th:src="@{|/static/upload/${dto.goodsMainStore}|}" alt="상품 이미지">
-                                        <div class="card-body">
-                                            <h5 class="card-title" th:text="${dto.goodsName}"></h5>
+                                        <div id="card-body">
+                                            <div class="card-title" th:text="${dto.goodsName}"></div>
                                             <p class="card-text" th:text="${dto.goodsPrice}"></p>
                                             <img class="delivery-badge" src="/static/images/badge-vendor.png" alt="배송비 아이콘">
                                             <span th:if="${dto.deliveryCost == 0}">무료배송</span>
