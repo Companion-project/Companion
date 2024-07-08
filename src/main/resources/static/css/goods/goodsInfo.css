@@ -22,6 +22,8 @@
 
 .info-value {
     flex: 2;
+    white-space: normal;
+    word-break: break-all;
 }
 
 .product-images {

@@ -48,6 +48,10 @@ ul, li{
 /* 상품명, 문의 유형, 작성자, 답변 상태 */
 .inquire-product, .inquire-kind, .inquire-memberId, .inquire-status-frame  {
     width: 100px;
+    overflow: hidden;
+    vertical-align: top;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 /* 문의 제목 */
 .inquire-title{

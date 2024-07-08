@@ -21,6 +21,8 @@
 
 .inquire-product,.inquire-product-number, .inquire-kind, .inquire-memberId, .inquire-date {
     display: table-cell;
+    white-space: normal;
+    word-break: break-all;
 }
 .inquire-product {
     width: 160px;
@@ -53,6 +55,8 @@
     margin-bottom: 16px;
     resize: none;
     font-size: 14px;
+    white-space: normal;
+    word-break: break-all;
 }
 
 textarea {
@@ -72,3 +76,6 @@ input[type=submit]:hover {
     background-color: #fc6b70;
 }
 
+.btn {
+    text-align: right;
+}
