@@ -54,12 +54,12 @@
     <!-- 상품목록 출력과 관심상품 -->
     <div id="categoryindex">
         <div id="allCategory" class="categoryContent active">
-            <div class="cate-title">전체 상품</div><br/>
+            <div class="cate-title"></div><br/>
             <div class="container">
                 <div class="row">
                     <th:block th:each="category : ${categoryMap.keySet()}">
                         <th:block th:each="dto, idx : ${categoryMap.get(category)}">
-                            <th:block th:if="${idx.count < 9}">
+
                                 <div class="col-4 mb-4">
                                     <div class="card">
                                         <a th:href="|/corner/detailView/${dto.goodsNum}|">
@@ -74,23 +74,21 @@
                                         </a>
                                     </div>
                                 </div>
-                            </th:block>
+
                         </th:block>
                     </th:block>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="/category" >더보기</a>
-            </div>
+
         </div>
 
         <!-- 각 카테고리별 상품 목록 -->
         <div th:each="category : ${categoryMap.keySet()}" th:id="${category}" class="categoryContent">
-            <div class="cate-title" th:text="${category}"></div><br/>
+            <div class="cate-title" ></div><br/>
             <div class="container">
                 <div class="row">
                     <th:block th:each="dto, idx : ${categoryMap.get(category)}">
-                        <th:block th:if="${idx.count < 9}">
+
                             <div class="col-4 mb-4">
                                 <div class="card">
                                     <a th:href="|/corner/detailView/${dto.goodsNum}|">
@@ -105,13 +103,11 @@
                                     </a>
                                 </div>
                             </div>
-                        </th:block>
+
                     </th:block>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="/category" >더보기</a>
-            </div>
+
         </div>
     </div>
 </div>
