@@ -7,10 +7,6 @@
         color: #FC6B70;
         padding-top: 15px;
         width: 100%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        font-size: 15px;
     }
 
 
@@ -69,7 +65,7 @@
         font-weight: 600;
     }
 
-    .text-center a: hover{
+    .text-center a:hover{
         color: #FC6B70;
     }
 
@@ -89,4 +85,11 @@
 
     .search-form {
         box-sizing: unset;
+    }
+
+    .card-title {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 15px;
     }

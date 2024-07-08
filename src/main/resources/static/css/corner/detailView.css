@@ -39,6 +39,7 @@
     margin-bottom: 10px;
     text-align: center;
     white-space: normal;
+    word-break: break-all;
 }
 
 /* 수량,가격,배송비 */
@@ -194,6 +195,8 @@ input::-webkit-inner-spin-button {
 
 /* 상세설명 */
 .deatil-product-content {
+    white-space: normal;
+    word-break: break-all;
 }
 
 /* 리뷰|문의 */

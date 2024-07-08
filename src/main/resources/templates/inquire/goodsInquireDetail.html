@@ -52,8 +52,10 @@
                 <input type="hidden" name="inquireSubject" th:value="${list[0].inquireSubject}">
                 <input type="hidden" name="inquireNum" th:value="${list[0].inquireNum}">
                 <input type="hidden" name="memberNum" th:value="${list[0].memberNum}">
-                <textarea rows="10" cols="50" name="inquireAnswer">[[${list[0].inquireAnswer}]]</textarea>
+                <textarea rows="10" cols="50" name="inquireAnswer">[[${list[0].inquireAnswer}]]</textarea><br/>
+                <div class="btn">
                 <input type="submit" value="답변 등록">
+                </div>
             </form>
         </div>
     </div>

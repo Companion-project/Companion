@@ -90,11 +90,15 @@ ul, li{
 /* 숨겨진 q&a 제목*/
 .inquire-hide-title {
     font-weight: 600;
-    padding-left:65px
+    padding-left:65px;
+    white-space: normal;
+    word-break: break-all;
 }
 /* 숨겨진 q&a 내용 */
 .inquire-hide-content {
     padding: 10px 0 10px 65px;
+    white-space: normal;
+    word-break: break-all;
 }
 /* q&a 수정 삭제 */
 .inquire-update-delete-frame {
@@ -114,7 +118,6 @@ ul, li{
 .inquire-answer-list-frame{
     display: table;
     border-top: 1px solid #eaeced;
-    width: 435px;
     padding: 10px 0 10px 0;
     margin-left:65px;
 }
@@ -141,6 +144,9 @@ ul, li{
 /* 답변 내용 */
 .inquire-answer-content {
     width:300px;
+    white-space: normal;
+    word-break: break-all;
+    padding-right:10px;
 }
 /* 답변 작성일 */
 .inquire-answer-date {
