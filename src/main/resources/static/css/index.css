@@ -1,16 +1,11 @@
 .card-body {
     padding:0px;
 }
-#cate-title{
+.cate-title{
         text-align: center;
         font-weight: lighter;
         color: #FC6B70;
         padding-top: 15px;
-        width: 100%;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        font-size: 15px;
     }
 
 
@@ -90,3 +85,9 @@
     .search-form {
         box-sizing: unset;
     }
+    .card-title {
+        width: 100%;
+          text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 15px;}
