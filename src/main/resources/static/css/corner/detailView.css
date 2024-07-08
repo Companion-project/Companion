@@ -66,6 +66,7 @@
     font-size: 1.5em;
     color: #FC6B70;
     font-weight: 700;
+    cursor: pointer;
 }
 /* 수량 입력창 */
 .qty-input{
@@ -77,6 +78,7 @@
     font-size: 20px;
     color: #FC6B70;
     font-weight: 700;
+    cursor: text;
 }
 /* 수량 화살표 제거 */
 input::-webkit-outer-spin-button,

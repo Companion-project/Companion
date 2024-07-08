@@ -26,211 +26,175 @@ body {
     font-optical-sizing: auto;
 }
 
-.search-container {
+/* 전체 */
+.companion-container {
+    display: grid;
     position: relative;
-    margin-top: 20px;
-    width: 340px;
-    height: 52px;
-}
-
-.search-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    object-fit: contain;
-    z-index: 1; /* 이미지는 최상위에 배치 */
-}
-
-.search-form {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    z-index: 2; /* 폼 요소는 이미지 위에 겹쳐서 배치 */
+    height: 100vh;
+    grid-template-columns: 50% 50%;
 }
 
+/* 왼쪽 메인 */
+.left-container {
+    grid-column: 1/2;
+    display: grid;
+    grid-template-rows: calc( 100vh / 2 - 200px ) 400px calc( 100vh / 2 - 200px );
+}
+/* 왼쪽 중간열 */
+.left-middle-frame {
+    grid-row: 2/3;
+    display: grid;
+    grid-template-rows: 210px 60px 60px;
+    justify-items: center;
+}
+
+/* 로고 */
+.left-middle-logo{
+    height: 200px;
+    grid-row: 1/2;
+    object-fit: scale-down;
+}
+
+/* 로고 밑 텍스트 */
+.left-middle-text {
+    height: 50px;
+    grid-row: 2/3;
+    object-fit: scale-down;
+}
+
+/* 검색창 */
+.search-form {
+    width: 280px;
+    height: 50px;
+    grid-row: 3/4;
+    display: grid;
+    grid-template-columns: auto 50px;
+    border-radius: 26px;
+    border: 3px solid #FC6B70;
+    background: white;
+}
+/* 검색창 인풋*/
 .search-input {
-    width: 210px; /* 버튼 크기만큼 빼서 입력창 너비 설정 */
-    height: 100%;
-    padding: 14px 16px;
-    border: none;
-    background: transparent !important;
+    padding: 0;
+    padding-left: 16px;
     font-size: 14px;
-    outline: none;
-    color: black;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    border: none;
+    background: none;
+    outline: none;
 }
-
 .search-input::placeholder {
     color: #888;
 }
-
+/*검색창 버튼*/
 .search-button {
-    width: 32px;
-    height: 32px;
-    background: transparent;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    height: 50px;
+    width: 55px;
+    background-color: #FC6B70;
     border: none;
-    cursor: pointer;
-    z-index: 3; /* 버튼은 가장 위에 배치 */
+}
+.search-button > img {
+    width: 35px;
+    object-fit: scale-down;
+    padding-top: 3px;
 }
 
-.companion-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
+/* 메인 페이지 */
 .main-container {
+    grid-column: 2/3;
+    display: grid;
+    grid-template-rows: 60px calc(100vh - 120px) 60px;
+    background: white;
     width: 600px;
-    max-width: calc(100vw - 20px); /* 화면 너비보다 크면 600px로 제한 */
-    height: 100vh;
-    background-color: white;
-    border-left: 1px solid #E9EBEC;
-    border-right: 1px solid #E9EBEC;
-    display: flex;
-    flex-direction: column; /* 컨테이너를 세로 방향으로 */
-    justify-content: space-between; /* 위아래 여백을 동일하게 배분 */
-    margin-left: 500px; /* 원하는 위치에 맞게 조정 */
-    padding: 10px; /* 내부 여백 추가 */
 }
-
-.header {
-    position: fixed;
-    width: 584px;
-    height: 52px;
-    border-bottom: 1px solid #E9EBEC;
+/* 메인 헤더 */
+.main-header-frame {
+    grid-row: 1/2;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #eaeced;
     align-items: center;
-    padding: 0 10px;
-    justify-content: center;
-    background-color: #ffffff;
+}
+.header-back-btn {
+    height: 30px;
 }
 
-.header h3 {
-    margin-left: auto;
-    margin-right: auto;
+
+.header-back-btn img {
+    height: 30px;
+    object-fit: scale-down;
 }
-.back-button {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    background-image: url("/static/images/back-button.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 24px;
-    height: 24px;
+.hear-cart-btn img {
+    height: 25px;
+    object-fit: scale-down;
 }
-.back-button img {
-    width: 24px;
-    height: 24px;
+.page-name {
+    align-content: center;
+    font-size: 24px;
+    font-weight: 700;
 }
 
-.left-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 400px;
-    height: 100vh;
-    padding: 50px 0 0 40px;
-    margin-left: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    z-index: 100;
+/* 메인 보드 */
+.main-board-frame {
+    grid-row: 2/3;
+    white-space: nowrap;
+    overflow: auto;
+    padding: 10px 0 10px 10px;;
 }
 
-#logo {
-    margin-bottom: 16px;
-    height: 200px;
-}
-
-#main-text {
-    margin-bottom: 16px;
-    height: 52px;
-}
-.index {
-    margin-bottom: 60px;
-    margin-top: 80px;
-    flex: 1; /* 남은 공간을 모두 차지 */
-    width: 100%;
-    max-width: 100%;
-    overflow-y: auto; /* 내용이 넘칠 경우 스크롤 표시 */
-    margin-bottom: 80px;
-}
-
-.index::-webkit-scrollbar{
+.main-board-frame::-webkit-scrollbar{
     width:10px;
 }
-.index::-webkit-scrollbar-thumb{
+.main-board-frame::-webkit-scrollbar-thumb{
     background-color: rgba(252, 107, 112, 0.5);
 }
-.index::-webkit-scrollbar-button{
+.main-board-frame::-webkit-scrollbar-button{
     display: none;
 }
-.index::-webkit-scrollbar-track,
-.index::-webkit-scrollbar-thumb {
+.main-board-frame::-webkit-scrollbar-track,
+.main-board-frame::-webkit-scrollbar-thumb {
     border-radius: 3px;
 }
 
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    width: 580px;
-    height: 56px;
-    background-color: #ffffff;
-    border-top: 1px solid #E9EBEC;
+/* 메인 바텀 */
+.main-bottom-frame {
+    grid-row: 3/4;
     display: flex;
+    flex-direction: row;
+    align-items: baseline;
     justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-    z-index: 999;
-}
-
-.bottom-nav-item {
-    width: 35px;
-    height: 35px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    cursor: pointer;
+    padding: 10px;
+    border-top: 1px solid #eaeced;
 }
 
 .nav-icon {
-    width: 35px;
-    height: 35px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    cursor: pointer;
+    height: 30px;
+    object-fit: scale-down;
+}
+.nav-order {
+    height: 36px;
+    object-fit: scale-down;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1000px) {
     #back-img {
         display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
-
-
     }
     body {
         background-color: rgb(244, 237, 237);
     }
-    .left-container {
-        display: none;
+    .companion-container {
+        grid-template-columns: 0 100%;
     }
-
-    .main-container {
-        margin-left: 0;
+    .left-container, .left-middle-frame {
+        display: none;
     }
 }
