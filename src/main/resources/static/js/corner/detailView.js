@@ -51,7 +51,7 @@ $(function() {
             alert("품절입니다");
         }
         else if (auth == null) {
-            window.open("/login/item.login", "login", "width=600, height=800,top = 100, left=100");
+            location.href = "/login/loginForm";
         } else if (stock > 0 && stock >= $("#qty").val()) {
             location.href = "../buyItem?goodsNum=" + goodsNum + "&qty=" + $("#qty").val();
         } else {
@@ -64,7 +64,7 @@ $(function() {
         if(stock <= 0){
             alert("품절입니다");
         } else if (auth == null) {
-            window.open("/login/item.login", "login", "width=600, height=800,top = 100, left=100");
+            location.href = "/login/loginForm";
         } else if (stock > 0 && stock >= $("#qty").val()) {
             $.ajax({
                 type: "get",
@@ -94,7 +94,7 @@ $(function() {
     //찜하기
     $("#wish").click(function () {
         if (auth == null) {
-            window.open("/login/item.login", "login", "width=600, height=800,top = 100, left=100");
+            location.href = "/login/loginForm";
         } else {
             $.ajax({
                 type: "post",
@@ -103,11 +103,11 @@ $(function() {
                 data: {"goodsNum": goodsNum},
                 success: function (result) {
                     if (result.trim() == "1") {
-                        $("this").css("background-color", "#fc6b70");
-                        $("this").css("color", "white")
+                        $("#wish").css("background-color", "#fc6b70");
+                        $("#wish").css("color", "white")
                     } else if (result.trim() == "0") {
-                        $("this").css("background-color", "");
-                        $("this").css("color", "")
+                        $("#wish").css("background-color", "");
+                        $("#wish").css("color", "")
                     } else if (result.trim() == "999") {
                         alert("관리자는 사용할 수 없습니다.");
                     }
