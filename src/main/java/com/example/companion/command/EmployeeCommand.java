@@ -29,7 +29,8 @@ public class EmployeeCommand {
 	@Email(message = "형식에 맞지 않습니다(OOO@OOO.OOO)")
 	@NotEmpty(message = "이메일을 입력해 주세요")
 	String empEmail;
-	@NotEmpty(message = "주민번호를 입력해 주세요")
+	@NotEmpty(message = "주민번호 13자리를 입력해 주세요")
+	@Size(max = 13, message = "주민번호는 13자리를 초과할 수 없습니다")
 	String empssn;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date empRegiDate;

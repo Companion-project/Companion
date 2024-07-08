@@ -12,11 +12,13 @@
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
 <!-- 여기서부터 직접 복사해서 바디에 넣어주세요 -->
-<div class="header">
-    <div class="back-button" onclick="goBack()"><img src="/static/images/back-button.png"></div>
-    <h3>비밀번호 확인</h3>
-</div>
-<div class="index">
+    <div class="main-header-frame"> <!-- 클래스명 변경-->
+        <div class="header-back-btn" onclick="goBack()"><img src="/static/images/icon/arrow-small-left.png"></div> <!-- 아이콘 변경 -->
+        <div class="page-name">페이지명</div> <!-- 페이지명 태그 변경 -->
+        <a class="hear-cart-btn" th:href="@{/corner/cartList}"><img src="/static/images/icon/cart.png"></a> <!-- 장바구니 추가 -->
+    </div>
+    <div class="main-board-frame"> <!-- 전 index -->
+
 
 	<form action="empPwUpdate" method="post" name="frm" id="frm">
 		<div class="area">
