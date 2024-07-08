@@ -147,21 +147,20 @@ body {
     grid-row: 2/3;
     white-space: nowrap;
     overflow: auto;
-    padding: 10px;
-
+    padding: 10px 0 10px 10px;;
 }
 
-.main-bottom-frame::-webkit-scrollbar{
+.main-board-frame::-webkit-scrollbar{
     width:10px;
 }
-.main-bottom-frame::-webkit-scrollbar-thumb{
+.main-board-frame::-webkit-scrollbar-thumb{
     background-color: rgba(252, 107, 112, 0.5);
 }
-.main-bottom-frame::-webkit-scrollbar-button{
+.main-board-frame::-webkit-scrollbar-button{
     display: none;
 }
-.main-bottom-frame::-webkit-scrollbar-track,
-.main-bottom-frame::-webkit-scrollbar-thumb {
+.main-board-frame::-webkit-scrollbar-track,
+.main-board-frame::-webkit-scrollbar-thumb {
     border-radius: 3px;
 }
 
@@ -170,18 +169,22 @@ body {
     grid-row: 3/4;
     display: flex;
     flex-direction: row;
+    align-items: baseline;
     justify-content: space-between;
-    padding: 10px 10px;
+    padding: 10px;
     border-top: 1px solid #eaeced;
-    align-items: center;
 }
 
 .nav-icon {
     height: 30px;
     object-fit: scale-down;
 }
+.nav-order {
+    height: 36px;
+    object-fit: scale-down;
+}
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1000px) {
     #back-img {
         display: none; /* 이미지를 숨기거나, 필요에 따라 배경색상 설정 등의 조치를 취할 수 있습니다. */
     }
@@ -193,8 +196,5 @@ body {
     }
     .left-container, .left-middle-frame {
         display: none;
-    }
-
-    .main-container {
     }
 }

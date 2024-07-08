@@ -3,7 +3,7 @@ $(function(){
         console.log(auth);
         //상품문의를 하는 사람이 누구인지 알아야 하므로 로그인이 안되어 있으면 로그인 창이 떠야 합니다.
         if(auth == null){
-            window.open("/login/item.login","login","width=600, height=800,top = 100, left=100");
+            location.href = "/login/loginForm";
         }else{
             //상품문의도 popup 으로 하겠습니다..
             window.open("/inquire/inquireWrite?goodsNum="+goodsNum
