@@ -131,10 +131,12 @@ body {
 .header-back-btn img {
     height: 30px;
     object-fit: scale-down;
+    cursor: pointer;
 }
 .hear-cart-btn img {
     height: 25px;
     object-fit: scale-down;
+    cursor: pointer;
 }
 .page-name {
     align-content: center;
@@ -146,10 +148,9 @@ body {
 .main-board-frame {
     grid-row: 2/3;
     white-space: nowrap;
-    overflow: auto;
+    overflow: scroll;
     padding: 10px 0 10px 10px;;
 }
-
 .main-board-frame::-webkit-scrollbar{
     width:10px;
 }
@@ -178,10 +179,12 @@ body {
 .nav-icon {
     height: 30px;
     object-fit: scale-down;
+    cursor: pointer;
 }
 .nav-order {
     height: 36px;
     object-fit: scale-down;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1000px) {
