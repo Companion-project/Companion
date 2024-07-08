@@ -14,6 +14,6 @@ function goCartList() {
     if (auth == null) {
         location.href = "/login/loginForm";
     } else {
-        location.href = "/purchase/orderList";
+        location.href = "/corner/cartList";
     }
 };
