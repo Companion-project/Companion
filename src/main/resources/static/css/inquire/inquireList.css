@@ -147,6 +147,7 @@ ul, li{
 /* 답변 아이콘 및 글자 */
 .inquire-answer {
     width: 50px;
+    padding-bottom: 5px;
 }
 /* 답변 아이콘 */
 .inquire-answer > img {
