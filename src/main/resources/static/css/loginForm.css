@@ -1,18 +1,18 @@
-.index ul{
+.main-board-frame ul{
     list-style-type: none;
     padding: 0;
 }
 
 
 
-.index li {
+.main-board-frame li {
     margin: 30px 0px;
     border-bottom: 1px solid #E9EBEC;
     padding-bottom: 30px;
 
 }
 
-.index li a {
+.main-board-frame li a {
     margin: 0px 30px;
     text-decoration: none;
     color: black;
