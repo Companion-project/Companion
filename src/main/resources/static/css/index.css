@@ -1,12 +1,11 @@
 .card-body {
     padding:0px;
 }
-#cate-title{
+.cate-title{
         text-align: center;
         font-weight: lighter;
         color: #FC6B70;
         padding-top: 15px;
-        width: 100%;
     }
 
 
