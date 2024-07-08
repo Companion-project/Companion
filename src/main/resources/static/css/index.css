@@ -75,3 +75,7 @@
         font-weight: lighter;
         color: #FC6B70;
     }
+
+    .search-form {
+        box-sizing: unset;
+    }
