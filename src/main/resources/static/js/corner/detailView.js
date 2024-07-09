@@ -75,15 +75,15 @@ $(function() {
                     if (result.trim() == "200") {
                         if (confirm("계속 쇼핑하려면 '취소'를 클릭하세요.")) {
                             location.href = "../cartList";
-                        } else if (result.trim() == "999") {
-                            alert("관리자는 사용할 수 없는 페이지입니다.");
-                        } else if (result.trim() == "000") {
-                            alert("로그인을 해야합니다.");
                         }
+                    } else if (result.trim() == "999") {
+                        alert("관리자는 사용할 수 없는 페이지입니다.");
+                    } else if (result.trim() == "000") {
+                        alert("로그인을 해야합니다.");
                     }
                 },
                 error: function () {
-                    alert("관리자는 사용할 수 없는 페이지입니다.");
+                    alert("서버 오류가 발생했습니다.");
                 }
             });
         } else {

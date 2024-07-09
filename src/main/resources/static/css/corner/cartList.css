@@ -19,6 +19,7 @@
     padding: 20px 0;
     border-bottom: 1px solid #E9EBEC;
     position: relative;
+    white-space: normal;
 }
 
 .cart-each-check {
