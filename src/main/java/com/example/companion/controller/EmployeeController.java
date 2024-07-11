@@ -54,6 +54,8 @@ public class EmployeeController {
 		if (!employeeCommand.isEmpPwEqualsEmpPwCon()) {
 			System.out.println("비밀번호 확인이 다릅니다.");
 			//틀렸으면 다시 employeeForm.html로
+			result.rejectValue("empPwCon", "employeeCommand.empPwCon",
+					"비밀번호가 일치하지 않습니다.");
 			return "/employee/employeeForm";
 		}
 		//완료시 DB 저장
