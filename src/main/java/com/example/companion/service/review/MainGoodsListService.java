@@ -1,6 +1,7 @@
 package com.example.companion.service.review;
 
 import com.example.companion.domain.GoodsDTO;
+import com.example.companion.domain.StartEndPageDTO;
 import com.example.companion.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,9 @@ import java.util.*;
 public class MainGoodsListService {
     @Autowired
     CartMapper cartMapper;
+
+    String searchWord;
+
     public void execute(String goodsCategory, Model model) {
         List<GoodsDTO> list = cartMapper.goodsSelectAll();
          Map<String, List<GoodsDTO>> categoryMap = new HashMap<>();
@@ -33,5 +37,14 @@ public class MainGoodsListService {
         }
 
         model.addAttribute("categoryMap", categoryMap);
+    }
+
+    public void search(String searchWord, Model model){
+        if(searchWord != null){
+            this.searchWord = searchWord.trim();
+        }
+        List<GoodsDTO> list = cartMapper.searchSelectAll(this.searchWord);
+        model.addAttribute("list", list);
+        model.addAttribute("searchWord", searchWord);
     }
 }
