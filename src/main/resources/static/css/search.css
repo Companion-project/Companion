@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: unset;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* 검색창 */
+#searchBar {
+    width: 500px;
+    height: 40px;
+    display: grid;
+    grid-template-columns: auto 40px;
+    border-radius: 26px;
+    border: 2px solid #757575;;
+    background: white;
+}
+
+/* 검색창 인풋*/
+#searchBarInput {
+    padding: 0;
+    padding-left: 16px;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+#searchBarInput ::placeholder {
+    color: #888;
+}
+
+input {
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        display: none;
+    }
+}
+
+/*검색창 버튼*/
+#searchBarBtn {
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border: none;
+}
+
+#searchBarBtn > img {
+    width: 25px;
+    object-fit: scale-down;
+    padding-left: 2px;
+}
+
+#searchFrame {
+    display: flex;
+    justify-content: center;
+}
+#goodsList {
+    display: grid;
+    grid-template-columns: repeat(3, 190px);
+    grid-template-rows: auto;
+    place-items: center;
+    width: 100%;
+}
+
+.goods-frame {
+    width: 150px;
+    margin: 15px;
+}
+
+.goods-image {
+    width: 150px;
+    height: 150px;
+    object-fit: scale-down;
+}
+.godds-name, .goods-price, .goods-delivery {
+    width: 150px;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+}
+
+.godds-name {
+    width: 150px;
+    font-size: 12px;
+    height: 36px;
+}
+.goods-price {
+    font-weight: 700;
+}
+.goods-delivery {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FC6B70;
+}
+
+.delivery-badge {
+    height: 20px;
+    object-fit: scale-down;
+}
