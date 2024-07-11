@@ -10,13 +10,14 @@ a {
 
 /* 검색창 */
 #searchBar {
-    width: 500px;
+    width: 540px;
     height: 40px;
     display: grid;
     grid-template-columns: auto 40px;
     border-radius: 26px;
     border: 2px solid #757575;;
     background: white;
+    margin: 10px 0;
 }
 
 /* 검색창 인풋*/
@@ -68,15 +69,16 @@ input {
 }
 #goodsList {
     display: grid;
-    grid-template-columns: repeat(3, 190px);
+    grid-template-columns: repeat(3, 194px);
     grid-template-rows: auto;
     place-items: center;
     width: 100%;
+    align-items: baseline;
 }
 
 .goods-frame {
     width: 150px;
-    margin: 15px;
+    margin-top: 15px;
 }
 
 .goods-image {
@@ -94,7 +96,6 @@ input {
 .godds-name {
     width: 150px;
     font-size: 12px;
-    height: 36px;
 }
 .goods-price {
     font-weight: 700;
