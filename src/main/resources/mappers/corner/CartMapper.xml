@@ -40,6 +40,20 @@ select goods_Num , goods_name , goods_price ,goods_content , delivery_cost , emp
 from goods
 order by goods_Num desc
 </select>
+    <select id="searchSelectAll" resultMap="goodsResultMap">
+        select goods_Num , goods_name , goods_price ,goods_content , delivery_cost , emp_num
+        ,goods_regist , goods_main_store ,goods_main_store_img , goods_images
+        ,goods_images_img , visit_count ,update_Emp_Num , goods_Update_Date, goods_category
+        from goods
+        <where>
+            <if test="searchWord != null">
+                goods_name like '%' || #{searchWord} || '%'
+                or goods_content like '%' || #{searchWord} || '%'
+                or goods_category like '%' || #{searchWord} || '%'
+            </if>
+        </where>
+        order by goods_Num desc
+    </select>
 
     <resultMap type="com.example.companion.domain.CartGoodsDTO" id="CartListResultMap">
         <result column="total_price" jdbcType="BIGINT"  property="totalPrice"/> <!-- 일반 속성부터 적어줘야 한다. -->

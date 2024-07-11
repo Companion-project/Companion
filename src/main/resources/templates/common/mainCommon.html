@@ -22,9 +22,8 @@
         <div class="left-middle-frame">
             <a th:href="@{/}"><img src="/static/images/logo.png" id="logo" class="left-middle-logo"></a>
             <img src="/static/images/main-text.png" id="main-text" class="left-middle-text">
-            <!--<img src="/static/images/button-search.png" class="search-img" alt="Search Button">-->
-            <form id="searchForm" class="search-form">
-                <input type="text" id="searchInput" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?">
+            <form action="/searchList" method="get" id="searchForm" class="search-form">
+                <input type="search" name="searchWord" id="search-input" class="search-input" autocomplete="off" placeholder="어떤 상품을 찾으시나요?" th:value="${searchWord}">
                 <button type="submit" class="search-button" aria-label="검색"><img src="/static/images/icon/search-white.png" alt="search"></button>
             </form>
         </div>
