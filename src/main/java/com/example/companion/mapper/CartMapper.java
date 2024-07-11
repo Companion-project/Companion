@@ -12,6 +12,7 @@ import java.util.Map;
 @Mapper
 public interface CartMapper {
     public List<GoodsDTO> goodsSelectAll();
+    public List<GoodsDTO> searchSelectAll(String searchWord);
     public int cartInsert(CartDTO dto);
     public List<CartGoodsDTO> cartList(@Param("memberNum") String memberNum, @Param("goodsNums") String [] prodCk);
     public Integer sumPrice(String memberNum);
