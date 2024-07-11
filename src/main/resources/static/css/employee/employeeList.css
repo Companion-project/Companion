@@ -87,7 +87,7 @@
 #employeetable a,
 #employeetable .pagination-cell a,
 #employeetable .pagination-cell span {
-    color: #0066cc;
+    color: #000000;
     text-decoration: none;
     display: inline-block;
 }
