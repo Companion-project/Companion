@@ -42,6 +42,7 @@ public class HelpController {
             @RequestParam(value = "userPhone") String userPhone,
             Model model){
         findPwService.execute(userId, userPhone, model);
+        model.addAttribute("userId", userId); // userId를 Model에 추가
         return "help/findPwOk";
     }
 
