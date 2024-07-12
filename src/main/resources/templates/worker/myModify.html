@@ -9,6 +9,8 @@
 <script src="/static/js/daumAddressScript.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/worker/myModify.js"></script>
+<script src="/static/js/autohypenPhone.js"></script>
+<script src="/static/js/autohypenSsn.js"></script>
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
@@ -48,14 +50,14 @@
     <input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}" readonly="readonly"/>
           <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br /><br />
 연락처<br />
-    <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/>
+    <input type="text" name="empPhone" id="empPhone" maxlength="13" onkeyup="this.value = autoHypenPhone(this.value)"  th:value="${employeeCommand.empPhone}"/>
 		<span style="color:red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br /><br />
 이메일<br />
     <input type="email" name="empEmail"  id="empEmail" th:value="${employeeCommand.empEmail}"/>
 		<span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span><br />
 		<span id='emailCheck'></span><br />
 주민번호<br />
-    <input type="text" name="empssn" th:value="${employeeCommand.empssn}"/>
+    <input type="text" name="empssn" id="empssn" maxlength="14" onkeyup="this.value = autoHypenSsn(this.value)" th:value="${employeeCommand.empssn}"/>
 		<span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br /><br />
 
     <input type="submit" id="button" value="수정" />
