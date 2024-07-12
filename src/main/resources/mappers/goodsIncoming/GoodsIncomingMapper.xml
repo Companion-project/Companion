@@ -28,6 +28,7 @@ insert into goodsincoming
 <select id="goodsIncomingAllSelect" resultMap="goodsIncomingResultMap">
     select <include refid="baseColums"/>
     from goodsincoming
+    order by incoming_date desc
 </select>
 <select id="selectIncomingGoods" resultMap="goodsIncomingResultMap">
     select <include refid="baseColums"/>
