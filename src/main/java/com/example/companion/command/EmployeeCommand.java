@@ -25,12 +25,13 @@ public class EmployeeCommand {
 	String empAddrDetail;
 	String empPost;
 	@NotBlank(message = "연락처를 입력해 주세요")
+	@Pattern(regexp = "^[\\d]{2,3}-[\\d]{3,4}-[\\d]{4}+$", message = "전화번호를 정확히 입력해주세요")
 	String empPhone;
 	@Email(message = "형식에 맞지 않습니다(OOO@OOO.OOO)")
 	@NotEmpty(message = "이메일을 입력해 주세요")
 	String empEmail;
-	@NotEmpty(message = "주민번호 13자리를 입력해 주세요")
-	@Size(max = 13, message = "주민번호는 13자리를 초과할 수 없습니다")
+	@NotEmpty(message = "주민번호를 입력해 주세요")
+	@Pattern(regexp = "^[\\d]{6}-[1-4][\\d]{6}+$", message = "주민번호를 정확히 입력해주세요")
 	String empssn;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date empRegiDate;

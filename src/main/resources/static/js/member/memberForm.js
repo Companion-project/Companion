@@ -28,8 +28,8 @@ $(function(){
             success: function(result){
 
                 $("#emailCheck").text(result);
-                if(result.trim() == "사용가능한 이메일입니다."){
-                    $("#emailCheck").css("color","blue");
+                if(result.trim() == "사용가능한 Email입니다."){
+					$("#emailCheck").css("color","blue");
                 }else{
                     $("#emailCheck").css("color","red");
                 }

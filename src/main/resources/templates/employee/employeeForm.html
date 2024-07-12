@@ -7,9 +7,12 @@
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
+<script src="/static/js/autohypenPhone.js"></script>
+<script src="/static/js/autohypenSsn.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"></script>
 <script src="/static/js/employee/employeeForm.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/employee/employeeForm.css">
+
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
@@ -46,12 +49,12 @@
 				상세주소<br/>  <input type="text" name="empAddrDetail" th:value="${employeeCommand.empAddrDetail}"/><br /><br/>
 				우편번호<br/>  <input type="text" name="empPost" id="sample4_postcode" th:value="${employeeCommand.empPost}"/><br/>
 						  <span style="color:red" th:if="${#fields.hasErrors('empAddr')}" th:errors="*{empAddr}"></span><br />
-				연락처<br/>  <input type="text" name="empPhone" th:value="${employeeCommand.empPhone}"/><br/>
+				연락처<br/>  <input type="text" name="empPhone" id="empPhone" maxlength="13" onkeyup="this.value = autoHypenPhone(this.value)" th:value="${employeeCommand.empPhone}"/><br/>
 						<span style="color:red" th:if="${#fields.hasErrors('empPhone')}" th:errors="*{empPhone}"></span><br />
 				이메일<br/> <input type="email" name="empEmail"  id="empEmail" th:value="${employeeCommand.empEmail}"/><br/>
 						<span style="color:red" th:if="${#fields.hasErrors('empEmail')}" th:errors="*{empEmail}"></span>
 						<span id='emailCheck'></span><br />
-				주민번호<br/> <input type="text" name="empssn" th:value="${employeeCommand.empssn}"/><br/>
+				주민번호<br/> <input type="text" name="empssn" id="empssn" maxlength="14" onkeyup="this.value = autoHypenSsn(this.value)" th:value="${employeeCommand.empssn}"/><br/>
 						<span style="color:red" th:if="${#fields.hasErrors('empssn')}" th:errors="*{empssn}"></span><br />
 				<input type="submit" id="button" value="직원등록" />
 				</form></span>

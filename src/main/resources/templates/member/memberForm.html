@@ -9,6 +9,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/static/js/daumAddressScript.js"></script>
 <script src="/static/js/member/memberForm.js"></script>
+<script src="/static/js/autohypenPhone.js"></script>
 <link rel="stylesheet" href="/static/css/member/memberForm.css">
 </head>
 <body>
@@ -59,10 +60,10 @@
      <input type="radio" name="memberGender" value="F" th:checked="${memberCommand.memberGender == 'F'}">여자<br/>
      </label><br/>
 
-연락처1<br/> <input type="tel" name="memberPhone1"  th:value="${memberCommand.memberPhone1}"><br/>
+연락처1<br/> <input type="tel" name="memberPhone1" id="memberPhone1" maxlength="13" onkeyup="this.value = autoHypenPhone(this.value)" th:value="${memberCommand.memberPhone1}"><br/>
 <span style="color:red" th:if="${#fields.hasErrors('memberPhone1')}" th:errors="*{memberPhone1}"></span><br/>
 
-연락처2<br/> <input type="tel" name="memberPhone2"  th:value="${memberCommand.memberPhone2}"><br/>
+연락처2<br/> <input type="tel" name="memberPhone2" id="memberPhone2" maxlength="13" onkeyup="this.value = autoHypenPhone(this.value)" th:value="${memberCommand.memberPhone2}"><br/>
 <span style="color:red" th:if="${#fields.hasErrors('memberPhone2')}" th:errors="*{memberPhone2}"></span><br/>
 
 이메일<br/> <input type="email" name="memberEmail" id="memberEmail"  th:value="${memberCommand.memberEmail}"><br/>
