@@ -85,6 +85,7 @@ input {
     width: 150px;
     height: 150px;
     object-fit: scale-down;
+    border-radius: 15px;
 }
 .godds-name, .goods-price, .goods-delivery {
     width: 150px;
@@ -95,7 +96,7 @@ input {
 
 .godds-name {
     width: 150px;
-    font-size: 12px;
+    font-size: 13px;
 }
 .goods-price {
     font-weight: 700;

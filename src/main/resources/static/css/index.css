@@ -13,7 +13,7 @@
         border: none;
     }
 
-    .card img {
+    .card > img {
 
         height: auto;
         border-radius: 15px;
@@ -69,14 +69,13 @@
     }
 
     .delivery-badge {
-        width: 20px;
-        height: auto;
+        height: 20px;
+        object-fit: scale-down;
         margin-right: 5px;
     }
 
     .card-text{
-        color: #FC6B70;
-        font-weight: 600;
+        font-weight: 700;
         margin: 0;
     }
 
@@ -91,4 +90,10 @@
         white-space: nowrap;
         overflow: hidden;
         font-size: 15px;
+    }
+
+    .delivery {
+        font-size: 12px;
+        font-weight: 700;
+        color: #FC6B70;
     }

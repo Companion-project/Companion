@@ -70,10 +70,10 @@
                                             <img class="card-img-top" th:src="@{|/static/upload/${dto.goodsMainStore}|}" alt="상품 이미지">
                                             <div id="card-body">
                                                 <div class="card-title" th:text="${dto.goodsName}"></div>
-                                                <p class="card-text" th:text="${dto.goodsPrice}"></p>
+                                                <p class="card-text">[[${#numbers.formatInteger(dto.goodsPrice,0,'COMMA')+'원'}]]</p>
                                                 <img class="delivery-badge" src="/static/images/badge-vendor.png" alt="배송비 아이콘">
-                                                <span th:if="${dto.deliveryCost == 0}">무료배송</span>
-                                                <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
+                                                <span class="delivery" th:if="${dto.deliveryCost == 0}">무료배송</span>
+                                                <span class="delivery" th:if="${dto.deliveryCost != 0}">[[${#numbers.formatInteger(dto.deliveryCost,0,'COMMA') + '원'}]]</span>
                                             </div>
                                         </a>
                                     </div>
@@ -99,10 +99,10 @@
                                         <img class="card-img-top" th:src="@{|/static/upload/${dto.goodsMainStore}|}" alt="상품 이미지">
                                         <div id="card-body">
                                             <div class="card-title" th:text="${dto.goodsName}"></div>
-                                            <p class="card-text" th:text="${dto.goodsPrice}"></p>
+                                            <p class="card-text">[[${#numbers.formatInteger(dto.goodsPrice,0,'COMMA')+'원'}]]</p>
                                             <img class="delivery-badge" src="/static/images/badge-vendor.png" alt="배송비 아이콘">
                                             <span th:if="${dto.deliveryCost == 0}">무료배송</span>
-                                            <span th:if="${dto.deliveryCost != 0}" th:text="${dto.deliveryCost}"></span>
+                                            <span th:if="${dto.deliveryCost != 0}">[[${#numbers.formatInteger(dto.deliveryCost,0,'COMMA') + '원'}]]</span>
                                         </div>
                                     </a>
                                 </div>
