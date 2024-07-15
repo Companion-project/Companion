@@ -1,41 +1,39 @@
-
 .input-style {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-    }
-
-    .input-style:not([type="radio"]){
-        width: 400px;
-    }
-
-    .input-style:focus {
-      border-color: #007bff;
-    }
-
-    .input-r{
-        margin: 15px 0px;
-    }
-
-    #button {
-          padding: 10px 20px;
-          font-size: 16px;
-          background-color: #FC6B70;
-          color: #fff;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: background-color 0.3s;
-          width: 400px;
-        height: 60px;
-        margin-left: 12px;
-
-        }
-
-.mod{
-    padding-left: 90px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%; /* 모바일에서는 너비를 100%로 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 전체 너비를 유지 */
 }
 
+.input-style:not([type="radio"]){
+    /* 모바일에서는 너비를 100%로 설정할 필요가 없으므로 여기에는 추가 변경 없음 */
+}
 
+.input-style:focus {
+    border-color: #007bff;
+}
 
+.input-r {
+    margin: 15px 0px;
+}
+
+#button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FC6B70;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* 모바일에서 버튼의 너비를 100%로 설정 */
+    height: 60px;
+    margin-left: 0; /* 모바일에서는 좌측 여백 제거 */
+    margin-top: 12px; /* 모바일에서 버튼 위쪽 여백 추가 */
+}
+
+.mod{
+    padding: 20px 30px;
+}
