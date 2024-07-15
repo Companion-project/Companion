@@ -1,18 +1,24 @@
 .value {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      width: 400px;
-    }
-
-.info{
-    padding-left: 90px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 100%; /* 모바일 환경에서는 가로 폭을 100%로 설정하여 화면에 꽉 차도록 함 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 요소의 전체 크기를 유지하도록 설정 */
+    margin-bottom: 10px; /* 각 항목 사이의 간격을 설정 */
 }
 
+.info {
+    padding: 20px 30px; /* 내용과의 간격을 더 넓게 설정 */
+    box-sizing: border-box; /* 패딩과 테두리를 포함한 요소의 전체 크기를 유지하도록 설정 */
+}
 
+@media screen and (max-width: 600px) {
+    .info {
+        padding: 10px 30px; /* 작은 화면에서 내용과의 간격을 좁게 설정 */
+    }
 
-
-
-
-
+    .value {
+        font-size: 13px; /* 작은 화면에서 폰트 사이즈를 줄임 */
+    }
+}

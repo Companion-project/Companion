@@ -65,3 +65,38 @@
     padding-top: 50px;
     padding-left: 90px;
 }
+
+@media screen and (max-width: 1000px) {
+    .main-board-frame ul {
+        padding: 10px;
+    }
+
+    .main-board-frame li {
+        margin: 20px 0px;
+        padding-bottom: 20px;
+    }
+
+    .main-board-frame li a {
+        margin: 0px 15px;
+        font-size: 16px;
+    }
+
+    .input-style {
+        width: calc(100% - 20px);
+    }
+
+    #loginButton {
+        width: calc(100% - 24px);
+        margin: 10px;
+    }
+
+    .loginForm {
+        padding-top: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .userLoginInfo {
+        padding: 0 10px;
+    }
+}
