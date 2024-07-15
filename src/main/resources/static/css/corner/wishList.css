@@ -49,6 +49,7 @@ input#submit:hover {
 .product-item a {
     color: #000;
     text-decoration: none;
+    white-space: normal;
 }
 
 .product-item a:hover {

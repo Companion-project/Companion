@@ -5,15 +5,16 @@
 }
 
 .main-image-frame{
-    width:500px;
-    height:500px;
+    max-width:500px;
+    max-height:500px;
     margin-bottom: 10px;
 }
 
 /* 상품 메인 이미지 */
 .main-image-frame > img{
-    width:500px;
-    height:500px;
+    max-width:500px;
+    max-height:500px;
+    width:100%;
     object-fit: cover;
     border-radius: 5px;
 }
