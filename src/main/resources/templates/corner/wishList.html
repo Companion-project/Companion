@@ -34,7 +34,7 @@
                     <div th:each="dto, idx : ${dtos}" class="product-item">
                         <div>[[${idx.count}]]</div>
                         <div><img th:src="|/static/upload/${dto.goodsMainStore}|" alt="상품이미지"/></div>
-                        <div><a th:href="@{/goods/goodsDetail(goodsNum=${dto.goodsNum})}">[[${dto.goodsName}]]</a></div>
+                        <div><a th:href="@{/corner/detailView/{goodsNum}(goodsNum=${dto.goodsNum})}">[[${dto.goodsName}]]</a></div>
                         <div>[[${dto.goodsPrice}]]</div>
                         <div>
                             <input type="checkbox" name="wishGoodsDel" th:value="${dto.goodsNum}"/>

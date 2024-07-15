@@ -92,3 +92,8 @@
 .status-confirmed {
     color: #009900; /* 구매 확정 */
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}

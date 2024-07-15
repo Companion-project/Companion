@@ -43,10 +43,12 @@
                     <!-- 결제정보 하나에 상품은 여러개 일 수 있어 collection으로 받아 욌습니다. -->
                     <div class="order-product-number">
                         <div class="order-product">
-                        <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
-                            <div class="img-section"><img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="100"/></div>
-                            [[${dto.goods.goodsName}]]
-                        </th:block>
+                            <th:block th:each="dto : ${orderListDTO.purchaseListGoodsDTOs}">
+                                <a th:href="@{/corner/detailView/{goodsNum}(goodsNum=${dto.goods.goodsNum})}">
+                                    <div class="img-section"><img th:src="|/static/upload/${dto.goods.goodsMainStore}|" width="100"/></div>
+                                    [[${dto.goods.goodsName}]]
+                                </a>
+                            </th:block>
                             </div>
                         <div class="order-number">
                         [[${orderListDTO.purchaseDTO.purchaseNum}]]
