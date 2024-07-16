@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Companion</title>
     <link rel="stylesheet" href="/static/css/membership/myPw.css">
+    <script src="/static/js/autohypenPhone.js"></script>
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
@@ -20,7 +21,7 @@
 <form action="findPassword" name="frm" id="frm" method="post">
     <div class="area">
         아이디<br/><input class="input-style" type="text" name="userId" required="required"/><br/>
-        전화번호<br/><input class="input-style" type="text" name="userPhone" required="required"/><br/><br/>
+        전화번호<br/><input class="input-style" type="text" name="userPhone" id="userPhone" maxlength="13" onkeyup="this.value = autoHypenPhone(this.value)" required="required"/><br/><br/>
         <input type="submit" id="button" value="비밀번호 찾기"/>
     </div>
 </form>
