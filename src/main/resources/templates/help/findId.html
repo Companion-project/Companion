@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Companion</title>
     <link rel="stylesheet" href="/static/css/membership/myPw.css">
+    <script src="/static/js/autohypenPhone.js"></script>
 </head>
 <body>
 <th:block th:replace="common/mainCommon :: beforePagename"></th:block>
@@ -17,7 +18,7 @@
 <div class="main-board-frame">
 <form action="findId" name="frm" id="frm" method="post">
     <div class="area">
-    전화번호<br/><input class="input-style" type="text" name="userPhone"/><br/>
+    전화번호<br/><input class="input-style" type="text" name="userPhone" id="userPhone" maxlength="13" onkeyup="this.value = autoHypenPhone(this.value)"/><br/>
     이메일<br/><input class="input-style" type="email" name="userEmail"/><br/><br/>
     <input type="submit" id="button" value="아이디 찾기"/>
     </div>
